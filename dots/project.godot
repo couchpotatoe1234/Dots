@@ -21,7 +21,7 @@ GameManager="*uid://qfln0y0r4aas"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg", "res://addons/net.yarvis.pixel_pen/plugin.cfg")
 
 [input]
 
