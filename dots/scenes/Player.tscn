@@ -1,23 +1,85 @@
 [gd_scene format=3 uid="uid://dwkoq4wumem4g"]
 
-[ext_resource type="Script" uid="uid://33rje7jxft5s" path="res://scripts/player.gd" id="1_p0vlq"]
+[ext_resource type="Script" uid="uid://bvqhyhyb3d0tf" path="res://scripts/player.gd" id="1_p0vlq"]
+[ext_resource type="Texture2D" uid="uid://d1qb8vceqnebc" path="res://Assets/sprites/CharacterFrames.png" id="2_v6fml"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p0vlq"]
-size = Vector2(40, 40)
+size = Vector2(24, 12)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_p0vlq"]
+[sub_resource type="Animation" id="Animation_qu4a1"]
+resource_name = "Attack"
+
+[sub_resource type="Animation" id="Animation_mdl7e"]
+resource_name = "Jump"
+
+[sub_resource type="Animation" id="Animation_v6fml"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3li8b"]
+resource_name = "idle"
+length = 0.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.26666668, 0.4, 0.53333336, 0.6666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mdl7e"]
+_data = {
+&"Attack": SubResource("Animation_qu4a1"),
+&"Jump": SubResource("Animation_mdl7e"),
+&"RESET": SubResource("Animation_v6fml"),
+&"idle": SubResource("Animation_3li8b")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v6fml"]
+size = Vector2(20.022549, 3.8834152)
 
 [node name="Player" type="CharacterBody2D" unique_id=1860738924]
+z_index = 10
+collision_layer = 255
+collision_mask = 255
 script = ExtResource("1_p0vlq")
 
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1639785637]
+position = Vector2(0, -16)
+texture = ExtResource("2_v6fml")
+hframes = 6
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=309462495]
-position = Vector2(20, 20)
+position = Vector2(0, -6)
 shape = SubResource("RectangleShape2D_p0vlq")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1725134786]
-sprite_frames = SubResource("SpriteFrames_p0vlq")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1872852328]
+libraries/ = SubResource("AnimationLibrary_mdl7e")
+autoplay = &"idle"
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1577258055]
-position = Vector2(20, 20)
-zoom = Vector2(2, 2)
-position_smoothing_enabled = true
+[node name="Attack" type="Node2D" parent="." unique_id=1903279733]
+
+[node name="Area2D" type="Area2D" parent="Attack" unique_id=1458105865]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack/Area2D" unique_id=93557552]
+position = Vector2(20.999994, -18)
+rotation = -0.6073746
+shape = SubResource("RectangleShape2D_v6fml")
+disabled = true
