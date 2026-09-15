@@ -1,16 +1,29 @@
 [gd_scene format=3 uid="uid://dwkoq4wumem4g"]
 
 [ext_resource type="Script" uid="uid://bvqhyhyb3d0tf" path="res://scripts/player.gd" id="1_p0vlq"]
-[ext_resource type="Texture2D" uid="uid://d1qb8vceqnebc" path="res://Assets/sprites/CharacterFrames.png" id="2_v6fml"]
+[ext_resource type="Texture2D" uid="uid://c4kto3jor8m5d" path="res://Assets/sprites/Spritesheet-Sheet.png" id="2_v6fml"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p0vlq"]
-size = Vector2(24, 12)
+size = Vector2(16, 25)
 
 [sub_resource type="Animation" id="Animation_qu4a1"]
 resource_name = "Attack"
 
 [sub_resource type="Animation" id="Animation_mdl7e"]
 resource_name = "Jump"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_v6fml"]
 length = 0.001
@@ -27,10 +40,9 @@ tracks/0/keys = {
 "values": [Vector2i(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_3li8b"]
-resource_name = "idle"
-length = 0.7
-loop_mode = 1
+[sub_resource type="Animation" id="Animation_70d11"]
+resource_name = "fall"
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -38,10 +50,63 @@ tracks/0/path = NodePath("Sprite2D:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.13333334, 0.26666668, 0.4, 0.53333336, 0.6666667),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0)]
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3li8b"]
+resource_name = "idle"
+length = 1.2
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.90000004, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0), Vector2i(6, 0), Vector2i(7, 0), Vector2i(8, 0), Vector2i(9, 0), Vector2i(10, 0), Vector2i(11, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_khinc"]
+resource_name = "run"
+length = 0.80001
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2), Vector2i(4, 2), Vector2i(5, 2), Vector2i(6, 2), Vector2i(7, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_cw2d6"]
+resource_name = "run-transition"
+length = 0.20001
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2i(0, 1), Vector2i(1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mdl7e"]
@@ -49,8 +114,14 @@ _data = {
 &"Attack": SubResource("Animation_qu4a1"),
 &"Jump": SubResource("Animation_mdl7e"),
 &"RESET": SubResource("Animation_v6fml"),
-&"idle": SubResource("Animation_3li8b")
+&"fall": SubResource("Animation_70d11"),
+&"idle": SubResource("Animation_3li8b"),
+&"run": SubResource("Animation_khinc"),
+&"run-transition": SubResource("Animation_cw2d6")
 }
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3li8b"]
+size = Vector2(14, 21)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v6fml"]
 size = Vector2(20.022549, 3.8834152)
@@ -64,15 +135,23 @@ script = ExtResource("1_p0vlq")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1639785637]
 position = Vector2(0, -16)
 texture = ExtResource("2_v6fml")
-hframes = 6
+hframes = 12
+vframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=309462495]
-position = Vector2(0, -6)
+position = Vector2(0, -12.5)
 shape = SubResource("RectangleShape2D_p0vlq")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1872852328]
 libraries/ = SubResource("AnimationLibrary_mdl7e")
-autoplay = &"idle"
+
+[node name="Hurtbox" type="Node2D" parent="." unique_id=219398855]
+
+[node name="Area2D" type="Area2D" parent="Hurtbox" unique_id=1159227117]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox/Area2D" unique_id=1974410907]
+position = Vector2(0, -13.5)
+shape = SubResource("RectangleShape2D_3li8b")
 
 [node name="Attack" type="Node2D" parent="." unique_id=1903279733]
 
