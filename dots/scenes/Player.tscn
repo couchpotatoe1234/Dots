@@ -16,14 +16,27 @@ tracks/0/path = NodePath("Attack/Area2D/CollisionShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.3, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [false, true]
+"values": [true, false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
 }
 
 [sub_resource type="Animation" id="Animation_mdl7e"]
 resource_name = "Jump"
+length = 0.60001004
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -32,10 +45,10 @@ tracks/0/path = NodePath("Sprite2D:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
 "update": 1,
-"values": [Vector2i(0, 0)]
+"values": []
 }
 
 [sub_resource type="Animation" id="Animation_v6fml"]
@@ -62,7 +75,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_70d11"]
@@ -148,8 +161,9 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3li8b"]
 size = Vector2(14, 21)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_v6fml"]
-size = Vector2(20.022549, 3.8834152)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v6fml"]
+radius = 9.993481
+height = 25.554413
 
 [node name="Player" type="CharacterBody2D" unique_id=1860738924]
 z_index = 10
@@ -161,7 +175,7 @@ script = ExtResource("1_p0vlq")
 position = Vector2(0, -16)
 texture = ExtResource("2_v6fml")
 hframes = 12
-vframes = 3
+vframes = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=309462495]
 position = Vector2(0, -12.5)
@@ -183,8 +197,9 @@ shape = SubResource("RectangleShape2D_3li8b")
 [node name="Area2D" type="Area2D" parent="Attack" unique_id=1458105865]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attack/Area2D" unique_id=93557552]
-position = Vector2(20.999994, -18)
-rotation = -0.6073746
-shape = SubResource("RectangleShape2D_v6fml")
+position = Vector2(7.000002, -12)
+rotation = -2.3212879
+shape = SubResource("CapsuleShape2D_v6fml")
+disabled = true
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]

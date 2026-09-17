@@ -17,6 +17,8 @@ func _physics_process(delta: float) -> void:
 	var input_dir := 0.0
 	if GameManager.controls_allowed:
 		if Input.is_action_just_pressed("Jump") and is_on_floor():
+			animation.play("Jump")
+			await get_tree().create_timer(0.2).timeout
 			velocity.y = JUMP_VELOCITY
 		if Input.is_action_just_released("Jump") and not is_on_floor():
 			if velocity.y > 0:
@@ -29,18 +31,21 @@ func _physics_process(delta: float) -> void:
 
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
-	
+		if Input.is_action_just_pressed("Attack"):
+			change_state("Attack")
+			GameManager.controls_allowed = false
+			velocity.x = 0
 	move_and_slide()
 	
 	update_state(input_dir)
 	
 func update_state(input_dir: float) -> void:
-	if current_state == "run-transition":
+	if current_state == "run-transition" or current_state == "Attack":
 		return
 		
 	if not is_on_floor():
 		if velocity.y < 0:
-			change_state("Jump")
+			pass
 		else:
 			change_state("fall")
 		return
@@ -62,3 +67,6 @@ func _on_animation_finished(anim_name: String) -> void:
 	if anim_name == "run-transition":
 		current_state = "run"
 		animation.play("run")
+	elif anim_name == "Attack":
+		GameManager.controls_allowed = true
+		current_state = ""
