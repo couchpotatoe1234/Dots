@@ -3,23 +3,28 @@
 [ext_resource type="Script" uid="uid://bvqhyhyb3d0tf" path="res://scripts/player.gd" id="1_p0vlq"]
 [ext_resource type="Texture2D" uid="uid://c4kto3jor8m5d" path="res://Assets/sprites/Spritesheet-Sheet.png" id="2_v6fml"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v6fml"]
+radius = 9.993481
+height = 25.554413
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p0vlq"]
 size = Vector2(16, 25)
 
 [sub_resource type="Animation" id="Animation_qu4a1"]
 resource_name = "Attack"
+length = 0.50001
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Attack/Area2D/CollisionShape2D:disabled")
+tracks/0/path = NodePath("Sprite2D/Attack/CollisionShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true, false, true]
+"values": [false, true]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -28,15 +33,15 @@ tracks/1/path = NodePath("Sprite2D:frame_coords")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": []
+"values": [Vector2i(0, 6), Vector2i(1, 6), Vector2i(2, 6), Vector2i(3, 6), Vector2i(4, 6), Vector2i(5, 6)]
 }
 
 [sub_resource type="Animation" id="Animation_mdl7e"]
 resource_name = "Jump"
-length = 0.60001004
+length = 0.10001
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -45,10 +50,10 @@ tracks/0/path = NodePath("Sprite2D:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": []
+"values": [Vector2i(1, 3)]
 }
 
 [sub_resource type="Animation" id="Animation_v6fml"]
@@ -68,7 +73,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Attack/Area2D/CollisionShape2D:disabled")
+tracks/1/path = NodePath("Sprite2D/Attack/CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -78,8 +83,10 @@ tracks/1/keys = {
 "values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_70d11"]
-resource_name = "fall"
+[sub_resource type="Animation" id="Animation_bruh7"]
+resource_name = "airtime"
+length = 0.20001
+loop_mode = 1
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -88,10 +95,27 @@ tracks/0/path = NodePath("Sprite2D:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [Vector2i(0, 0)]
+"values": [Vector2i(0, 4), Vector2i(1, 4)]
+}
+
+[sub_resource type="Animation" id="Animation_70d11"]
+resource_name = "fall"
+length = 0.20001
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2i(0, 5), Vector2i(1, 5)]
 }
 
 [sub_resource type="Animation" id="Animation_3li8b"]
@@ -132,7 +156,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_cw2d6"]
 resource_name = "run-transition"
-length = 0.20001
+length = 0.10001
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -141,10 +165,10 @@ tracks/0/path = NodePath("Sprite2D:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2i(0, 1), Vector2i(1, 1)]
+"values": [Vector2i(0, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mdl7e"]
@@ -152,6 +176,7 @@ _data = {
 &"Attack": SubResource("Animation_qu4a1"),
 &"Jump": SubResource("Animation_mdl7e"),
 &"RESET": SubResource("Animation_v6fml"),
+&"airtime": SubResource("Animation_bruh7"),
 &"fall": SubResource("Animation_70d11"),
 &"idle": SubResource("Animation_3li8b"),
 &"run": SubResource("Animation_khinc"),
@@ -160,10 +185,6 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3li8b"]
 size = Vector2(14, 21)
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v6fml"]
-radius = 9.993481
-height = 25.554413
 
 [node name="Player" type="CharacterBody2D" unique_id=1860738924]
 z_index = 10
@@ -175,7 +196,16 @@ script = ExtResource("1_p0vlq")
 position = Vector2(0, -16)
 texture = ExtResource("2_v6fml")
 hframes = 12
-vframes = 7
+vframes = 8
+
+[node name="Attack" type="Area2D" parent="Sprite2D" unique_id=1458105865]
+position = Vector2(0, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Attack" unique_id=93557552]
+position = Vector2(7.000002, -12)
+rotation = -2.3212879
+shape = SubResource("CapsuleShape2D_v6fml")
+disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=309462495]
 position = Vector2(0, -12.5)
@@ -191,15 +221,5 @@ libraries/ = SubResource("AnimationLibrary_mdl7e")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox/Area2D" unique_id=1974410907]
 position = Vector2(0, -13.5)
 shape = SubResource("RectangleShape2D_3li8b")
-
-[node name="Attack" type="Node2D" parent="." unique_id=1903279733]
-
-[node name="Area2D" type="Area2D" parent="Attack" unique_id=1458105865]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack/Area2D" unique_id=93557552]
-position = Vector2(7.000002, -12)
-rotation = -2.3212879
-shape = SubResource("CapsuleShape2D_v6fml")
-disabled = true
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
