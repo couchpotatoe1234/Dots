@@ -55,7 +55,7 @@ func update_state(input_dir: float) -> void:
 		
 	if current_state == "airtime":
 		var fall_distance = global_position.y - fall_height
-		if fall_distance >= 66:
+		if fall_distance >= 96:
 			change_state("fall")
 			return
 		else:
