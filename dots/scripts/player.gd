@@ -27,7 +27,10 @@ func _physics_process(delta: float) -> void:
 		input_dir = Input.get_axis("left", "right")
 		if input_dir:
 			velocity.x = input_dir * SPEED
-			scale.x = -1 if input_dir <0 else 1
+			var is_left = input_dir < 0
+			sprite.flip_h = is_left
+			$Attack.scale.x = -1 if is_left else 1
+
 
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
@@ -52,7 +55,7 @@ func update_state(input_dir: float) -> void:
 		
 	if current_state == "airtime":
 		var fall_distance = global_position.y - fall_height
-		if fall_distance >= 64:
+		if fall_distance >= 66:
 			change_state("fall")
 			return
 		else:
