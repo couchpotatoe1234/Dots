@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 
 const SPEED = 100.0
-const JUMP_VELOCITY = -300.0
+const JUMP_VELOCITY = -375.0
 var can_attack = true
 var current_state = ""
 var fall_height: float = 0.0
@@ -55,7 +55,7 @@ func update_state(input_dir: float) -> void:
 		
 	if current_state == "airtime":
 		var fall_distance = global_position.y - fall_height
-		if fall_distance >= 66:
+		if fall_distance >= 96:
 			change_state("fall")
 			return
 		else:
