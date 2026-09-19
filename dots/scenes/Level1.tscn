@@ -24,7 +24,14 @@ sources/0 = SubResource("TileSetAtlasSource_odhdn")
 
 [node name="Node2D" type="Node2D" unique_id=524429940]
 
+[node name="sky" type="Parallax2D" parent="." unique_id=2094090045]
+
+[node name="planet" type="Parallax2D" parent="." unique_id=1506091991]
+
+[node name="clouds" type="Parallax2D" parent="." unique_id=1645046804]
+
 [node name="Player" parent="." unique_id=1860738924 instance=ExtResource("1_6ovph")]
+position = Vector2(-43, -133)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=2081588765]
 zoom = Vector2(3, 3)
