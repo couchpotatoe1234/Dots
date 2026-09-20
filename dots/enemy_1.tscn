@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://d1l5h6y70wdec"]
+
+[ext_resource type="Texture2D" uid="uid://b426e1b3wx7hn" path="res://Assets/sprites/Enemy01.png" id="1_mbxyh"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jdwa3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_mbxyh")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="enemy1" type="CharacterBody2D" unique_id=467132087]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=341240700]
+position = Vector2(672, 17)
+sprite_frames = SubResource("SpriteFrames_jdwa3")
