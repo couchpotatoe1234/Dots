@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bf7njj11ps5q5"
+path="res://.godot/imported/Spritesheet.aseprite-ffbc1b73afdef085aa46369747e4b939.res"
+
+[deps]
+
+source_file="res://Aseprite drawings/Spritesheet.aseprite"
+dest_files=["res://.godot/imported/Spritesheet.aseprite-ffbc1b73afdef085aa46369747e4b939.res"]
+
+[params]
+

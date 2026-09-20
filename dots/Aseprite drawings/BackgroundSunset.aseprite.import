@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://hmbi5afgdhbd"
+path="res://.godot/imported/BackgroundSunset.aseprite-1e35b811edb28fdcaba1f9f3e3ca303b.res"
+
+[deps]
+
+source_file="res://Aseprite drawings/BackgroundSunset.aseprite"
+dest_files=["res://.godot/imported/BackgroundSunset.aseprite-1e35b811edb28fdcaba1f9f3e3ca303b.res"]
+
+[params]
+

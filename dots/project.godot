@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Dots"
 run/main_scene="uid://caejj3jqg3peh"
-config/features=PackedStringArray("4.7", "GL Compatibility")
+config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
@@ -21,7 +21,13 @@ GameManager="*uid://qfln0y0r4aas"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg", "res://addons/net.yarvis.pixel_pen/plugin.cfg")
+enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/godot_super-wakatime/plugin.cfg", "res://addons/net.yarvis.pixel_pen/plugin.cfg")
+
+[importer_defaults]
+
+animation_library={
+&"animation/fps": 10.0
+}
 
 [input]
 
@@ -60,6 +66,7 @@ Jump={
 [physics]
 
 3d/physics_engine="Jolt Physics"
+2d/default_gravity=750.0
 
 [rendering]
 
