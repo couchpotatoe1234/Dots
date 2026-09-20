@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b426e1b3wx7hn"
-path="res://.godot/imported/Enemy01.png-24ef2b686a59fd38fda9dd129af0f077.ctex"
+uid="uid://18jaets2sl2a"
+path="res://.godot/imported/BackgroundSunset-Sheet.png-d5c8f1bd9f76b62343ddd50032619312.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/sprites/Enemy01.png"
-dest_files=["res://.godot/imported/Enemy01.png-24ef2b686a59fd38fda9dd129af0f077.ctex"]
+source_file="res://Assets/sprites/BackgroundSunset-Sheet.png"
+dest_files=["res://.godot/imported/BackgroundSunset-Sheet.png-d5c8f1bd9f76b62343ddd50032619312.ctex"]
 
 [params]
 

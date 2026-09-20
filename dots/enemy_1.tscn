@@ -1,20 +1,21 @@
 [gd_scene format=3 uid="uid://d1l5h6y70wdec"]
 
-[ext_resource type="Texture2D" uid="uid://b426e1b3wx7hn" path="res://Assets/sprites/Enemy01.png" id="1_mbxyh"]
+[ext_resource type="Texture2D" uid="uid://cymae72i7ph41" path="res://Assets/sprites/Enemy01-Sheet.png" id="1_mbxyh"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_jdwa3"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("1_mbxyh")
-}],
-"loop": 1,
-"name": &"default",
-"speed": 5.0
-}]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6rg8l"]
+size = Vector2(22, 10)
 
-[node name="enemy1" type="CharacterBody2D" unique_id=467132087]
+[node name="enemy1" type="Area2D" unique_id=493662410]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=341240700]
-position = Vector2(672, 17)
-sprite_frames = SubResource("SpriteFrames_jdwa3")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1280344579]
+root_node = NodePath("../AnimatedSprite2D")
+
+[node name="AnimatedSprite2D" type="Sprite2D" parent="." unique_id=1470062004]
+position = Vector2(0, -16)
+texture = ExtResource("1_mbxyh")
+hframes = 27
+vframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1456834289]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_6rg8l")

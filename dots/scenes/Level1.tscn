@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://caejj3jqg3peh"]
 
 [ext_resource type="PackedScene" uid="uid://dwkoq4wumem4g" path="res://scenes/Player.tscn" id="1_6ovph"]
+[ext_resource type="Texture2D" uid="uid://18jaets2sl2a" path="res://Assets/sprites/BackgroundSunset-Sheet.png" id="1_odhdn"]
 [ext_resource type="Texture2D" uid="uid://bsfbtgxk66vvx" path="res://Assets/sprites/Tiles.png" id="2_bwv4p"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_odhdn"]
@@ -25,6 +26,12 @@ sources/0 = SubResource("TileSetAtlasSource_odhdn")
 [node name="Node2D" type="Node2D" unique_id=524429940]
 
 [node name="sky" type="Parallax2D" parent="." unique_id=2094090045]
+
+[node name="Sprite2D" type="Sprite2D" parent="sky" unique_id=1420511014]
+position = Vector2(292, -36)
+scale = Vector2(5, 5)
+texture = ExtResource("1_odhdn")
+vframes = 4
 
 [node name="planet" type="Parallax2D" parent="." unique_id=1506091991]
 
