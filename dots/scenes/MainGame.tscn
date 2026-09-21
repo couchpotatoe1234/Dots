@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://caejj3jqg3peh"]
+[gd_scene format=4 uid="uid://tkydm2oxcoa3"]
 
 [ext_resource type="PackedScene" uid="uid://dwkoq4wumem4g" path="res://scenes/Player.tscn" id="1_6ovph"]
 [ext_resource type="Texture2D" uid="uid://18jaets2sl2a" path="res://Assets/sprites/BackgroundSunset-Sheet.png" id="1_odhdn"]
