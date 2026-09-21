@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://cswgs7kt4in1f"]
+[gd_scene format=4 uid="uid://caejj3jqg3peh"]
 
 [ext_resource type="PackedScene" uid="uid://dwkoq4wumem4g" path="res://scenes/Player.tscn" id="1_6ovph"]
 [ext_resource type="Texture2D" uid="uid://18jaets2sl2a" path="res://Assets/sprites/BackgroundSunset-Sheet.png" id="1_odhdn"]
@@ -36,13 +36,13 @@ repeat_times = 2
 follow_viewport = false
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/sky" unique_id=1420511014]
-position = Vector2(60.4, -11.399999)
+position = Vector2(60.999996, 11.2)
 texture = ExtResource("1_odhdn")
 vframes = 4
 
 [node name="planet" type="Parallax2D" parent="Background" unique_id=1506091991]
 scroll_scale = Vector2(0.1, 0.1)
-scroll_offset = Vector2(150, -42)
+scroll_offset = Vector2(86, -55)
 follow_viewport = false
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/planet" unique_id=1365588354]
@@ -67,7 +67,7 @@ frame = 3
 
 [node name="clouds" type="Parallax2D" parent="Background" unique_id=1645046804]
 scroll_scale = Vector2(0.2, 0.2)
-scroll_offset = Vector2(-4, -33)
+scroll_offset = Vector2(-1, -28)
 repeat_size = Vector2(192, 0)
 repeat_times = 4
 limit_begin = Vector2(-10000000, 0)
