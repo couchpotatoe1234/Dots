@@ -8,7 +8,7 @@ extends CharacterBody2D
 @onready var wall_ray: RayCast2D = $WallRayCheck
 @onready var ledge_ray: RayCast2D = $LedgeRayCheck
 
-var direction: int = -1
+var direction: int = 1
 
 func _physics_process(delta: float) -> void:
 	print("tick", velocity)
@@ -28,3 +28,6 @@ func flip_direction() -> void:
 	sprite.flip_h = (direction > 0)
 	wall_ray.scale.x = -wall_ray.scale.x
 	ledge_ray.scale.x = -ledge_ray.scale.x
+	
+func _ready():
+	sprite.play("walk")
