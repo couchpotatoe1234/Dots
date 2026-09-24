@@ -8,6 +8,9 @@ var current_state = ""
 var fall_height: float = 0.0
 @onready var sprite = $Sprite2D
 @onready var animation = $AnimationPlayer
+@export var max_health: int = 5
+var current_health: int = 5
+var is_invulnerable: bool = false
 
 func _ready() -> void:
 	change_state("idle")
@@ -17,6 +20,8 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 	var input_dir := 0.0
 	if GameManager.controls_allowed:
+		if Input.is_action_just_pressed("up"):
+			take_damage(1)
 		if Input.is_action_just_pressed("Jump") and is_on_floor():
 			animation.play("Jump")
 			velocity.y = JUMP_VELOCITY
@@ -86,3 +91,32 @@ func _on_animation_finished(anim_name: String) -> void:
 		animation.play("idle")
 	elif anim_name == "Attack":
 		current_state = ""
+
+func take_damage(amount: int) -> void:
+	if is_invulnerable:
+		return
+	current_health -= amount
+	print("Player health now:", current_health)
+	if current_health <= 0:
+		die()
+	else:
+		start_invulnerablilty()
+		
+func start_invulnerablilty() -> void:
+	is_invulnerable = true
+	sprite.modulate.a = 0.5
+	await get_tree().create_timer(1.0).timeout
+	sprite.modulate.a = 1.0
+	is_invulnerable = false
+	
+func die() -> void:
+	GameManager.controls_allowed = false
+	print("ya died dummy")
+	get_tree().reload_current_scene()
+
+
+func _on_hurtbox_area_entered(area: Area2D) -> void:
+	if area.is_in_group("normal_enemy"):
+		take_damage(1)
+	if area.is_in_group("strong_enemy"):
+		take_damage(2)
