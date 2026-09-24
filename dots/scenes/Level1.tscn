@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://caejj3jqg3peh"]
+[gd_scene format=4 uid="uid://cswgs7kt4in1f"]
 
 [ext_resource type="PackedScene" uid="uid://dwkoq4wumem4g" path="res://scenes/Player.tscn" id="1_6ovph"]
 [ext_resource type="Texture2D" uid="uid://18jaets2sl2a" path="res://Assets/sprites/BackgroundSunset-Sheet.png" id="1_odhdn"]
@@ -89,7 +89,7 @@ vframes = 4
 frame = 3
 
 [node name="Player" parent="." unique_id=1860738924 instance=ExtResource("1_6ovph")]
-position = Vector2(-25, -7)
+position = Vector2(-27, -10)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=2081588765]
 zoom = Vector2(3, 3)
