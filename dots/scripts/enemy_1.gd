@@ -11,12 +11,9 @@ extends CharacterBody2D
 var direction: int = 1
 
 func _physics_process(delta: float) -> void:
-	print("tick", velocity)
-	print("wall: ", wall_ray.is_colliding(), " ledge: ", ledge_ray.is_colliding())
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	
-	#Turn around code
 	if is_on_wall() or (wall_ray.is_colliding() or not ledge_ray.is_colliding()):
 		flip_direction()
 	
