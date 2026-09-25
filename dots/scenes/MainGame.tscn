@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dwkoq4wumem4g" path="res://scenes/Player.tscn" id="1_6ovph"]
 [ext_resource type="Script" uid="uid://bxfu3cjh5t870" path="res://scripts/Main.gd" id="1_p73vr"]
+[ext_resource type="PackedScene" uid="uid://crjuv2rpraf3o" path="res://scenes/PauseMenu.tscn" id="3_p73vr"]
 
 [node name="Node2D" type="Node2D" unique_id=524429940]
 script = ExtResource("1_p73vr")
@@ -14,4 +15,6 @@ zoom = Vector2(3, 3)
 
 [node name="Level" type="Node2D" parent="." unique_id=1094287842]
 
-[node name="GUI" type="Node2D" parent="." unique_id=1240038196]
+[node name="GUI" type="CanvasLayer" parent="." unique_id=1761024443]
+
+[node name="PauseMenu" parent="." unique_id=539579433 instance=ExtResource("3_p73vr")]

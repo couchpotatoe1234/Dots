@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://crjuv2rpraf3o"]
+
+[ext_resource type="Script" uid="uid://c5v2lsv8gtq76" path="res://scripts/PauseMenu.gd" id="1_jvnd5"]
+
+[node name="PauseMenu" type="CanvasLayer" unique_id=539579433]
+process_mode = 3
+script = ExtResource("1_jvnd5")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=392339429]
+modulate = Color(1, 1, 1, 0.39215687)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect" unique_id=503801356]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -72.5
+offset_right = 48.0
+offset_bottom = 72.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleLable" type="Label" parent="ColorRect/VBoxContainer" unique_id=1129664215]
+layout_mode = 2
+text = "PAUSED
+
+"
+
+[node name="ResumeButton" type="Button" parent="ColorRect/VBoxContainer" unique_id=875656202]
+layout_mode = 2
+text = "Resume"
+
+[node name="MainMenuButton" type="Button" parent="ColorRect/VBoxContainer" unique_id=1750137428]
+layout_mode = 2
+text = "Main Menu"
+
+[connection signal="pressed" from="ColorRect/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]

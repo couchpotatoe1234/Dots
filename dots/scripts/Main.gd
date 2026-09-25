@@ -2,12 +2,15 @@ extends Node2D
 
 @onready var level_container = $Level
 @onready var player = $Player
+@onready var pause_menu = $PauseMenu
 var current_level_node: Node = null
 
 func _ready() -> void:
 	if player:
 		player.hide()
 		player.process_mode = PROCESS_MODE_DISABLED
+	if pause_menu:
+		pause_menu.return_to_menu_requested.connect(return_to_main_menu)
 	load_main_menu()
 	
 func load_main_menu() -> void:
@@ -36,3 +39,12 @@ func change_level(level_path: String, spawn_position: Vector2 = Vector2.ZERO) ->
 		level_container.add_child(current_level_node)
 		if player and spawn_position != Vector2.ZERO:
 			player.global_position = spawn_position
+			
+func return_to_main_menu() -> void:
+	if player:
+		player.hide()
+		player.process_mode = Node.PROCESS_MODE_DISABLED
+	if current_level_node:
+		current_level_node.queue_free()
+		current_level_node = null
+	load_main_menu()
