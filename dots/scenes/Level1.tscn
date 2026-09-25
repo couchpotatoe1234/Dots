@@ -114,16 +114,23 @@ texture_region_size = Vector2i(32, 32)
 3:2/0/terrains_peering_bit/top_left_corner = 0
 3:2/0/terrains_peering_bit/top_side = 0
 0:3/0 = 0
+0:3/0/terrain_set = 0
 1:3/0 = 0
+1:3/0/terrain_set = 0
 2:3/0 = 0
+2:3/0/terrain_set = 0
 2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -0.0859642, 16, -0.028654099, 16, 16, -16, 16)
 3:3/0 = 0
+3:3/0/terrain_set = 0
 3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -0.0859642, 16, -0.028654099, 16, 16, -16, 16)
 0:4/0 = 0
+0:4/0/terrain_set = 0
 0:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:4/0 = 0
+1:4/0/terrain_set = 0
 1:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 2:4/0 = 0
+2:4/0/terrain_set = 0
 2:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 0, -16, 0)
 
 [sub_resource type="TileSet" id="TileSet_dw26h"]
@@ -193,3 +200,6 @@ tile_set = SubResource("TileSet_dw26h")
 
 [node name="enemy1" parent="." unique_id=156177197 instance=ExtResource("4_dw26h")]
 position = Vector2(336, -1)
+
+[node name="Node" type="Node2D" parent="." unique_id=1864394000]
+position = Vector2(-34, -448)
