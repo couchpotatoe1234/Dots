@@ -17,4 +17,8 @@ zoom = Vector2(3, 3)
 
 [node name="GUI" type="CanvasLayer" parent="." unique_id=1761024443]
 
+[node name="ColorRect" type="ColorRect" parent="GUI" unique_id=2092174242]
+offset_right = 40.0
+offset_bottom = 40.0
+
 [node name="PauseMenu" parent="." unique_id=539579433 instance=ExtResource("3_p73vr")]
