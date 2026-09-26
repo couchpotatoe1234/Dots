@@ -6,6 +6,7 @@ const JUMP_VELOCITY = -325.0
 var can_attack = true
 var current_state = ""
 var fall_height: float = 0.0
+@export var is_attacking: bool = false
 @onready var sprite = $Sprite2D
 @onready var animation = $AnimationPlayer
 @export var max_health: int = 5
@@ -30,11 +31,12 @@ func _physics_process(delta: float) -> void:
 				velocity.y = 0
 		
 		input_dir = Input.get_axis("left", "right")
-		if input_dir:
+		if input_dir && not is_attacking:
 			velocity.x = input_dir * SPEED
 			var is_left = input_dir < 0
-			sprite.flip_h = is_left
-			$Attack.scale.x = -1 if is_left else 1
+			if not is_attacking:
+				sprite.flip_h = is_left
+				$Attack.scale.x = -1 if is_left else 1
 
 
 		else:
@@ -93,7 +95,7 @@ func _on_animation_finished(anim_name: String) -> void:
 		current_state = ""
 
 func take_damage(amount: int) -> void:
-	if is_invulnerable:
+	if not GameManager.controls_allowed or is_invulnerable:
 		return
 	current_health -= amount
 	print("Player health now:", current_health)

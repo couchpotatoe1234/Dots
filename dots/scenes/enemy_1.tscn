@@ -3,6 +3,9 @@
 [ext_resource type="Script" uid="uid://csgss2pt6ggd7" path="res://scripts/enemy_1.gd" id="1_ejytf"]
 [ext_resource type="Texture2D" uid="uid://cymae72i7ph41" path="res://Assets/sprites/Enemy01-Sheet.png" id="2_a1412"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6rg8l"]
+size = Vector2(23, 11)
+
 [sub_resource type="Animation" id="Animation_mbxyh"]
 resource_name = "Death"
 loop_mode = 1
@@ -316,13 +319,20 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="GDScript" id="GDScript_a1412"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a1412"]
+size = Vector2(25, 12)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6rg8l"]
-size = Vector2(24, 12)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a1412"]
+radius = 4.0
+height = 22.0
 
 [node name="enemy1" type="CharacterBody2D" unique_id=156177197]
+collision_layer = 4
 script = ExtResource("1_ejytf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1456834289]
+position = Vector2(-0.5, -5.5)
+shape = SubResource("RectangleShape2D_6rg8l")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1280344579]
 root_node = NodePath("../AnimatedSprite2D")
@@ -332,11 +342,12 @@ libraries/ = SubResource("AnimationLibrary_ovk8a")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_ke6mt")
 animation = &"death"
-script = SubResource("GDScript_a1412")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1456834289]
-position = Vector2(-1, -5)
-shape = SubResource("RectangleShape2D_6rg8l")
+[node name="Hurtbox" type="Area2D" parent="." unique_id=1111178456]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=982167528]
+position = Vector2(-0.5, -6)
+shape = SubResource("RectangleShape2D_a1412")
 
 [node name="WallRayCheck" type="RayCast2D" parent="." unique_id=468862402]
 target_position = Vector2(12, 0)
@@ -344,3 +355,10 @@ target_position = Vector2(12, 0)
 [node name="LedgeRayCheck" type="RayCast2D" parent="." unique_id=1771359990]
 position = Vector2(13, 0)
 target_position = Vector2(0, 20)
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=874396624 groups=["normal_enemy"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=691138422]
+position = Vector2(0, -4)
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_a1412")

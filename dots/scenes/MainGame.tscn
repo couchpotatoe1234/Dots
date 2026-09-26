@@ -3,13 +3,14 @@
 [ext_resource type="PackedScene" uid="uid://dwkoq4wumem4g" path="res://scenes/Player.tscn" id="1_6ovph"]
 [ext_resource type="Script" uid="uid://bxfu3cjh5t870" path="res://scripts/Main.gd" id="1_p73vr"]
 [ext_resource type="PackedScene" uid="uid://crjuv2rpraf3o" path="res://scenes/PauseMenu.tscn" id="3_p73vr"]
+[ext_resource type="Script" uid="uid://di6dldye1rkun" path="res://scripts/TransitionLayer.gd" id="3_t4bxf"]
 
 [sub_resource type="Animation" id="Animation_p73vr"]
 resource_name = "Fade_to_black"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/path = NodePath("TransitionLayer/TransitionLayer:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -20,11 +21,11 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_t4bxf"]
-resource_name = "Fade_to_white"
+resource_name = "Fade_to_clear"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/path = NodePath("TransitionLayer/TransitionLayer:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -39,7 +40,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/path = NodePath("TransitionLayer/TransitionLayer:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -52,7 +53,7 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7fyak"]
 _data = {
 &"Fade_to_black": SubResource("Animation_p73vr"),
-&"Fade_to_white": SubResource("Animation_t4bxf"),
+&"Fade_to_clear": SubResource("Animation_t4bxf"),
 &"RESET": SubResource("Animation_x628s")
 }
 
@@ -76,7 +77,10 @@ drag_bottom_margin = 0.1
 
 [node name="GUI" type="CanvasLayer" parent="." unique_id=1761024443]
 
-[node name="ColorRect" type="ColorRect" parent="GUI" unique_id=2092174242]
+[node name="TransitionLayer" type="Node" parent="GUI" unique_id=1121956783]
+script = ExtResource("3_t4bxf")
+
+[node name="TransitionLayer" type="ColorRect" parent="GUI/TransitionLayer" unique_id=2092174242]
 modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0
@@ -86,7 +90,8 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="GUI" unique_id=2098844064]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GUI/TransitionLayer" unique_id=2098844064]
+root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_7fyak")
 
 [node name="PauseMenu" parent="." unique_id=539579433 instance=ExtResource("3_p73vr")]

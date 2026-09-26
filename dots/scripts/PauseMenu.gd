@@ -18,6 +18,10 @@ func _on_resume_button_pressed() -> void:
 	toggle_pause()
 
 func _on_main_menu_button_pressed() -> void:
+	var main_scene = get_tree().root.get_node_or_null("MainGame")
+	if main_scene and main_scene.player:
+		main_scene.player.velocity = Vector2.ZERO
+		main_scene.player.set_physics_process(false)
 	get_tree().paused = false
 	visible = false
 	hide()
