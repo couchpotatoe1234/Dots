@@ -10,6 +10,10 @@ extends CharacterBody2D
 
 var direction: int = 1
 
+func _ready():
+	sprite.play("walk")
+	sprite.flip_h = (direction > 0)
+
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -29,6 +33,3 @@ func flip_direction() -> void:
 	ledge_ray.scale.x = -ledge_ray.scale.x
 	ledge_ray.position.x = -ledge_ray.position.x
 	
-func _ready():
-	sprite.play("walk")
-	sprite.flip_h = (direction > 0)

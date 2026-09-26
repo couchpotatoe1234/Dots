@@ -47,4 +47,6 @@ func return_to_main_menu() -> void:
 	if current_level_node:
 		current_level_node.queue_free()
 		current_level_node = null
+	for child in level_container.get_children():
+		child.queue_free()
 	load_main_menu()
