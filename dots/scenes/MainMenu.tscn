@@ -5,7 +5,7 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eo3j8"]
 atlas = ExtResource("2_0ykhv")
-region = Rect2(13, 2, 38, 22)
+region = Rect2(13, 2, 38, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x64yu"]
 atlas = ExtResource("2_0ykhv")
@@ -13,11 +13,11 @@ region = Rect2(141, 2, 38, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2u2iq"]
 atlas = ExtResource("2_0ykhv")
-region = Rect2(77, 2, 38, 21)
+region = Rect2(77, 2, 38, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0ykhv"]
 atlas = ExtResource("2_0ykhv")
-region = Rect2(13, 43, 38, 22)
+region = Rect2(13, 43, 38, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2wh52"]
 atlas = ExtResource("2_0ykhv")
@@ -25,11 +25,11 @@ region = Rect2(141, 43, 38, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ow34m"]
 atlas = ExtResource("2_0ykhv")
-region = Rect2(77, 43, 38, 21)
+region = Rect2(77, 43, 38, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l72w3"]
 atlas = ExtResource("2_0ykhv")
-region = Rect2(13, 75, 38, 22)
+region = Rect2(13, 75, 38, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_826wr"]
 atlas = ExtResource("2_0ykhv")
@@ -37,7 +37,7 @@ region = Rect2(141, 75, 38, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ucygd"]
 atlas = ExtResource("2_0ykhv")
-region = Rect2(77, 75, 38, 21)
+region = Rect2(77, 75, 38, 20)
 
 [node name="MainMenu" type="CanvasLayer" unique_id=1293915226]
 script = ExtResource("1_yqorp")
@@ -50,28 +50,34 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -35.0
 offset_top = -50.5
-offset_right = 35.0
-offset_bottom = 50.5
+offset_right = 3.0
+offset_bottom = 23.5
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Start" type="TextureButton" parent="VBoxContainer" unique_id=1662265221]
+custom_minimum_size = Vector2(150, 75)
 layout_mode = 2
 texture_normal = SubResource("AtlasTexture_eo3j8")
 texture_pressed = SubResource("AtlasTexture_x64yu")
 texture_hover = SubResource("AtlasTexture_2u2iq")
+stretch_mode = 4
 
 [node name="Settings Button" type="TextureButton" parent="VBoxContainer" unique_id=1377929990]
+custom_minimum_size = Vector2(150, 75)
 layout_mode = 2
 texture_normal = SubResource("AtlasTexture_0ykhv")
 texture_pressed = SubResource("AtlasTexture_2wh52")
 texture_hover = SubResource("AtlasTexture_ow34m")
+stretch_mode = 4
 
 [node name="Quit" type="TextureButton" parent="VBoxContainer" unique_id=1927734801]
+custom_minimum_size = Vector2(150, 75)
 layout_mode = 2
 texture_normal = SubResource("AtlasTexture_l72w3")
 texture_pressed = SubResource("AtlasTexture_826wr")
 texture_hover = SubResource("AtlasTexture_ucygd")
+stretch_mode = 4
 
 [connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]
