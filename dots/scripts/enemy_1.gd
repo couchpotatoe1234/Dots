@@ -3,7 +3,7 @@ extends CharacterBody2D
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var wall_ray: RayCast2D = $WallRayCheck
 @onready var ledge_ray: RayCast2D = $LedgeRayCheck
-@export var health: int = 2
+var health: int = 2
 var invulnerable = false
 var speed: float = 30.0
 
@@ -37,6 +37,7 @@ func flip_direction() -> void:
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("player_attack"):
 		health -= 1
+		print("enemy health:", health)
 		invulnerable = true
 		velocity.y = 200
 		velocity.x = -200 * direction

@@ -9,7 +9,7 @@ var fall_height: float = 0.0
 @export var is_attacking: bool = false
 @onready var sprite = $Sprite2D
 @onready var animation = $AnimationPlayer
-var health: int = 5
+var health: int = 50
 var is_invulnerable: bool = false
 var knocked_back: bool = false
 
@@ -47,7 +47,7 @@ func _physics_process(delta: float) -> void:
 	update_state(input_dir)
 	
 func update_state(input_dir: float) -> void:
-	if current_state in ["Attack", "run-transition", "Jump"]:
+	if current_state in ["Attack", "run-transition", "Jump", "hurt"]:
 		return
 	
 	if not is_on_floor():
@@ -89,8 +89,9 @@ func _on_animation_finished(anim_name: String) -> void:
 	elif anim_name == "fall":
 		current_state = "idle"
 		animation.play("idle")
-	elif anim_name == "Attack":
+	elif anim_name == "Attack" or anim_name == "hurt":
 		current_state = ""
+		change_state("idle")
 
 func take_damage(amount: int) -> void:
 	if is_invulnerable:
@@ -100,7 +101,6 @@ func take_damage(amount: int) -> void:
 	var knock_dir = 1.0 if sprite.flip_h or scale.x < 0 else -1.0
 	velocity.x = knock_dir * 100.0
 	velocity.y = -200
-
 	if $Camera2D:
 		var tween = create_tween()
 		for i in 10:
@@ -116,8 +116,8 @@ func take_damage(amount: int) -> void:
 
 func start_invulnerablilty() -> void:
 	is_invulnerable = true
-	sprite.modulate.a = 0.5
-	await get_tree().create_timer(1.0).timeout
+	change_state("hurt")
+	await get_tree().create_timer(0.75).timeout
 	sprite.modulate.a = 1.0
 	is_invulnerable = false
 
