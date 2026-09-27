@@ -9,9 +9,9 @@ var fall_height: float = 0.0
 @export var is_attacking: bool = false
 @onready var sprite = $Sprite2D
 @onready var animation = $AnimationPlayer
-@export var max_health: int = 5
-var current_health: int = 5
+var health: int = 5
 var is_invulnerable: bool = false
+var knocked_back: bool = false
 
 func _ready() -> void:
 	change_state("idle")
@@ -21,8 +21,6 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 	var input_dir := 0.0
 	if GameManager.controls_allowed:
-		if Input.is_action_just_pressed("up"):
-			take_damage(1)
 		if Input.is_action_just_pressed("Jump") and is_on_floor():
 			animation.play("Jump")
 			velocity.y = JUMP_VELOCITY
@@ -95,22 +93,34 @@ func _on_animation_finished(anim_name: String) -> void:
 		current_state = ""
 
 func take_damage(amount: int) -> void:
-	if not GameManager.controls_allowed or is_invulnerable:
+	if is_invulnerable:
 		return
-	current_health -= amount
-	print("Player health now:", current_health)
-	if current_health <= 0:
+	health -= amount
+	print("Player health now:", health)
+	var knock_dir = 1.0 if sprite.flip_h or scale.x < 0 else -1.0
+	velocity.x = knock_dir * 100.0
+	velocity.y = -200
+
+	if $Camera2D:
+		var tween = create_tween()
+		for i in 10:
+			tween.tween_property($Camera2D, "offset", Vector2(randf_range(-8, 8), randf_range(-8, 8)), 0.05)
+		tween.tween_property($Camera2D, "offset", Vector2.ZERO, 0.05)
+	if health <= 0:
 		die()
 	else:
 		start_invulnerablilty()
-		
+		GameManager.controls_allowed = false
+		await get_tree().create_timer(0.25).timeout
+		GameManager.controls_allowed = true
+
 func start_invulnerablilty() -> void:
 	is_invulnerable = true
 	sprite.modulate.a = 0.5
 	await get_tree().create_timer(1.0).timeout
 	sprite.modulate.a = 1.0
 	is_invulnerable = false
-	
+
 func die() -> void:
 	GameManager.controls_allowed = false
 	print("ya died dummy")
@@ -122,3 +132,4 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 		take_damage(1)
 	if area.is_in_group("strong_enemy"):
 		take_damage(2)
+		

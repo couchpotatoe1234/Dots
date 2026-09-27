@@ -15,8 +15,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect" unique_id=503801356]
-layout_mode = 1
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=503801356]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -29,19 +28,19 @@ offset_bottom = 72.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TitleLable" type="Label" parent="ColorRect/VBoxContainer" unique_id=1129664215]
+[node name="TitleLable" type="Label" parent="VBoxContainer" unique_id=1129664215]
 layout_mode = 2
 text = "PAUSED
 
 "
 
-[node name="ResumeButton" type="Button" parent="ColorRect/VBoxContainer" unique_id=875656202]
+[node name="ResumeButton" type="Button" parent="VBoxContainer" unique_id=875656202]
 layout_mode = 2
 text = "Resume"
 
-[node name="MainMenuButton" type="Button" parent="ColorRect/VBoxContainer" unique_id=1750137428]
+[node name="MainMenuButton" type="Button" parent="VBoxContainer" unique_id=1750137428]
 layout_mode = 2
 text = "Main Menu"
 
-[connection signal="pressed" from="ColorRect/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
-[connection signal="pressed" from="ColorRect/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
