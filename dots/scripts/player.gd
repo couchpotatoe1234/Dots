@@ -41,7 +41,6 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 		if Input.is_action_just_pressed("Attack"):
 			change_state("Attack")
-			velocity.x = 0
 	move_and_slide()
 	
 	update_state(input_dir)
