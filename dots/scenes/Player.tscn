@@ -253,6 +253,8 @@ position = Vector2(0, -13.5)
 shape = SubResource("RectangleShape2D_3li8b")
 
 [node name="Attack" type="Area2D" parent="." unique_id=1458105865 groups=["player_attack"]]
+collision_layer = 8
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attack" unique_id=93557552]
 position = Vector2(7.000002, -12)

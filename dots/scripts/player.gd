@@ -9,7 +9,7 @@ var fall_height: float = 0.0
 @export var is_attacking: bool = false
 @onready var sprite = $Sprite2D
 @onready var animation = $AnimationPlayer
-var health: int = 50
+var health: int = 5
 var is_invulnerable: bool = false
 var knocked_back: bool = false
 
@@ -125,6 +125,7 @@ func die() -> void:
 	GameManager.controls_allowed = false
 	print("ya died dummy")
 	get_tree().reload_current_scene()
+	print("LaNguAgE")
 
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:

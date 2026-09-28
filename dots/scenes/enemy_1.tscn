@@ -277,7 +277,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4rae8")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"death",
 "speed": 10.0
 }, {
@@ -342,8 +342,11 @@ libraries/ = SubResource("AnimationLibrary_ovk8a")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_ke6mt")
 animation = &"death"
+frame = 26
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=1111178456]
+collision_layer = 10
+collision_mask = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=982167528]
 position = Vector2(-0.5, -6)
@@ -362,3 +365,5 @@ target_position = Vector2(0, 20)
 position = Vector2(0, -4)
 rotation = -1.5707964
 shape = SubResource("CapsuleShape2D_a1412")
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
