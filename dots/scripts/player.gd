@@ -17,6 +17,8 @@ func _ready() -> void:
 	change_state("idle")
 	
 func _physics_process(delta: float) -> void:
+	GameManager.player_x = position.x
+	GameManager.player_y = position.y
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	var input_dir := 0.0
@@ -40,14 +42,13 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 		if Input.is_action_just_pressed("Attack"):
-			change_state("Attack")
-			velocity.x = 0
+			change_state("attack-side")
 	move_and_slide()
 	
 	update_state(input_dir)
 	
 func update_state(input_dir: float) -> void:
-	if current_state in ["Attack", "run-transition", "Jump", "hurt"]:
+	if current_state in ["attack-side", "run-transition", "Jump", "hurt"]:
 		return
 	
 	if not is_on_floor():
@@ -89,9 +90,12 @@ func _on_animation_finished(anim_name: String) -> void:
 	elif anim_name == "fall":
 		current_state = "idle"
 		animation.play("idle")
-	elif anim_name == "Attack" or anim_name == "hurt":
+	elif anim_name == "attack-side" or anim_name == "hurt":
 		current_state = ""
 		change_state("idle")
+	elif anim_name == "die":
+		health = 5
+		$Main.load_main_menu()
 
 func take_damage(amount: int) -> void:
 	if is_invulnerable:
@@ -123,9 +127,10 @@ func start_invulnerablilty() -> void:
 
 func die() -> void:
 	GameManager.controls_allowed = false
+	velocity.x = 0
+	velocity.y = 0
 	print("ya died dummy")
-	get_tree().reload_current_scene()
-	print("LaNguAgE")
+	change_state("die")
 
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
