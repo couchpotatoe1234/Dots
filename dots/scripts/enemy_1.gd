@@ -46,12 +46,13 @@ func flip_direction() -> void:
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("player_attack"):
+		var knock_dir = 1.0 if GameManager.player_x >= position.x else -1.0
 		damaged = true
 		health -= 1
 		print("enemy health:", health)
-		velocity.y = -200
-		velocity.x = -100 * direction
-		await get_tree().create_timer(0.5).timeout
+		velocity.y = -50
+		velocity.x = -50 * knock_dir
+		await get_tree().create_timer(0.25).timeout
 		damaged = false
 
 	
