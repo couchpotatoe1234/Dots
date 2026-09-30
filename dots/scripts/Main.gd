@@ -10,6 +10,7 @@ func _ready() -> void:
 	if player:
 		player.hide()
 		player.process_mode = PROCESS_MODE_DISABLED
+		player.load_main_menu.connect(return_to_main_menu)
 	if pause_menu:
 		pause_menu.return_to_menu_requested.connect(return_to_main_menu)
 	load_main_menu()
@@ -49,6 +50,7 @@ func change_level(level_path: String, spawn_position: Vector2 = Vector2.ZERO) ->
 		GameManager.controls_allowed = true
 			
 func return_to_main_menu() -> void:
+	print("main menu-d")
 	GameManager.controls_allowed = false
 	if player:
 		player.velocity = Vector2.ZERO
