@@ -9,11 +9,13 @@ var fall_height: float = 0.0
 @export var is_attacking: bool = false
 @onready var sprite = $Sprite2D
 @onready var animation = $AnimationPlayer
-var health: int = 5
+var health: int = 2
 var is_invulnerable: bool = false
 var knocked_back: bool = false
+signal load_main_menu
 
 func _ready() -> void:
+	is_invulnerable = false
 	change_state("idle")
 	
 func _physics_process(delta: float) -> void:
@@ -48,7 +50,7 @@ func _physics_process(delta: float) -> void:
 	update_state(input_dir)
 	
 func update_state(input_dir: float) -> void:
-	if current_state in ["attack-side", "run-transition", "Jump", "hurt"]:
+	if current_state in ["attack-side", "run-transition", "Jump", "hurt", "die"]:
 		return
 	
 	if not is_on_floor():
@@ -94,8 +96,8 @@ func _on_animation_finished(anim_name: String) -> void:
 		current_state = ""
 		change_state("idle")
 	elif anim_name == "die":
-		health = 5
-		$Main.load_main_menu()
+		print("emited")
+		load_main_menu.emit()
 
 func take_damage(amount: int) -> void:
 	if is_invulnerable:
@@ -126,6 +128,7 @@ func start_invulnerablilty() -> void:
 	is_invulnerable = false
 
 func die() -> void:
+	is_invulnerable = true
 	GameManager.controls_allowed = false
 	velocity.x = 0
 	velocity.y = 0

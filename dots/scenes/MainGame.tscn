@@ -95,3 +95,5 @@ root_node = NodePath("../..")
 libraries/ = SubResource("AnimationLibrary_7fyak")
 
 [node name="PauseMenu" parent="." unique_id=539579433 instance=ExtResource("3_p73vr")]
+
+[connection signal="load_main_menu" from="Player" to="." method="return_to_main_menu"]
