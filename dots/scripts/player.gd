@@ -7,7 +7,7 @@ var can_attack = true
 var current_state = ""
 var fall_height: float = 0.0
 @export var is_attacking: bool = false
-@onready var sprite = $Sprite2D
+@onready var sprite = $PlayerSprite
 @onready var animation = $AnimationPlayer
 var health: int = 5
 var is_invulnerable: bool = false
@@ -53,7 +53,6 @@ func update_state(input_dir: float) -> void:
 	if current_state in ["attack-side", "attack-up", "attack-down", "run-transition", "hurt", "die"]:
 		if is_invulnerable && current_state in ["attack-side", "attack-up", "attack-down"]:
 			animation.stop()
-			is_attacking = false
 			start_invulnerablilty()
 		else:
 			return
@@ -125,6 +124,7 @@ func take_damage(amount: int) -> void:
 func start_invulnerablilty() -> void:
 	is_invulnerable = true
 	is_attacking = false
+	$PlayerSprite/Slash.visible = false
 	change_state("hurt")
 	await get_tree().create_timer(0.75).timeout
 	sprite.modulate.a = 1.0
