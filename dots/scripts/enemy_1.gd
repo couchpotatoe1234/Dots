@@ -3,7 +3,7 @@ extends CharacterBody2D
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var wall_ray: RayCast2D = $WallRayCheck
 @onready var ledge_ray: RayCast2D = $LedgeRayCheck
-var health: int = 10
+var health: int = 2
 
 var damaged = false
 var speed: float = 30.0
