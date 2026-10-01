@@ -9,7 +9,7 @@ var fall_height: float = 0.0
 @export var is_attacking: bool = false
 @onready var sprite = $Sprite2D
 @onready var animation = $AnimationPlayer
-var health: int = 2
+var health: int = 5
 var is_invulnerable: bool = false
 var knocked_back: bool = false
 signal load_main_menu
@@ -20,38 +20,43 @@ func _ready() -> void:
 	
 func _physics_process(delta: float) -> void:
 	GameManager.player_x = position.x
-	GameManager.player_y = position.y
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	var input_dir := 0.0
 	if GameManager.controls_allowed:
 		if Input.is_action_just_pressed("Jump") and is_on_floor():
-			animation.play("Jump")
 			velocity.y = JUMP_VELOCITY
 		if Input.is_action_just_released("Jump") and not is_on_floor():
 			if velocity.y < 0:
 				velocity.y = 0
 		
 		input_dir = Input.get_axis("left", "right")
-		if input_dir && not is_attacking:
+		
+		if input_dir:
 			velocity.x = input_dir * SPEED
 			var is_left = input_dir < 0
 			if not is_attacking:
 				sprite.flip_h = is_left
 				$Attack.scale.x = -1 if is_left else 1
 
-
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
-		if Input.is_action_just_pressed("Attack"):
-			change_state("attack-side")
+		
+		if Input.is_action_just_pressed("Attack") && not is_attacking:
+			attack()
+		
 	move_and_slide()
 	
 	update_state(input_dir)
 	
 func update_state(input_dir: float) -> void:
-	if current_state in ["attack-side", "run-transition", "Jump", "hurt", "die"]:
-		return
+	if current_state in ["attack-side", "attack-up", "attack-down", "run-transition", "hurt", "die"]:
+		if is_invulnerable && current_state in ["attack-side", "attack-up", "attack-down"]:
+			animation.stop()
+			is_attacking = false
+			start_invulnerablilty()
+		else:
+			return
 	
 	if not is_on_floor():
 		if current_state != "airtime":
@@ -86,13 +91,10 @@ func _on_animation_finished(anim_name: String) -> void:
 	if anim_name == "run-transition":
 		current_state = "run"
 		animation.play("run")
-	elif anim_name == "Jump":
-		current_state = "airtime"
-		animation.play("airtime")
 	elif anim_name == "fall":
 		current_state = "idle"
 		animation.play("idle")
-	elif anim_name == "attack-side" or anim_name == "hurt":
+	elif anim_name == "attack-side" or anim_name == "hurt" or anim_name == "attack-up" or anim_name == "attack-down":
 		current_state = ""
 		change_state("idle")
 	elif anim_name == "die":
@@ -122,6 +124,7 @@ func take_damage(amount: int) -> void:
 
 func start_invulnerablilty() -> void:
 	is_invulnerable = true
+	is_attacking = false
 	change_state("hurt")
 	await get_tree().create_timer(0.75).timeout
 	sprite.modulate.a = 1.0
@@ -142,3 +145,14 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("strong_enemy"):
 		take_damage(2)
 		
+func attack() -> void:
+	if Input.is_action_pressed("up"):
+		change_state("attack-up")
+	elif Input.is_action_pressed("down") && not is_on_floor():
+		change_state("attack-down")
+	else:
+		change_state("attack-side")
+	
+func _on_attack_area_entered(area: Area2D) -> void:
+	if area.is_in_group("pogoable") && current_state == "attack-down":
+		velocity.y = -300

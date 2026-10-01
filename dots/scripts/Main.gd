@@ -10,7 +10,6 @@ func _ready() -> void:
 	if player:
 		player.hide()
 		player.process_mode = PROCESS_MODE_DISABLED
-		player.load_main_menu.connect(return_to_main_menu)
 	if pause_menu:
 		pause_menu.return_to_menu_requested.connect(return_to_main_menu)
 	load_main_menu()

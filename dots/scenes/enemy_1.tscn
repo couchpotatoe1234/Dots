@@ -6,79 +6,6 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6rg8l"]
 size = Vector2(23, 11)
 
-[sub_resource type="Animation" id="Animation_mbxyh"]
-resource_name = "Death"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 100, 94, 93, 95, 96, 97, 98, 99, 101, 102, 103, 104, 105, 106, 107]
-}
-
-[sub_resource type="Animation" id="Animation_pjquw"]
-resource_name = "Movement"
-length = 0.7
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.100000024, 0.20000005, 0.3, 0.4, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 3, 4, 5, 6, 7]
-}
-
-[sub_resource type="Animation" id="Animation_663o1"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-
-[sub_resource type="Animation" id="Animation_a1412"]
-resource_name = "hurt"
-length = 0.040004
-step = 0.04
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.04),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [0, 1]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ovk8a"]
-_data = {
-&"Death": SubResource("Animation_mbxyh"),
-&"Movement": SubResource("Animation_pjquw"),
-&"RESET": SubResource("Animation_663o1"),
-&"hurt": SubResource("Animation_a1412")
-}
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_ejytf"]
 atlas = ExtResource("2_a1412")
 region = Rect2(0, 96, 32, 32)
@@ -383,17 +310,12 @@ script = ExtResource("1_ejytf")
 position = Vector2(-0.5, -5.5)
 shape = SubResource("RectangleShape2D_6rg8l")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1280344579]
-root_node = NodePath("../AnimatedSprite2D")
-libraries/ = SubResource("AnimationLibrary_ovk8a")
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1467014739]
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_ke6mt")
-animation = &"death"
-frame = 1
+animation = &"hurt"
 
-[node name="Hurtbox" type="Area2D" parent="." unique_id=1111178456]
+[node name="Hurtbox" type="Area2D" parent="." unique_id=1111178456 groups=["pogoable"]]
 collision_layer = 10
 collision_mask = 10
 

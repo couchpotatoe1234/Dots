@@ -3,7 +3,8 @@ extends CharacterBody2D
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var wall_ray: RayCast2D = $WallRayCheck
 @onready var ledge_ray: RayCast2D = $LedgeRayCheck
-var health: int = 2
+var health: int = 10
+
 var damaged = false
 var speed: float = 30.0
 
@@ -48,12 +49,14 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("player_attack"):
 		var knock_dir = 1.0 if GameManager.player_x >= position.x else -1.0
 		damaged = true
+		sprite.play("hurt")
 		health -= 1
 		print("enemy health:", health)
 		velocity.y = -50
 		velocity.x = -50 * knock_dir
 		await get_tree().create_timer(0.25).timeout
 		damaged = false
+		sprite.play("walk")
 
 	
 	if health <= 0:
