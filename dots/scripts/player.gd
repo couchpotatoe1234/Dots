@@ -139,7 +139,6 @@ func die() -> void:
 	print("ya died dummy")
 	change_state("die")
 
-
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("normal_enemy"):
 		take_damage(1)
@@ -147,6 +146,7 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 		take_damage(2)
 	if area.is_in_group("normal_hazard"):
 		respawn_at_checkpoint()
+
 func attack() -> void:
 	if Input.is_action_pressed("up"):
 		change_state("attack-up")
