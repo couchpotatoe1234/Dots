@@ -3,12 +3,12 @@ extends CharacterBody2D
 
 const SPEED = 100.0
 const JUMP_VELOCITY = -325.0
-var can_attack = true
 var current_state = ""
 var fall_height: float = 0.0
-@export var is_attacking: bool = false
+@export var unturnable: bool = false
 @onready var sprite = $PlayerSprite
 @onready var animation = $AnimationPlayer
+@onready var transition_layer = $GUI/TransitionLayer
 var health: int = 5
 var is_invulnerable: bool = false
 var knocked_back: bool = false
@@ -19,7 +19,7 @@ func _ready() -> void:
 	change_state("idle")
 	
 func _physics_process(delta: float) -> void:
-	GameManager.player_x = position.x
+	GameManager.player_x = global_position.x
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	var input_dir := 0.0
@@ -35,14 +35,15 @@ func _physics_process(delta: float) -> void:
 		if input_dir:
 			velocity.x = input_dir * SPEED
 			var is_left = input_dir < 0
-			if not is_attacking:
+			if not unturnable:
 				sprite.flip_h = is_left
+				$PlayerSprite/Slash.flip_h = is_left
 				$Attack.scale.x = -1 if is_left else 1
 
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 		
-		if Input.is_action_just_pressed("Attack") && not is_attacking:
+		if Input.is_action_just_pressed("Attack") && not unturnable:
 			attack()
 		
 	move_and_slide()
@@ -99,6 +100,7 @@ func _on_animation_finished(anim_name: String) -> void:
 	elif anim_name == "die":
 		print("emited")
 		load_main_menu.emit()
+		health = 5
 
 func take_damage(amount: int) -> void:
 	if is_invulnerable:
@@ -123,11 +125,10 @@ func take_damage(amount: int) -> void:
 
 func start_invulnerablilty() -> void:
 	is_invulnerable = true
-	is_attacking = false
+	unturnable = false
 	$PlayerSprite/Slash.visible = false
 	change_state("hurt")
 	await get_tree().create_timer(0.75).timeout
-	sprite.modulate.a = 1.0
 	is_invulnerable = false
 
 func die() -> void:
@@ -144,7 +145,8 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 		take_damage(1)
 	if area.is_in_group("strong_enemy"):
 		take_damage(2)
-		
+	if area.is_in_group("normal_hazard"):
+		respawn_at_checkpoint()
 func attack() -> void:
 	if Input.is_action_pressed("up"):
 		change_state("attack-up")
@@ -156,3 +158,28 @@ func attack() -> void:
 func _on_attack_area_entered(area: Area2D) -> void:
 	if area.is_in_group("pogoable") && current_state == "attack-down":
 		velocity.y = -300
+
+func respawn_at_checkpoint() -> void:
+	transition_layer.play("fade_out")
+	GameManager.controls_allowed = false
+	is_invulnerable = true
+	var knock_dir = 1.0 if sprite.flip_h or scale.x < 0 else -1.0
+	velocity.x = knock_dir * 100.0
+	velocity.y = -200
+	health -= 1
+	if $Camera2D:
+		var tween = create_tween()
+		for i in 10:
+			tween.tween_property($Camera2D, "offset", Vector2(randf_range(-8, 8), randf_range(-8, 8)), 0.05)
+		tween.tween_property($Camera2D, "offset", Vector2.ZERO, 0.05)
+	change_state("hurt")
+	print("Player health now:", health)
+	if health <= 0:
+		die()
+		return
+	await get_tree().create_timer(0.2).timeout
+	global_position = GameManager.last_respawn_position
+	transition_layer.player("fade_in")
+	GameManager.controls_allowed = true
+	is_invulnerable = false
+	change_state("idle")

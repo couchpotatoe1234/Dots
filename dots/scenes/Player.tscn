@@ -36,19 +36,19 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath(".:is_attacking")
+tracks/2/path = NodePath("Attack/Up:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Attack/Up:disabled")
+tracks/3/path = NodePath("Attack/Down:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -60,38 +60,38 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Attack/Down:disabled")
+tracks/4/path = NodePath("PlayerSprite/Slash:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("PlayerSprite/Slash:visible")
+tracks/5/path = NodePath("PlayerSprite/Slash:frame_coords")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [Vector2i(0, 0)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("PlayerSprite/Slash:frame_coords")
+tracks/6/path = NodePath(".:unturnable")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2i(0, 0)]
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_bruh7"]
@@ -114,7 +114,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_mdl7e"]
 resource_name = "attack-down"
-length = 0.400004
+length = 0.2
 step = 0.04
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -123,7 +123,7 @@ tracks/0/path = NodePath("PlayerSprite:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.08, 0.16, 0.24, 0.32, 0.4),
+"times": PackedFloat32Array(0, 0.04, 0.08, 0.12, 0.16, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2i(0, 8), Vector2i(1, 8), Vector2i(2, 8), Vector2i(3, 8), Vector2i(4, 8), Vector2i(5, 8)]
@@ -131,55 +131,55 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:is_attacking")
+tracks/1/path = NodePath("Attack/Down:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.16),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Attack/Down:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.4),
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("PlayerSprite/Slash:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.4),
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlayerSprite/Slash:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("PlayerSprite/Slash:frame_coords")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.08, 0.16, 0.24, 0.32, 0.4),
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PlayerSprite/Slash:frame_coords")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.04, 0.08, 0.12, 0.16, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:unturnable")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.08),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="Animation" id="Animation_qu4a1"]
 resource_name = "attack-side"
-length = 0.400004
+length = 0.2
 step = 0.04
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -188,7 +188,7 @@ tracks/0/path = NodePath("Attack/Side:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4),
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -200,7 +200,7 @@ tracks/1/path = NodePath("PlayerSprite:frame_coords")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.08, 0.16, 0.24, 0.32, 0.4),
+"times": PackedFloat32Array(0, 0.04, 0.08, 0.12, 0.16, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2i(0, 6), Vector2i(1, 6), Vector2i(2, 6), Vector2i(3, 6), Vector2i(4, 6), Vector2i(5, 6)]
@@ -208,11 +208,23 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath(".:is_attacking")
+tracks/2/path = NodePath("PlayerSprite/Slash:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.16),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:unturnable")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.12),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -220,7 +232,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_o4126"]
 resource_name = "attack-up"
-length = 0.400004
+length = 0.2
 step = 0.04
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -229,7 +241,7 @@ tracks/0/path = NodePath("PlayerSprite:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.08, 0.16, 0.24, 0.32, 0.4),
+"times": PackedFloat32Array(0, 0.04, 0.08, 0.12, 0.16, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2i(0, 7), Vector2i(1, 7), Vector2i(2, 7), Vector2i(3, 7), Vector2i(4, 7), Vector2i(5, 7)]
@@ -237,26 +249,38 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:is_attacking")
+tracks/1/path = NodePath("Attack/Up:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.16),
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true, false]
+"values": [false, true]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Attack/Up:disabled")
+tracks/2/path = NodePath("PlayerSprite/Slash:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.4),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:unturnable")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.08),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [false, true]
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_d3wef"]
@@ -442,7 +466,7 @@ vframes = 11
 
 [node name="Slash" type="Sprite2D" parent="PlayerSprite" unique_id=2032199800]
 visible = false
-position = Vector2(-2, 4)
+position = Vector2(0, 4)
 rotation = 3.1415927
 texture = ExtResource("3_3li8b")
 hframes = 6
@@ -461,8 +485,8 @@ position = Vector2(0, -13.5)
 shape = SubResource("RectangleShape2D_3li8b")
 
 [node name="Attack" type="Area2D" parent="." unique_id=1458105865 groups=["player_attack"]]
-collision_layer = 8
-collision_mask = 2
+collision_layer = 2
+collision_mask = 3
 
 [node name="Side" type="CollisionShape2D" parent="Attack" unique_id=93557552]
 position = Vector2(7.000002, -12)
@@ -476,7 +500,7 @@ shape = SubResource("CapsuleShape2D_3li8b")
 disabled = true
 
 [node name="Down" type="CollisionShape2D" parent="Attack" unique_id=14728022]
-position = Vector2(0, -3)
+position = Vector2(0, -5)
 shape = SubResource("CapsuleShape2D_mdl7e")
 disabled = true
 

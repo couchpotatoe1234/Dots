@@ -4,7 +4,7 @@ extends CharacterBody2D
 @onready var wall_ray: RayCast2D = $WallRayCheck
 @onready var ledge_ray: RayCast2D = $LedgeRayCheck
 var health: int = 2
-
+var knock_dir: int = 1
 var damaged = false
 var speed: float = 30.0
 
@@ -20,7 +20,6 @@ func _ready():
 		return
 
 func _physics_process(delta: float) -> void:
-
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	
@@ -47,7 +46,10 @@ func flip_direction() -> void:
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("player_attack"):
-		var knock_dir = 1.0 if GameManager.player_x >= position.x else -1.0
+		if GameManager.player_x > global_position.x:
+			knock_dir = 1
+		else: 
+			knock_dir = -1
 		damaged = true
 		sprite.play("hurt")
 		health -= 1
@@ -57,14 +59,16 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 		await get_tree().create_timer(0.25).timeout
 		damaged = false
 		sprite.play("walk")
-
+	
+	if area.is_in_group("normal_hazard"):
+		health = 0
 	
 	if health <= 0:
 		stop = true
 		speed = 1
 		sprite.play("death")
-		$Hurtbox/CollisionShape2D.disabled = true
-		$Hitbox/CollisionShape2D.disabled = true
+		$Hurtbox/CollisionShape2D.set_deferred("disabled", true)
+		$Hitbox/CollisionShape2D.set_deferred("disabled", true)
 		await $AnimatedSprite2D.animation_finished
 		queue_free()
 		

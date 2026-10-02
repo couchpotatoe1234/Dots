@@ -303,6 +303,7 @@ radius = 4.0
 height = 22.0
 
 [node name="enemy1" type="CharacterBody2D" unique_id=156177197]
+z_index = 5
 collision_layer = 4
 script = ExtResource("1_ejytf")
 
@@ -317,7 +318,7 @@ animation = &"hurt"
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=1111178456 groups=["pogoable"]]
 collision_layer = 10
-collision_mask = 10
+collision_mask = 11
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=982167528]
 position = Vector2(-0.5, -6)
