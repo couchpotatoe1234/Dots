@@ -44,7 +44,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 		
-		if Input.is_action_just_pressed("Attack") && not unturnable:
+		if Input.is_action_just_pressed("Attack") && can_attack:
 			attack()
 		
 	move_and_slide()
@@ -99,6 +99,7 @@ func _on_animation_finished(anim_name: String) -> void:
 		current_state = "idle"
 		animation.play("idle")
 	elif anim_name == "attack-side" or anim_name == "hurt" or anim_name == "attack-up" or anim_name == "attack-down":
+		can_attack = true
 		current_state = ""
 		change_state("idle")
 	elif anim_name == "die":
