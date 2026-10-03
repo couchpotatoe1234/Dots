@@ -2,7 +2,8 @@
 
 [ext_resource type="Script" uid="uid://1mnto6raifri" path="res://scripts/MainMenu.gd" id="1_yqorp"]
 [ext_resource type="Texture2D" uid="uid://bkg6kh0qbmbve" path="res://Assets/sprites/grey.png" id="2_0ykhv"]
-[ext_resource type="Texture2D" uid="uid://e66klf0nuj5l" path="res://Aseprite drawings/Menu_NoTitle.png" id="2_2wh52"]
+[ext_resource type="Texture2D" uid="uid://e66klf0nuj5l" path="res://Assets/sprites/Menu_NoTitle.png" id="2_ow34m"]
+[ext_resource type="Texture2D" uid="uid://sfxrcc0nefli" path="res://Assets/sprites/Title.png" id="4_l72w3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eo3j8"]
 atlas = ExtResource("2_0ykhv")
@@ -43,10 +44,10 @@ region = Rect2(77, 43, 38, 20)
 [node name="MainMenu" type="CanvasLayer" unique_id=1293915226]
 script = ExtResource("1_yqorp")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1002692964]
+[node name="background" type="TextureRect" parent="." unique_id=1002692964]
 offset_right = 1152.0
 offset_bottom = 648.0
-texture = ExtResource("2_2wh52")
+texture = ExtResource("2_ow34m")
 metadata/_aseprite_wizard_interface_config_ = {
 "layer_section": false,
 "pending_changes": {
@@ -68,6 +69,14 @@ metadata/_aseprite_wizard_interface_config_ = {
 "source_uid": -1
 }
 }
+
+[node name="Title" type="TextureRect" parent="." unique_id=1650992634]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_l72w3")
 
 [node name="Start" type="TextureButton" parent="." unique_id=1662265221]
 custom_minimum_size = Vector2(150, 75)
