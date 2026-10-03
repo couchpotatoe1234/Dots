@@ -24,7 +24,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Attack/Side:disabled")
+tracks/1/path = NodePath("Attack-side/Side:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -36,7 +36,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Attack/Up:disabled")
+tracks/2/path = NodePath("Attack-up/Up:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -48,7 +48,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Attack/Down:disabled")
+tracks/3/path = NodePath("Attack-down/Down:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -131,7 +131,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Attack/Down:disabled")
+tracks/1/path = NodePath("Attack-down/Down:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -184,7 +184,7 @@ step = 0.04
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Attack/Side:disabled")
+tracks/0/path = NodePath("Attack-side/Side:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -249,7 +249,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Attack/Up:disabled")
+tracks/1/path = NodePath("Attack-up/Up:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -336,7 +336,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Attack/Side:disabled")
+tracks/1/path = NodePath("Attack-side/Side:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -348,7 +348,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Attack/Up:disabled")
+tracks/2/path = NodePath("Attack-up/Up:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -360,7 +360,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Attack/Down:disabled")
+tracks/3/path = NodePath("Attack-down/Down:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -441,17 +441,17 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3li8b"]
 size = Vector2(14, 21)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v6fml"]
-radius = 9.993481
-height = 25.554413
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3li8b"]
-radius = 8.0
-height = 22.0
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mdl7e"]
 radius = 8.0
 height = 22.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3li8b"]
+radius = 13.0
+height = 32.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v6fml"]
+radius = 9.993481
+height = 25.554413
 
 [node name="Player" type="CharacterBody2D" unique_id=1860738924]
 z_index = 10
@@ -484,26 +484,31 @@ libraries/ = SubResource("AnimationLibrary_mdl7e")
 position = Vector2(0, -13.5)
 shape = SubResource("RectangleShape2D_3li8b")
 
-[node name="Attack" type="Area2D" parent="." unique_id=1458105865 groups=["player_attack"]]
+[node name="Attack-down" type="Area2D" parent="." unique_id=1458105865 groups=["player_attack_down"]]
 collision_layer = 2
 collision_mask = 3
 
-[node name="Side" type="CollisionShape2D" parent="Attack" unique_id=93557552]
-position = Vector2(7.000002, -12)
-rotation = -2.3212879
-shape = SubResource("CapsuleShape2D_v6fml")
-disabled = true
-
-[node name="Up" type="CollisionShape2D" parent="Attack" unique_id=172591767]
-position = Vector2(0, -24)
-shape = SubResource("CapsuleShape2D_3li8b")
-disabled = true
-
-[node name="Down" type="CollisionShape2D" parent="Attack" unique_id=14728022]
+[node name="Down" type="CollisionShape2D" parent="Attack-down" unique_id=14728022]
 position = Vector2(0, -5)
 shape = SubResource("CapsuleShape2D_mdl7e")
 disabled = true
 
+[node name="Attack-up" type="Area2D" parent="." unique_id=1647694317 groups=["player_attack_up"]]
+
+[node name="Up" type="CollisionShape2D" parent="Attack-up" unique_id=172591767]
+position = Vector2(0, -19)
+shape = SubResource("CapsuleShape2D_3li8b")
+disabled = true
+
+[node name="Attack-side" type="Area2D" parent="." unique_id=1066161007 groups=["player_attack"]]
+
+[node name="Side" type="CollisionShape2D" parent="Attack-side" unique_id=93557552]
+position = Vector2(6, -13)
+rotation = 1.5707964
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("CapsuleShape2D_v6fml")
+disabled = true
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
-[connection signal="area_entered" from="Attack" to="." method="_on_attack_area_entered"]
+[connection signal="area_entered" from="Attack-down" to="." method="_on_attack_area_entered"]

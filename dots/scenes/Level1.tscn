@@ -151,8 +151,8 @@ size = Vector2(32, 12)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dw26h"]
 size = Vector2(96, 19)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_76388"]
-size = Vector2(20, 1)
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_dw26h"]
+a = Vector2(0, -23)
 
 [node name="Node2D2" type="Node2D" unique_id=524429940]
 
@@ -257,17 +257,32 @@ position = Vector2(-197, 99)
 shape = SubResource("RectangleShape2D_lrl65")
 
 [node name="Pogo-zone" type="Area2D" parent="." unique_id=1171495182 groups=["pogoable"]]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pogo-zone" unique_id=1433465461]
 position = Vector2(35, 13.5)
 shape = SubResource("RectangleShape2D_dw26h")
 
-[node name="Respawn-Points" type="Area2D" parent="." unique_id=352218630]
+[node name="Respawns" type="Node2D" parent="." unique_id=748781904]
+
+[node name="Respawn-Points" type="Area2D" parent="Respawns" unique_id=352218630]
+position = Vector2(-251, -10)
+collision_layer = 5
+collision_mask = 255
 script = ExtResource("4_lrl65")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Respawn-Points" unique_id=53340378]
-position = Vector2(-254, -9.5)
-shape = SubResource("RectangleShape2D_76388")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Respawns/Respawn-Points" unique_id=53340378]
+position = Vector2(0, -10)
+shape = SubResource("SegmentShape2D_dw26h")
 
-[connection signal="body_entered" from="Respawn-Points" to="Respawn-Points" method="_on_body_entered"]
+[node name="Respawn-Points2" type="Area2D" parent="Respawns" unique_id=1017177139]
+position = Vector2(-22, -10)
+collision_layer = 5
+collision_mask = 255
+script = ExtResource("4_lrl65")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Respawns/Respawn-Points2" unique_id=232676003]
+position = Vector2(0, -10)
+shape = SubResource("SegmentShape2D_dw26h")
+
+[connection signal="body_entered" from="Respawns/Respawn-Points" to="Respawns/Respawn-Points" method="_on_body_entered"]
+[connection signal="body_entered" from="Respawns/Respawn-Points2" to="Respawns/Respawn-Points2" method="_on_body_entered"]

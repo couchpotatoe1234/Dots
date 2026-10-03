@@ -33,7 +33,7 @@ func _physics_process(delta: float) -> void:
 
 
 func flip_direction() -> void:
-	if not stop:
+	if not stop && is_on_floor():
 		direction *= -1
 		sprite.flip_h = (direction > 0)
 		wall_ray.scale.x = -wall_ray.scale.x
@@ -59,7 +59,25 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 		await get_tree().create_timer(0.25).timeout
 		damaged = false
 		sprite.play("walk")
-	
+	if area.is_in_group("player_attack_up"):
+		damaged = true
+		sprite.play("hurt")
+		health -= 1
+		print("enemy health:", health)
+		velocity.y = -200
+		velocity.x = 0
+		await get_tree().create_timer(0.5).timeout
+		damaged = false
+		sprite.play("walk")
+	if area.is_in_group("player_attack_down"):
+		damaged = true
+		sprite.play("hurt")
+		health -= 1
+		print("enemy health:", health)
+		velocity.x = 0
+		await get_tree().create_timer(0.25).timeout
+		damaged = false
+		sprite.play("walk")
 	if area.is_in_group("normal_hazard"):
 		health = 0
 	

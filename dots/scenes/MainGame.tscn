@@ -61,7 +61,6 @@ _data = {
 script = ExtResource("1_p73vr")
 
 [node name="Player" parent="." unique_id=1860738924 instance=ExtResource("1_6ovph")]
-position = Vector2(-25, -7)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=2081588765]
 zoom = Vector2(3, 3)
