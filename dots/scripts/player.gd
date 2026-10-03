@@ -55,6 +55,9 @@ func update_state(input_dir: float) -> void:
 	if current_state in ["attack-side", "attack-up", "attack-down", "run-transition", "hurt", "die"]:
 		if is_invulnerable && current_state in ["attack-side", "attack-up", "attack-down"]:
 			animation.stop()
+			$"Attack-down/Down".set_deferred("disabled", true)
+			$"Attack-up/Up".set_deferred("disabled", true)
+			$"Attack-side/Side".set_deferred("disabled", true)
 			start_invulnerablilty()
 		else:
 			return
@@ -101,12 +104,14 @@ func _on_animation_finished(anim_name: String) -> void:
 	elif anim_name == "die":
 		print("emited")
 		health = 5
+		is_invulnerable = false
 		load_main_menu.emit()
 		
 
 func take_damage(amount: int) -> void:
 	if is_invulnerable:
 		return
+	unturnable = false
 	health -= amount
 	print("Player health now:", health)
 	var knock_dir = 1.0 if sprite.flip_h or scale.x < 0 else -1.0
@@ -133,6 +138,7 @@ func start_invulnerablilty() -> void:
 	change_state("hurt")
 	await get_tree().create_timer(0.75).timeout
 	can_attack = true
+	unturnable = false
 	is_invulnerable = false
 
 func die() -> void:
@@ -145,10 +151,13 @@ func die() -> void:
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("normal_enemy"):
+		unturnable = false
 		take_damage(1)
 	if area.is_in_group("strong_enemy"):
+		unturnable = false
 		take_damage(2)
 	if area.is_in_group("normal_hazard"):
+		unturnable = false
 		respawn_at_checkpoint()
 
 func attack() -> void:
@@ -175,6 +184,8 @@ func respawn_at_checkpoint() -> void:
 	if is_invulnerable:
 		return
 	transition_layer.fade_out()
+	$PlayerSprite/Slash.visible = false
+	unturnable = false
 	if $Camera2D:
 		var tween = create_tween()
 		for i in 10:
@@ -183,7 +194,6 @@ func respawn_at_checkpoint() -> void:
 	change_state("hurt")
 	GameManager.controls_allowed = false
 	is_invulnerable = true
-	var knock_dir = 1.0 if sprite.flip_h or scale.x < 0 else -1.0
 	velocity.y = -250
 	
 	health -= 1
@@ -195,5 +205,6 @@ func respawn_at_checkpoint() -> void:
 	global_position = GameManager.last_respawn_position
 	transition_layer.fade_in()
 	GameManager.controls_allowed = true
-	is_invulnerable = false
 	change_state("idle")
+	await get_tree().create_timer(0.5).timeout
+	is_invulnerable = false

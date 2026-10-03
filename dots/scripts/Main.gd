@@ -22,6 +22,7 @@ func load_main_menu() -> void:
 func _on_start_game() -> void:
 	if player:
 		player.set_physics_process(true)
+		player.change_state("idle")
 	change_level(GameManager.last_level, GameManager.last_save_point)
 	
 
