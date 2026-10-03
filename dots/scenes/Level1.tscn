@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cr77ffttbmtn" path="res://Assets/sprites/TileSheet-Sheet.png" id="3_odhdn"]
 [ext_resource type="PackedScene" uid="uid://d1l5h6y70wdec" path="res://scenes/enemy_1.tscn" id="4_dw26h"]
 [ext_resource type="Script" uid="uid://d3dqvajhov50i" path="res://scripts/checkpoint.gd" id="4_lrl65"]
+[ext_resource type="PackedScene" uid="uid://2oso1y4cnvq5" path="res://scenes/HUD.tscn" id="5_lrl65"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dw26h"]
 texture = ExtResource("3_odhdn")
@@ -284,6 +285,9 @@ script = ExtResource("4_lrl65")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Respawns/Respawn-Points2" unique_id=232676003]
 position = Vector2(0, -10)
 shape = SubResource("SegmentShape2D_dw26h")
+
+[node name="Node2D" parent="." unique_id=593963156 instance=ExtResource("5_lrl65")]
+position = Vector2(-301, 116)
 
 [connection signal="body_entered" from="Respawns/Respawn-Points" to="Respawns/Respawn-Points" method="_on_body_entered"]
 [connection signal="body_entered" from="Respawns/Respawn-Points2" to="Respawns/Respawn-Points2" method="_on_body_entered"]

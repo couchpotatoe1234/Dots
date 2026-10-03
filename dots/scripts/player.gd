@@ -9,6 +9,10 @@ var fall_height: float = 0.0
 @onready var sprite = $PlayerSprite
 @onready var animation = $AnimationPlayer
 @onready var transition_layer = $"../GUI/TransitionLayer"
+
+signal health_changed(current_health: int, max_health: int)
+
+@export var max_health: int = 5
 var health: int = 5
 var is_invulnerable: bool = false
 var knocked_back: bool = false
@@ -104,7 +108,8 @@ func _on_animation_finished(anim_name: String) -> void:
 		change_state("idle")
 	elif anim_name == "die":
 		print("emited")
-		health = 5
+		health = max_health
+		health_changed.emit(health, max_health)
 		is_invulnerable = false
 		load_main_menu.emit()
 		
@@ -114,6 +119,7 @@ func take_damage(amount: int) -> void:
 		return
 	unturnable = false
 	health -= amount
+	health_changed.emit(health, max_health)
 	print("Player health now:", health)
 	var knock_dir = 1.0 if sprite.flip_h or scale.x < 0 else -1.0
 	velocity.x = knock_dir * 100.0
@@ -151,6 +157,8 @@ func die() -> void:
 	change_state("die")
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
+	if is_invulnerable:
+		return
 	if area.is_in_group("normal_enemy"):
 		unturnable = false
 		take_damage(1)
@@ -198,6 +206,7 @@ func respawn_at_checkpoint() -> void:
 	velocity.y = -250
 	
 	health -= 1
+	health_changed.emit(health, max_health)
 	print("Player health now:", health)
 	if health <= 0:
 		die()

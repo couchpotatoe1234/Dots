@@ -453,7 +453,7 @@ height = 32.0
 radius = 9.993481
 height = 25.554413
 
-[node name="Player" type="CharacterBody2D" unique_id=1860738924]
+[node name="Player" type="CharacterBody2D" unique_id=1860738924 groups=["player"]]
 z_index = 10
 collision_layer = 2
 script = ExtResource("1_p0vlq")
