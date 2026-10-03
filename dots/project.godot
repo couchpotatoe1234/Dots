@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 GameManager="*uid://qfln0y0r4aas"
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/godot_super-wakatime/plugin.cfg")
