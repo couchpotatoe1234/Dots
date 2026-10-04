@@ -14,11 +14,11 @@ func _on_health_changed(current_health: int, max_health: int) -> void:
 	for i in hearts.size():
 		var last_frame = hearts[i].sprite_frames.get_frame_count("hit") - 1
 		if i < current_health:
-			hearts[i].frame = 0   #full heart
+			hearts[i].frame = 0
 		elif i == current_health:
-			hearts[i].play("hit")    #heart animation hit
+			hearts[i].play("hit")
 		else:
-			hearts[i].frame = last_frame   #what else
+			hearts[i].frame = last_frame
 			
 func _on_node_added(node: Node) -> void:
 	if node.is_in_group("player"):

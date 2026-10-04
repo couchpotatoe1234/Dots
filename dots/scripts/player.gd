@@ -20,6 +20,7 @@ var can_attack: bool = true
 signal load_main_menu
 
 func _ready() -> void:
+	health_changed.emit(health, max_health)
 	is_invulnerable = false
 	change_state("idle")
 	
@@ -108,10 +109,11 @@ func _on_animation_finished(anim_name: String) -> void:
 		change_state("idle")
 	elif anim_name == "die":
 		print("emited")
-		health = max_health
 		health_changed.emit(health, max_health)
+		health = max_health
 		is_invulnerable = false
 		load_main_menu.emit()
+		
 		
 
 func take_damage(amount: int) -> void:
@@ -218,3 +220,7 @@ func respawn_at_checkpoint() -> void:
 	change_state("idle")
 	await get_tree().create_timer(0.5).timeout
 	is_invulnerable = false
+
+func _on_game_started() -> void:
+	health_changed.emit(health, max_health)
+	sprite.flip_h = false

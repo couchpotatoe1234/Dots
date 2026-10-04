@@ -4,9 +4,13 @@ extends Node2D
 @onready var player = $Player
 @onready var pause_menu = $PauseMenu
 @onready var transition_layer = $GUI/TransitionLayer
+@onready var hud = $GUI/HUD
 var current_level_node: Node = null
+signal game_started
 
 func _ready() -> void:
+	if hud:
+		hud.set_deferred("visible", false)
 	if player:
 		player.hide()
 		player.process_mode = PROCESS_MODE_DISABLED
@@ -23,15 +27,18 @@ func _on_start_game() -> void:
 	if player:
 		player.set_physics_process(true)
 		player.change_state("idle")
+		game_started.emit()
 	change_level(GameManager.last_level, GameManager.last_save_point)
 	
 
 func change_level(level_path: String, spawn_position: Vector2 = Vector2.ZERO) -> void:
 	GameManager.controls_allowed = false
-	if transition_layer:
-		await transition_layer.fade_out()
 	if player:
 		player.hide()
+	if hud:
+		hud.set_deferred("visible", false)
+	if transition_layer:
+		await transition_layer.fade_out()
 	if current_level_node:
 		current_level_node.queue_free()
 		await current_level_node.tree_exited
@@ -45,6 +52,8 @@ func change_level(level_path: String, spawn_position: Vector2 = Vector2.ZERO) ->
 		player.global_position = spawn_position
 		player.process_mode = Node.PROCESS_MODE_INHERIT
 		player.show()
+	if hud:
+		hud.set_deferred("visible", true)
 	if transition_layer:
 		await transition_layer.fade_in()
 		GameManager.controls_allowed = true
