@@ -1,6 +1,31 @@
 [gd_scene format=3 uid="uid://crjuv2rpraf3o"]
 
 [ext_resource type="Script" uid="uid://c5v2lsv8gtq76" path="res://scripts/PauseMenu.gd" id="1_jvnd5"]
+[ext_resource type="Texture2D" uid="uid://bqm6uh3jlrak5" path="res://Assets/sprites/Buttons2.png" id="2_g4jo0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ke6mt"]
+atlas = ExtResource("2_g4jo0")
+region = Rect2(0, 40, 128, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jdwa3"]
+atlas = ExtResource("2_g4jo0")
+region = Rect2(256, 40, 128, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hjt5"]
+atlas = ExtResource("2_g4jo0")
+region = Rect2(128, 40, 128, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4mnnb"]
+atlas = ExtResource("2_g4jo0")
+region = Rect2(0, 7, 128, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_syh4r"]
+atlas = ExtResource("2_g4jo0")
+region = Rect2(256, 9, 128, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ofkbq"]
+atlas = ExtResource("2_g4jo0")
+region = Rect2(128, 7, 128, 20)
 
 [node name="PauseMenu" type="CanvasLayer" unique_id=539579433]
 process_mode = 3
@@ -15,32 +40,22 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=503801356]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -48.0
-offset_top = -72.5
-offset_right = 48.0
-offset_bottom = 72.5
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Resume" type="TextureButton" parent="." unique_id=119215711]
+offset_left = 200.0
+offset_top = 184.0
+offset_right = 946.0
+offset_bottom = 312.0
+texture_normal = SubResource("AtlasTexture_ke6mt")
+texture_pressed = SubResource("AtlasTexture_jdwa3")
+texture_hover = SubResource("AtlasTexture_2hjt5")
+stretch_mode = 4
 
-[node name="TitleLable" type="Label" parent="VBoxContainer" unique_id=1129664215]
-layout_mode = 2
-text = "PAUSED
-
-"
-
-[node name="ResumeButton" type="Button" parent="VBoxContainer" unique_id=875656202]
-layout_mode = 2
-text = "Resume"
-
-[node name="MainMenuButton" type="Button" parent="VBoxContainer" unique_id=1750137428]
-layout_mode = 2
-text = "Main Menu"
-
-[connection signal="pressed" from="VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[node name="MainMenu" type="TextureButton" parent="." unique_id=604514619]
+offset_left = 200.0
+offset_top = 360.0
+offset_right = 944.0
+offset_bottom = 480.0
+texture_normal = SubResource("AtlasTexture_4mnnb")
+texture_pressed = SubResource("AtlasTexture_syh4r")
+texture_hover = SubResource("AtlasTexture_ofkbq")
+stretch_mode = 4
