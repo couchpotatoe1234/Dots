@@ -137,7 +137,7 @@ func take_damage(amount: int) -> void:
 	else:
 		start_invulnerablilty()
 		GameManager.controls_allowed = false
-		await get_tree().create_timer(0.25).timeout
+		await get_tree().create_timer(0.2).timeout
 		GameManager.controls_allowed = true
 
 func start_invulnerablilty() -> void:
