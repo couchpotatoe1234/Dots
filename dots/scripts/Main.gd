@@ -51,7 +51,7 @@ func change_level(level_path: String, spawn_position: Vector2 = Vector2.ZERO) ->
 		level_container.add_child(current_level_node)
 	if player:
 		player.global_position = spawn_position
-		
+		camera.global_position = spawn_position
 		player.process_mode = Node.PROCESS_MODE_INHERIT
 		player.show()
 	if hud:
