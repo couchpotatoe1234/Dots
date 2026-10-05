@@ -9,6 +9,7 @@ var fall_height: float = 0.0
 @onready var sprite = $PlayerSprite
 @onready var animation = $AnimationPlayer
 @onready var transition_layer = $"../GUI/TransitionLayer"
+@onready var camera = $"Camera2D"
 
 signal health_changed(current_health: int, max_health: int)
 
