@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://cswgs7kt4in1f"]
 
 [ext_resource type="Texture2D" uid="uid://18jaets2sl2a" path="res://Assets/sprites/BackgroundSunset-Sheet.png" id="1_odhdn"]
-[ext_resource type="TileSet" uid="uid://c5xyi4dqquns3" path="res://Assets/Other /TileSet1.tres" id="2_lrl65"]
+[ext_resource type="TileSet" uid="uid://c5xyi4dqquns3" path="res://Assets/Other/TileSet1.tres" id="2_lrl65"]
 [ext_resource type="PackedScene" uid="uid://d1l5h6y70wdec" path="res://scenes/enemy_1.tscn" id="4_dw26h"]
 [ext_resource type="PackedScene" uid="uid://beo3miagmv876" path="res://scenes/respawn_point.tscn" id="4_lrl65"]
 
@@ -183,7 +183,7 @@ shape = SubResource("RectangleShape2D_kbo48")
 position = Vector2(-259, -9)
 
 [node name="RespawnPoint2" parent="Respawns" unique_id=1482105515 instance=ExtResource("4_lrl65")]
-position = Vector2(-23, -9)
+position = Vector2(-26, -9)
 
 [node name="RespawnPoint3" parent="Respawns" unique_id=1521453699 instance=ExtResource("4_lrl65")]
 position = Vector2(-739, -425)

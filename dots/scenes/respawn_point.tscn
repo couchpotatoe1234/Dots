@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://d3dqvajhov50i" path="res://scripts/checkpoint.gd" id="1_j6bsa"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_j6bsa"]
+a = Vector2(0, -13)
 
 [node name="RespawnPoint" type="Area2D" unique_id=1267886851]
 collision_layer = 7
