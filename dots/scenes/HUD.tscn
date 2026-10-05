@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dyq4gqlif2xjt" path="res://scripts/hud.gd" id="1_fls4u"]
 [ext_resource type="Texture2D" uid="uid://bn3t0klrhpgr8" path="res://Assets/sprites/health1.png" id="1_k5de2"]
+[ext_resource type="Texture2D" uid="uid://js1e6g6t5273" path="res://Assets/sprites/HUDBackground.png" id="2_1etfg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_efote"]
 atlas = ExtResource("1_k5de2")
@@ -132,9 +133,17 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_kxho0")
 }],
-"loop": false,
+"loop": 0,
 "name": &"hit",
 "speed": 20.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jdwa3"]
+animations = [{
+"frames": [],
+"loop": 1,
+"name": &"Pounds",
+"speed": 5.0
 }]
 
 [node name="HUD" type="CanvasLayer" unique_id=1320359941]
@@ -146,32 +155,43 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_fls4u")
 
+[node name="Sprite2D" type="Sprite2D" parent="HUD" unique_id=1148475851]
+position = Vector2(60, 210)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_1etfg")
+
 [node name="Heart1" type="AnimatedSprite2D" parent="HUD" unique_id=1583859170]
-position = Vector2(64, 58.464)
-scale = Vector2(3, 2.933)
+position = Vector2(60, 74)
+scale = Vector2(2, 1.955)
 sprite_frames = SubResource("SpriteFrames_ke6mt")
 animation = &"hit"
 
 [node name="Heart2" type="AnimatedSprite2D" parent="HUD" unique_id=1892402654]
-position = Vector2(119, 58.464)
-scale = Vector2(3, 2.933)
+position = Vector2(61, 130)
+scale = Vector2(2, 1.955)
 sprite_frames = SubResource("SpriteFrames_ke6mt")
 animation = &"hit"
 
 [node name="Heart3" type="AnimatedSprite2D" parent="HUD" unique_id=1213325240]
-position = Vector2(174, 58.464)
-scale = Vector2(3, 2.933)
+position = Vector2(61, 185)
+scale = Vector2(2, 1.955)
 sprite_frames = SubResource("SpriteFrames_ke6mt")
 animation = &"hit"
 
 [node name="Heart4" type="AnimatedSprite2D" parent="HUD" unique_id=1276609030]
-position = Vector2(229, 58.464005)
-scale = Vector2(3, 2.933)
+position = Vector2(60, 240)
+scale = Vector2(2, 1.955)
 sprite_frames = SubResource("SpriteFrames_ke6mt")
 animation = &"hit"
 
 [node name="Heart5" type="AnimatedSprite2D" parent="HUD" unique_id=800991457]
-position = Vector2(284, 58.464)
-scale = Vector2(3, 2.933)
+position = Vector2(61, 295)
+scale = Vector2(2, 1.955)
 sprite_frames = SubResource("SpriteFrames_ke6mt")
 animation = &"hit"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HUD" unique_id=1429690813]
+sprite_frames = SubResource("SpriteFrames_jdwa3")
+animation = &"Pounds"
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="HUD" unique_id=983910015]

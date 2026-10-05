@@ -29,3 +29,5 @@ func _connect_to_player(player: Node) -> void:
 	player.health_changed.connect(_on_health_changed)
 	_on_health_changed(player.health, player.max_health)
 	
+func _money() -> void:
+	
