@@ -59,3 +59,6 @@ texture_normal = SubResource("AtlasTexture_4mnnb")
 texture_pressed = SubResource("AtlasTexture_syh4r")
 texture_hover = SubResource("AtlasTexture_ofkbq")
 stretch_mode = 4
+
+[connection signal="pressed" from="Resume" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="MainMenu" to="." method="_on_main_menu_button_pressed"]

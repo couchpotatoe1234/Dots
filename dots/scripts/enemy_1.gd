@@ -55,18 +55,22 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 		health -= 1
 		print("enemy health:", health)
 		velocity.y = -50
-		velocity.x = -50 * knock_dir
-		await get_tree().create_timer(0.25).timeout
+		velocity.x = -15 * knock_dir
+		await get_tree().create_timer(0.4).timeout
 		damaged = false
 		sprite.play("walk")
 	if area.is_in_group("player_attack_up"):
+		if GameManager.player_x > global_position.x:
+			knock_dir = 1
+		else: 
+			knock_dir = -1
 		damaged = true
 		sprite.play("hurt")
 		health -= 1
 		print("enemy health:", health)
-		velocity.y = -200
-		velocity.x = 0
-		await get_tree().create_timer(0.5).timeout
+		velocity.y = -150
+		velocity.x = -40 * knock_dir
+		await get_tree().create_timer(0.4).timeout
 		damaged = false
 		sprite.play("walk")
 	if area.is_in_group("player_attack_down"):
@@ -75,7 +79,7 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 		health -= 1
 		print("enemy health:", health)
 		velocity.x = 0
-		await get_tree().create_timer(0.25).timeout
+		await get_tree().create_timer(0.4).timeout
 		damaged = false
 		sprite.play("walk")
 	if area.is_in_group("normal_hazard"):
