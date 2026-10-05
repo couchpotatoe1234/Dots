@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://bxfu3cjh5t870" path="res://scripts/Main.gd" id="1_p73vr"]
 [ext_resource type="PackedScene" uid="uid://crjuv2rpraf3o" path="res://scenes/PauseMenu.tscn" id="3_p73vr"]
 [ext_resource type="Script" uid="uid://di6dldye1rkun" path="res://scripts/TransitionLayer.gd" id="3_t4bxf"]
+[ext_resource type="PackedScene" uid="uid://2oso1y4cnvq5" path="res://scenes/HUD.tscn" id="4_x628s"]
 
 [sub_resource type="Animation" id="Animation_p73vr"]
 resource_name = "Fade_to_black"
@@ -76,6 +77,8 @@ drag_bottom_margin = 0.1
 
 [node name="GUI" type="CanvasLayer" parent="." unique_id=1761024443]
 
+[node name="HUD" parent="GUI" unique_id=593963156 instance=ExtResource("4_x628s")]
+
 [node name="TransitionLayer" type="Node" parent="GUI" unique_id=1121956783]
 script = ExtResource("3_t4bxf")
 
@@ -95,4 +98,5 @@ libraries/ = SubResource("AnimationLibrary_7fyak")
 
 [node name="PauseMenu" parent="." unique_id=539579433 instance=ExtResource("3_p73vr")]
 
+[connection signal="game_started" from="." to="Player" method="_on_game_started"]
 [connection signal="load_main_menu" from="Player" to="." method="return_to_main_menu"]

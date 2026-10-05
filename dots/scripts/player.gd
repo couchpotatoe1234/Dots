@@ -20,6 +20,7 @@ var can_attack: bool = true
 signal load_main_menu
 
 func _ready() -> void:
+	health_changed.emit(health, max_health)
 	is_invulnerable = false
 	change_state("idle")
 	
@@ -48,8 +49,11 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 		
-		if Input.is_action_just_pressed("Attack") && can_attack:
-			attack()
+		if Input.is_action_just_pressed("Attack"):
+			if can_attack:
+				attack()
+			else:
+				pass
 		
 	move_and_slide()
 	
@@ -108,12 +112,11 @@ func _on_animation_finished(anim_name: String) -> void:
 		change_state("idle")
 	elif anim_name == "die":
 		print("emited")
-		health = max_health
 		health_changed.emit(health, max_health)
+		health = max_health
 		is_invulnerable = false
 		load_main_menu.emit()
 		
-
 func take_damage(amount: int) -> void:
 	if is_invulnerable:
 		return
@@ -183,7 +186,9 @@ func attack() -> void:
 	else:
 		can_attack = false
 		change_state("attack-side")
+		print("cooldown-start")
 		await get_tree().create_timer(0.4).timeout
+		print("cooldown-end")
 	
 func _on_attack_area_entered(area: Area2D) -> void:
 	if area.is_in_group("pogoable") && current_state == "attack-down":
@@ -204,7 +209,7 @@ func respawn_at_checkpoint() -> void:
 	GameManager.controls_allowed = false
 	is_invulnerable = true
 	velocity.y = -250
-	
+	velocity.x = 0
 	health -= 1
 	health_changed.emit(health, max_health)
 	print("Player health now:", health)
@@ -214,7 +219,11 @@ func respawn_at_checkpoint() -> void:
 	await transition_layer.fade_out() 
 	global_position = GameManager.last_respawn_position
 	transition_layer.fade_in()
-	GameManager.controls_allowed = true
 	change_state("idle")
 	await get_tree().create_timer(0.5).timeout
 	is_invulnerable = false
+	GameManager.controls_allowed = true
+	
+func _on_game_started() -> void:
+	health_changed.emit(health, max_health)
+	sprite.flip_h = false
