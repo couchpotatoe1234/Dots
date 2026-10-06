@@ -30,4 +30,4 @@ func _connect_to_player(player: Node) -> void:
 	_on_health_changed(player.health, player.max_health)
 	
 func _money() -> void:
-	
+	print("67")
