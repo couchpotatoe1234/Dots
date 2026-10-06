@@ -63,16 +63,6 @@ script = ExtResource("1_p73vr")
 
 [node name="Player" parent="." unique_id=1860738924 instance=ExtResource("1_6ovph")]
 
-[node name="Camera2D" type="Camera2D" parent="Player" unique_id=2081588765]
-zoom = Vector2(2, 2)
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
-drag_left_margin = 0.15
-drag_top_margin = 0.65
-drag_right_margin = 0.15
-drag_bottom_margin = 0.0
-editor_draw_drag_margin = true
-
 [node name="Level" type="Node2D" parent="." unique_id=1094287842]
 
 [node name="GUI" type="CanvasLayer" parent="." unique_id=1761024443]
@@ -98,5 +88,6 @@ libraries/ = SubResource("AnimationLibrary_7fyak")
 
 [node name="PauseMenu" parent="." unique_id=539579433 instance=ExtResource("3_p73vr")]
 
+[connection signal="changed_level" from="." to="Player" method="_on_changed_level"]
 [connection signal="game_started" from="." to="Player" method="_on_game_started"]
 [connection signal="load_main_menu" from="Player" to="." method="return_to_main_menu"]

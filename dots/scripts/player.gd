@@ -27,6 +27,11 @@ func _ready() -> void:
 	
 func _physics_process(delta: float) -> void:
 	GameManager.player_x = global_position.x
+	if is_on_floor() and current_state == "attack-down":
+		animation.stop()
+		change_state("idle")
+		unturnable = false
+		$"Attack-down/Down".set_deferred("disabled", true)
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	var input_dir := 0.0
@@ -57,7 +62,6 @@ func _physics_process(delta: float) -> void:
 				pass
 		
 	move_and_slide()
-	
 	update_state(input_dir)
 	
 func update_state(input_dir: float) -> void:
@@ -128,11 +132,11 @@ func take_damage(amount: int) -> void:
 	var knock_dir = 1.0 if sprite.flip_h or scale.x < 0 else -1.0
 	velocity.x = knock_dir * 100.0
 	velocity.y = -200
-	if $Camera2D:
+	if camera:
 		var tween = create_tween()
 		for i in 10:
-			tween.tween_property($Camera2D, "offset", Vector2(randf_range(-8, 8), randf_range(-8, 8)), 0.05)
-		tween.tween_property($Camera2D, "offset", Vector2.ZERO, 0.05)
+			tween.tween_property(camera, "offset", Vector2(randf_range(-8, 8), randf_range(-8, 8)), 0.05)
+		tween.tween_property(camera, "offset", Vector2.ZERO, 0.05)
 	if health <= 0:
 		die()
 	else:
@@ -151,6 +155,8 @@ func start_invulnerablilty() -> void:
 	can_attack = true
 	unturnable = false
 	is_invulnerable = false
+	await get_tree().create_timer(0.5).timeout
+	check_for_hazards()
 
 func die() -> void:
 	is_invulnerable = true
@@ -201,11 +207,11 @@ func respawn_at_checkpoint() -> void:
 	transition_layer.fade_out()
 	$PlayerSprite/Slash.visible = false
 	unturnable = false
-	if $Camera2D:
+	if camera:
 		var tween = create_tween()
 		for i in 10:
-			tween.tween_property($Camera2D, "offset", Vector2(randf_range(-8, 8), randf_range(-8, 8)), 0.05)
-		tween.tween_property($Camera2D, "offset", Vector2.ZERO, 0.05)
+			tween.tween_property(camera, "offset", Vector2(randf_range(-8, 8), randf_range(-8, 8)), 0.05)
+		tween.tween_property(camera, "offset", Vector2.ZERO, 0.05)
 	change_state("hurt")
 	GameManager.controls_allowed = false
 	is_invulnerable = true
@@ -228,3 +234,23 @@ func respawn_at_checkpoint() -> void:
 func _on_game_started() -> void:
 	health_changed.emit(health, max_health)
 	sprite.flip_h = false
+
+
+func _on_changed_level() -> void:
+	camera.drag_horizontal_enabled = false
+	camera.drag_vertical_enabled = false
+	await get_tree().create_timer(0.01).timeout
+	camera.drag_horizontal_enabled = true
+	camera.drag_vertical_enabled = true
+
+func check_for_hazards() -> void:
+	if is_invulnerable:
+		return
+	for area in $Hurtbox.get_overlapping_areas():
+		print("yeloo")
+		if area.is_in_group("normal_enemy"):
+			take_damage(1)
+			break
+		if area.is_in_group("hazard"):
+			respawn_at_checkpoint()
+		

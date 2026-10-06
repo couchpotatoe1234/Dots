@@ -315,7 +315,7 @@ shape = SubResource("RectangleShape2D_6rg8l")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_ke6mt")
 animation = &"hurt"
-frame_progress = 0.89769334
+frame_progress = 0.804815
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=1111178456 groups=["pogoable"]]
 collision_layer = 10

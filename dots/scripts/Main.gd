@@ -5,9 +5,9 @@ extends Node2D
 @onready var pause_menu = $PauseMenu
 @onready var transition_layer = $GUI/TransitionLayer
 @onready var hud = $GUI/HUD
-@onready var camera = $Player/Camera2D
 var current_level_node: Node = null
 signal game_started
+signal changed_level
 
 func _ready() -> void:
 	if hud:
@@ -51,8 +51,8 @@ func change_level(level_path: String, spawn_position: Vector2 = Vector2.ZERO) ->
 		level_container.add_child(current_level_node)
 	if player:
 		player.global_position = spawn_position
-		camera.global_position = spawn_position
 		player.process_mode = Node.PROCESS_MODE_INHERIT
+		changed_level.emit()
 		player.show()
 	if hud:
 		hud.set_deferred("visible", true)
