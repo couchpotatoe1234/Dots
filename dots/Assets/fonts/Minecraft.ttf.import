@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://b1lhp0efn2pmk"
-path="res://.godot/imported/Minecraft.ttf-8a074f374b0b9c87e0de1486eccab1f3.fontdata"
+uid="uid://dtob7sad1udk0"
+path="res://.godot/imported/Minecraft.ttf-795455c6105b4a68e8228d634156ccf2.fontdata"
 
 [deps]
 
-source_file="res://Assets/sprites/Minecraft.ttf"
-dest_files=["res://.godot/imported/Minecraft.ttf-8a074f374b0b9c87e0de1486eccab1f3.fontdata"]
+source_file="res://Assets/fonts/Minecraft.ttf"
+dest_files=["res://.godot/imported/Minecraft.ttf-795455c6105b4a68e8228d634156ccf2.fontdata"]
 
 [params]
 
@@ -22,7 +22,7 @@ msdf_size=48
 allow_system_fallback=true
 force_autohinter=false
 modulate_color_glyphs=false
-hinting=3
+hinting=1
 subpixel_positioning=4
 keep_rounding_remainders=true
 oversampling=0.0
