@@ -177,7 +177,7 @@ sprite_frames = SubResource("SpriteFrames_ke6mt")
 animation = &"hit"
 
 [node name="Heart5" type="AnimatedSprite2D" parent="HUD" unique_id=800991457]
-position = Vector2(61, 295)
+position = Vector2(60, 288)
 scale = Vector2(2, 1.955)
 sprite_frames = SubResource("SpriteFrames_ke6mt")
 animation = &"hit"
