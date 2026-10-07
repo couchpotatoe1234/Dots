@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://c5abxu8glgnpr"
+path="res://.godot/imported/HUDFRFR.aseprite-d9ed74c5d1a116daf78008b7d24514ad.res"
+
+[deps]
+
+source_file="res://Aseprite drawings/HUDFRFR.aseprite"
+dest_files=["res://.godot/imported/HUDFRFR.aseprite-d9ed74c5d1a116daf78008b7d24514ad.res"]
+
+[params]
+
