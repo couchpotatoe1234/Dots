@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://duwg1gjydhlq8"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=235027177]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1492390756]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=376673020]
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=280137790]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=842564116]
+
+[node name="Hurtbox2" type="Area2D" parent="." unique_id=849384051]
