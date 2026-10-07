@@ -234,6 +234,7 @@ func respawn_at_checkpoint() -> void:
 func _on_game_started() -> void:
 	health_changed.emit(health, max_health)
 	sprite.flip_h = false
+	velocity = Vector2.ZERO
 
 
 func _on_changed_level() -> void:
