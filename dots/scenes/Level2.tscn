@@ -3,6 +3,7 @@
 [ext_resource type="TileSet" uid="uid://c5xyi4dqquns3" path="res://Assets/Other/TileSet1.tres" id="1_8mrap"]
 [ext_resource type="Texture2D" uid="uid://18jaets2sl2a" path="res://Assets/sprites/BackgroundSunset-Sheet.png" id="1_kkoku"]
 [ext_resource type="PackedScene" uid="uid://d1l5h6y70wdec" path="res://scenes/enemy_1.tscn" id="3_l6gr7"]
+[ext_resource type="PackedScene" uid="uid://duwg1gjydhlq8" path="res://scenes/enemy_2.tscn" id="4_sp0w3"]
 
 [node name="Level2" type="Node2D" unique_id=1602681685]
 
@@ -85,17 +86,24 @@ tile_set = ExtResource("1_8mrap")
 [node name="Enemies" type="Node2D" parent="." unique_id=1623247341]
 position = Vector2(-168, -368)
 
-[node name="enemy1" parent="Enemies" unique_id=156177197 instance=ExtResource("3_l6gr7")]
+[node name="Enemy_1" type="Node2D" parent="Enemies" unique_id=987334962]
+
+[node name="enemy1" parent="Enemies/Enemy_1" unique_id=156177197 instance=ExtResource("3_l6gr7")]
 position = Vector2(-1553, 367)
 
-[node name="enemy2" parent="Enemies" unique_id=144853499 instance=ExtResource("3_l6gr7")]
+[node name="enemy2" parent="Enemies/Enemy_1" unique_id=144853499 instance=ExtResource("3_l6gr7")]
 position = Vector2(-953, 431)
 
-[node name="enemy3" parent="Enemies" unique_id=839024310 instance=ExtResource("3_l6gr7")]
+[node name="enemy3" parent="Enemies/Enemy_1" unique_id=839024310 instance=ExtResource("3_l6gr7")]
 position = Vector2(571, 495)
 
-[node name="enemy4" parent="Enemies" unique_id=1155625047 instance=ExtResource("3_l6gr7")]
+[node name="enemy4" parent="Enemies/Enemy_1" unique_id=1155625047 instance=ExtResource("3_l6gr7")]
 position = Vector2(1021, 399)
+
+[node name="Enemy_2" type="Node2D" parent="Enemies" unique_id=326031247]
+
+[node name="enemy1" parent="Enemies/Enemy_2" unique_id=235027177 instance=ExtResource("4_sp0w3")]
+position = Vector2(-1952, 255)
 
 [node name="Node2D" type="Node2D" parent="." unique_id=195246853]
 position = Vector2(-2372, -65)

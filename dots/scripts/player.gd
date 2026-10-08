@@ -200,6 +200,7 @@ func attack() -> void:
 func _on_attack_area_entered(area: Area2D) -> void:
 	if area.is_in_group("pogoable") && current_state == "attack-down":
 		velocity.y = -300
+		GameManager.hitstop(0.05)
 
 func respawn_at_checkpoint() -> void:
 	if is_invulnerable:
@@ -248,7 +249,6 @@ func check_for_hazards() -> void:
 	if is_invulnerable:
 		return
 	for area in $Hurtbox.get_overlapping_areas():
-		print("yeloo")
 		if area.is_in_group("normal_enemy"):
 			take_damage(1)
 			break

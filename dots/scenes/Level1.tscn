@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://18jaets2sl2a" path="res://Assets/sprites/BackgroundSunset-Sheet.png" id="1_odhdn"]
 [ext_resource type="TileSet" uid="uid://c5xyi4dqquns3" path="res://Assets/Other/TileSet1.tres" id="2_lrl65"]
+[ext_resource type="PackedScene" uid="uid://duwg1gjydhlq8" path="res://scenes/enemy_2.tscn" id="4_76388"]
 [ext_resource type="PackedScene" uid="uid://d1l5h6y70wdec" path="res://scenes/enemy_1.tscn" id="4_dw26h"]
 [ext_resource type="PackedScene" uid="uid://beo3miagmv876" path="res://scenes/respawn_point.tscn" id="4_lrl65"]
 
@@ -112,26 +113,33 @@ tile_set = ExtResource("2_lrl65")
 [node name="Enemies" type="Node2D" parent="." unique_id=1864394000]
 position = Vector2(-168, -368)
 
-[node name="enemy1" parent="Enemies" unique_id=156177197 instance=ExtResource("4_dw26h")]
+[node name="Enemy_1" type="Node2D" parent="Enemies" unique_id=2073567195]
+
+[node name="enemy1" parent="Enemies/Enemy_1" unique_id=156177197 instance=ExtResource("4_dw26h")]
 position = Vector2(-397, -26)
 
-[node name="enemy2" parent="Enemies" unique_id=1062415995 instance=ExtResource("4_dw26h")]
+[node name="enemy2" parent="Enemies/Enemy_1" unique_id=1062415995 instance=ExtResource("4_dw26h")]
 position = Vector2(5, 358)
 
-[node name="enemy3" parent="Enemies" unique_id=237006568 instance=ExtResource("4_dw26h")]
+[node name="enemy3" parent="Enemies/Enemy_1" unique_id=237006568 instance=ExtResource("4_dw26h")]
 position = Vector2(485, 38)
 
-[node name="enemy4" parent="Enemies" unique_id=478058403 instance=ExtResource("4_dw26h")]
+[node name="enemy4" parent="Enemies/Enemy_1" unique_id=478058403 instance=ExtResource("4_dw26h")]
 position = Vector2(356, 742)
 
-[node name="enemy5" parent="Enemies" unique_id=1938811055 instance=ExtResource("4_dw26h")]
+[node name="enemy5" parent="Enemies/Enemy_1" unique_id=1938811055 instance=ExtResource("4_dw26h")]
 position = Vector2(652, 742)
 
-[node name="enemy6" parent="Enemies" unique_id=1198166134 instance=ExtResource("4_dw26h")]
+[node name="enemy6" parent="Enemies/Enemy_1" unique_id=1198166134 instance=ExtResource("4_dw26h")]
 position = Vector2(619, 326)
 
-[node name="enemy7" parent="Enemies" unique_id=1145277686 instance=ExtResource("4_dw26h")]
+[node name="enemy7" parent="Enemies/Enemy_1" unique_id=1145277686 instance=ExtResource("4_dw26h")]
 position = Vector2(960, 710)
+
+[node name="Enemy_2" type="Node2D" parent="Enemies" unique_id=1604583367]
+
+[node name="enemy1" parent="Enemies/Enemy_2" unique_id=235027177 instance=ExtResource("4_76388")]
+position = Vector2(659, 61)
 
 [node name="Killzone" type="Area2D" parent="." unique_id=498380167 groups=["normal_hazard"]]
 
