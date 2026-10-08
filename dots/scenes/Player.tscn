@@ -517,5 +517,7 @@ drag_right_margin = 0.15
 drag_bottom_margin = 0.0
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
-[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
-[connection signal="area_entered" from="Attack-down" to="." method="_on_attack_area_entered"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_damaged"]
+[connection signal="area_entered" from="Attack-down" to="." method="_pogo"]
+[connection signal="area_entered" from="Attack-up" to="." method="_enemy_hit"]
+[connection signal="area_entered" from="Attack-side" to="." method="_enemy_hit"]

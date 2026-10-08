@@ -153,8 +153,9 @@ func start_invulnerablilty() -> void:
 	can_attack = false
 	$PlayerSprite/Slash.visible = false
 	change_state("hurt")
-	await get_tree().create_timer(0.75).timeout
+	await get_tree().create_timer(0.5).timeout
 	can_attack = true
+	await get_tree().create_timer(0.25).timeout
 	unturnable = false
 	is_invulnerable = false
 	await get_tree().create_timer(0.5).timeout
@@ -168,19 +169,6 @@ func die() -> void:
 	print("ya died dummy")
 	change_state("die")
 
-func _on_hurtbox_area_entered(area: Area2D) -> void:
-	if is_invulnerable:
-		return
-	if area.is_in_group("normal_enemy"):
-		unturnable = false
-		take_damage(1)
-	if area.is_in_group("strong_enemy"):
-		unturnable = false
-		take_damage(2)
-	if area.is_in_group("normal_hazard"):
-		unturnable = false
-		respawn_at_checkpoint()
-
 func attack() -> void:
 	attack_cooldown_timer = ATTACK_COOLDOWN
 	if Input.is_action_pressed("up"):
@@ -190,11 +178,6 @@ func attack() -> void:
 	else:
 		change_state("attack-side")
 	
-func _on_attack_area_entered(area: Area2D) -> void:
-	if area.is_in_group("pogoable") && current_state == "attack-down":
-		velocity.y = -300
-		GameManager.hitstop(0.05)
-
 func respawn_at_checkpoint() -> void:
 	if is_invulnerable:
 		return
@@ -230,7 +213,6 @@ func _on_game_started() -> void:
 	sprite.flip_h = false
 	velocity = Vector2.ZERO
 
-
 func _on_changed_level() -> void:
 	camera.drag_horizontal_enabled = false
 	camera.drag_vertical_enabled = false
@@ -247,4 +229,31 @@ func check_for_hazards() -> void:
 			break
 		if area.is_in_group("hazard"):
 			respawn_at_checkpoint()
-		
+
+func _pogo(area: Area2D) -> void:
+	if area.is_in_group("pogoable") && current_state == "attack-down":
+		velocity.y = -300
+		GameManager.hitstop(0.05)
+
+func _damaged(area: Area2D) -> void:
+	if is_invulnerable:
+		return
+	if area.is_in_group("normal_enemy"):
+		unturnable = false
+		take_damage(1)
+	if area.is_in_group("strong_enemy"):
+		unturnable = false
+		take_damage(2)
+	if area.is_in_group("normal_hazard"):
+		unturnable = false
+		respawn_at_checkpoint()
+
+func _enemy_hit(area: Area2D) -> void:
+	if area.is_in_group("normal_enemy"):
+		GameManager.controls_allowed = false
+		var hitback_dir = 1.0 if sprite.flip_h or scale.x < 0 else -1.0
+		velocity.y = -25
+		velocity.x = 100 * hitback_dir
+		GameManager.hitstop(0.05)
+		await get_tree().create_timer(0.2).timeout
+		GameManager.controls_allowed = true
