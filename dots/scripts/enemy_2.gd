@@ -97,32 +97,45 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("player_attack") and current_anim != Anim.DIE:
 		health -= 1
 		print("Flying enemy health:", health)
-		knocked_back = true
-		velocity = Vector2(push_dir * 75, -80)
-		change_anim(Anim.HURT)
-		await get_tree().create_timer(0.5).timeout
-		knocked_back = false
+		if health <= 0:
+			knocked_back = true
+			velocity = Vector2(push_dir * 200, -100)
+			change_anim(Anim.HURT)
+			await get_tree().create_timer(0.1).timeout
+			change_anim(Anim.DIE)
+		else:
+			knocked_back = true
+			velocity = Vector2(push_dir * 200, -100)
+			change_anim(Anim.HURT)
+			await get_tree().create_timer(0.1).timeout
+			knocked_back = false
 	if area.is_in_group("player_attack_up") and current_anim != Anim.DIE:
 		health -= 1
 		print("Flying enemy health:", health)
-		knocked_back = true
-		velocity = Vector2(0, -80)
-		change_anim(Anim.HURT)
-		await get_tree().create_timer(0.5).timeout
-		knocked_back = false
+		if health <= 0:
+			knocked_back = true
+			velocity = Vector2(push_dir * 50, -200)
+			change_anim(Anim.HURT)
+			await get_tree().create_timer(0.1).timeout
+			change_anim(Anim.DIE)
+		else:
+			knocked_back = true
+			velocity = Vector2(0, -200)
+			change_anim(Anim.HURT)
+			await get_tree().create_timer(0.1).timeout
+			knocked_back = false
 	if area.is_in_group("player_attack_down") and current_anim != Anim.DIE:
 		health -= 1
 		print("Flying enemy health:", health)
-		knocked_back = true
-		velocity = Vector2(0, 80)
-		change_anim(Anim.HURT)
-		await get_tree().create_timer(0.5).timeout
-		knocked_back = false
-	if health <= 0:
-		knocked_back = true
-		velocity = Vector2(push_dir * 50, 50)
-		change_anim(Anim.HURT)
-		await get_tree().create_timer(0.75).timeout
-		change_anim(Anim.DIE)
-
-			
+		if health <= 0:
+			knocked_back = true
+			velocity = Vector2(push_dir * 0, 200)
+			change_anim(Anim.HURT)
+			await get_tree().create_timer(0.1).timeout
+			change_anim(Anim.DIE)
+		else:
+			knocked_back = true
+			velocity = Vector2(0, 200)
+			change_anim(Anim.HURT)
+			await get_tree().create_timer(0.1).timeout
+			knocked_back = false
