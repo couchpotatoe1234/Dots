@@ -1,16 +1,16 @@
 extends CharacterBody2D
 
 
-const SPEED = 100.0
-const JUMP_VELOCITY = -325.0
+const SPEED: float = 100.0
+const JUMP_VELOCITY: float = -325.0
 const ATTACK_COOLDOWN : float = 0.4
 @export var unturnable: bool = false
 @export var max_health: int = 5
-@onready var sprite = $PlayerSprite
-@onready var animation = $AnimationPlayer
+@onready var sprite: Sprite2D = $PlayerSprite
+@onready var animation: AnimationPlayer = $AnimationPlayer
 @onready var transition_layer = $"../GUI/TransitionLayer"
-@onready var camera = $"Camera2D"
-var current_state = ""
+@onready var camera: Camera2D = $"Camera2D"
+var current_state: String = ""
 var fall_height: float = 0.0
 var health: int = 5
 var is_invulnerable: bool = false
