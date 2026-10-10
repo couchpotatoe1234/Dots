@@ -1,8 +1,8 @@
 extends Node
 
 var controls_allowed = true
-var last_save_point = Vector2(-2372, -65)
-var last_level = "res://scenes/Level2.tscn"
+var last_save_point = Vector2(-2400, -192)
+var last_level = "res://scenes/level3(cross).tscn"
 var player_x: float = 0
 var last_respawn_position: Vector2 = Vector2.ZERO
 
@@ -16,3 +16,4 @@ func hitstop(duration: float, magnitude: float = 0.0) -> void:
 #LEVELSSS
 #level 1 = -675, -400
 #level 2 = -2372, -65
+#level 3 (cross) = -2400, -192
