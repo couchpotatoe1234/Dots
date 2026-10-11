@@ -479,7 +479,6 @@ shape = SubResource("RectangleShape2D_p0vlq")
 libraries/ = SubResource("AnimationLibrary_mdl7e")
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=1159227117 groups=["player_hurtbox"]]
-collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1974410907]
 position = Vector2(0, -13.5)
