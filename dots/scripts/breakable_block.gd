@@ -1,14 +1,11 @@
 extends StaticBody2D
-class_name BreakableBlock
 
-signal broken
-
-@export var hits_to_break: int = 5
+@export var hits_to_break: int = 3
 @export var shake_stregnth: float = 4.0
 @export var shake_duration: float = 0.18
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
-@onready var particles: CPUParticles2D = get_node_or_null("BreakParticles")
+@onready var particles: CPUParticles2D = $CPUParticles2D
 
 var _hits_left: int
 var _sprite_home: Vector2
@@ -19,17 +16,6 @@ func _ready() -> void:
 	_hits_left = hits_to_break
 	_sprite_home = sprite.position
 
-func take_hit(hit_direction: Vector2 = Vector2.ZERO) -> void:
-	if _is_broken:
-		return
-	
-	_hits_left -= 1
-	
-	if _hits_left <= 0:
-		_break()
-	else:
-		_shake(hit_direction)
-		
 func _shake(hit_direction: Vector2) -> void:
 	if _shake_tween:
 		_shake_tween.kill()
@@ -37,7 +23,6 @@ func _shake(hit_direction: Vector2) -> void:
 	var dir := hit_direction.normalized()
 	var steps := 4
 	var step_time := shake_duration / (steps + 1)
-	
 	_shake_tween = create_tween()
 	for i in steps:
 		var falloff := 1.0 - float(i) / steps
@@ -50,14 +35,18 @@ func _shake(hit_direction: Vector2) -> void:
 func _break() -> void:
 	_is_broken = true
 	if _shake_tween:
+		await get_tree().create_timer(0.18).timeout
 		_shake_tween.kill()
-	
-	if particles:
 		particles.emitting = true
 		await get_tree().create_timer(particles.lifetime).timeout
-	queue_free()
+		queue_free()
 
-		
-		
-func _process(delta: float) -> void:
-	pass
+func _on_area_entered(area: Area2D) -> void:
+	print("area entered")
+	if area.is_in_group("player_attack")  or area.is_in_group("player_attack_up") or area.is_in_group("player_attack_down"):
+		var hit_direction = Vector2(1, 0) if GameManager.player_x < global_position.x else Vector2(-1, 0)
+		_hits_left -= 1
+		if _hits_left <= 0:
+			_break()
+		else:
+			_shake(hit_direction)

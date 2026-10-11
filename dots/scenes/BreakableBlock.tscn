@@ -16,12 +16,15 @@ script = ExtResource("1_nplfk")
 shape = SubResource("RectangleShape2D_jdwa3")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1307329162]
+z_index = 2
 emitting = false
+amount = 100
 one_shot = true
 explosiveness = 1.0
 color = Color(0.19877315, 0.19877344, 0.18961903, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=693766352]
+z_index = 1
 texture = ExtResource("2_nplfk")
 hframes = 4
 vframes = 7
@@ -31,3 +34,5 @@ frame = 24
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Break-part" unique_id=1258945627]
 shape = SubResource("RectangleShape2D_gkdic")
+
+[connection signal="area_entered" from="Break-part" to="." method="_on_area_entered"]

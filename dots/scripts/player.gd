@@ -21,13 +21,11 @@ var can_attack: bool = true
 signal load_main_menu
 signal health_changed(current_health: int, max_health: int)
 
-
 func _ready() -> void:
 	health_changed.emit(health, max_health)
 	is_invulnerable = false
 	change_state("idle")
-	
-	
+
 func _physics_process(delta: float) -> void:
 	if attack_cooldown_timer > 0.0:
 		attack_cooldown_timer -= delta
@@ -57,19 +55,16 @@ func _physics_process(delta: float) -> void:
 				sprite.flip_h = is_left
 				$PlayerSprite/Slash.flip_h = is_left
 				$"Attack-side".scale.x = -1 if is_left else 1
-
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
-		
 		if Input.is_action_just_pressed("Attack"):
 			if attack_cooldown_timer <= 0.0 && can_attack:
 				attack()
 			else:
 				pass
-		
 	move_and_slide()
 	update_state(input_dir)
-	
+
 func update_state(input_dir: float) -> void:
 	if current_state in ["attack-side", "attack-up", "attack-down", "run-transition", "hurt", "die"]:
 		if is_invulnerable && current_state in ["attack-side", "attack-up", "attack-down"]:
@@ -80,7 +75,6 @@ func update_state(input_dir: float) -> void:
 			start_invulnerablilty()
 		else:
 			return
-	
 	if not is_on_floor():
 		if current_state != "airtime":
 			fall_height = global_position.y
@@ -88,7 +82,6 @@ func update_state(input_dir: float) -> void:
 			fall_height = min(fall_height, global_position.y)
 		change_state("airtime")
 		return
-		
 	if current_state == "airtime":
 		var fall_distance = global_position.y - fall_height
 		if fall_distance >= 96:
@@ -96,7 +89,6 @@ func update_state(input_dir: float) -> void:
 			return
 		else:
 			current_state = ""
-		
 	if input_dir != 0:
 		if current_state != "run":
 			change_state("run-transition")
@@ -106,10 +98,9 @@ func update_state(input_dir: float) -> void:
 func change_state(new_state: String) -> void:
 	if current_state == new_state:
 		return
-		
 	current_state = new_state
 	animation.play(new_state)
-	
+
 func _on_animation_finished(anim_name: String) -> void:
 	if anim_name == "run-transition":
 		current_state = "run"
@@ -126,7 +117,7 @@ func _on_animation_finished(anim_name: String) -> void:
 		health = max_health
 		is_invulnerable = false
 		load_main_menu.emit()
-		
+
 func take_damage(amount: int) -> void:
 	if is_invulnerable:
 		return
@@ -180,7 +171,7 @@ func attack() -> void:
 		change_state("attack-down")
 	else:
 		change_state("attack-side")
-	
+
 func respawn_at_checkpoint() -> void:
 	if is_invulnerable:
 		return
@@ -210,7 +201,7 @@ func respawn_at_checkpoint() -> void:
 	await get_tree().create_timer(0.5).timeout
 	is_invulnerable = false
 	GameManager.controls_allowed = true
-	
+
 func _on_game_started() -> void:
 	health_changed.emit(health, max_health)
 	sprite.flip_h = false
