@@ -49,6 +49,13 @@ func change_level(level_path: String, spawn_position: Vector2 = Vector2.ZERO) ->
 	if level_resource:
 		current_level_node = level_resource.instantiate()
 		level_container.add_child(current_level_node)
+		if "camera_limits" in current_level_node and player.has_node("Camera2D"):
+			var cam: Camera2D = player.get_node("Camera2D")
+			var rect: Rect2 = current_level_node.camera_limits
+			cam.limit_left = int(rect.position.x)
+			cam.limit_top = int(rect.position.y)
+			cam.limit_right = int(rect.position.x + rect.size.x)
+			cam.limit_bottom = int(rect.position.y + rect.size.y)
 	if player:
 		player.global_position = spawn_position
 		player.process_mode = Node.PROCESS_MODE_INHERIT

@@ -258,7 +258,7 @@ animations = [{
 }],
 "loop": 0,
 "name": &"attack",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -371,8 +371,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hqy2m"]
 size = Vector2(28, 18)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_oh86k"]
-size = Vector2(24, 14)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fi5i3"]
+radius = 5.0
+height = 22.0
 
 [node name="enemy1" type="CharacterBody2D" unique_id=235027177]
 collision_layer = 2
@@ -386,7 +387,7 @@ shape = SubResource("RectangleShape2D_fi5i3")
 position = Vector2(1, -1)
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_x8io2")
-animation = &"hurt"
+animation = &"attack"
 autoplay = "idle"
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=280137790 groups=["pogoable"]]
@@ -397,7 +398,8 @@ shape = SubResource("RectangleShape2D_hqy2m")
 [node name="Hitbox" type="Area2D" parent="." unique_id=849384051 groups=["normal_enemy"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1555118305]
-shape = SubResource("RectangleShape2D_oh86k")
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_fi5i3")
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=370536291]
 
