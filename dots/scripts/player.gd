@@ -10,9 +10,6 @@ const ATTACK_COOLDOWN : float = 0.4
 @onready var animation: AnimationPlayer = $AnimationPlayer
 @onready var transition_layer = $"../GUI/TransitionLayer"
 @onready var camera: Camera2D = $"Camera2D"
-@onready var attack_down: Area2D = $AttackDown
-@onready var attack_up: Area2D = $AttackUp
-@onready var attack_side: Area2D = $AttackSide
 var current_state: String = ""
 var fall_height: float = 0.0
 var facing := 1
@@ -29,12 +26,7 @@ func _ready() -> void:
 	health_changed.emit(health, max_health)
 	is_invulnerable = false
 	change_state("idle")
-	attack_side.body_entered.connect(func(body): _on_attack_hit(body, Vector2(facing, 0)))
-	attack_up.body_entered.connect(func(body): _on_attack_hit(body, Vector2.UP))
-	attack_down.body_entered.connect(func(body): _on_attack_hit(body, Vector2.DOWN))
 	
-	for hitbox in [attack_side, attack_up, attack_down]:
-		hitbox.monitoring = false
 	
 func _physics_process(delta: float) -> void:
 	if attack_cooldown_timer > 0.0:

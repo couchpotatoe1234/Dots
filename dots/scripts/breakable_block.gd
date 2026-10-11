@@ -15,8 +15,6 @@ var _sprite_home: Vector2
 var _shake_tween: Tween
 var _is_broken := false
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_hits_left = hits_to_break
 	_sprite_home = sprite.position
@@ -48,6 +46,7 @@ func _shake(hit_direction: Vector2) -> void:
 		var offset := (dir * flip + jitter) * shake_stregnth * falloff
 		_shake_tween.tween_property(sprite, "position", _sprite_home + offset, step_time)
 	_shake_tween.tween_property(sprite, "position", _sprite_home, step_time)
+
 func _break() -> void:
 	_is_broken = true
 	if _shake_tween:
