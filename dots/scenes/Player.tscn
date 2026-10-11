@@ -485,7 +485,6 @@ position = Vector2(0, -13.5)
 shape = SubResource("RectangleShape2D_3li8b")
 
 [node name="Attack-down" type="Area2D" parent="." unique_id=1458105865 groups=["player_attack_down"]]
-collision_layer = 2
 collision_mask = 3
 
 [node name="Down" type="CollisionShape2D" parent="Attack-down" unique_id=14728022]
@@ -511,6 +510,7 @@ disabled = true
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=893015492]
 zoom = Vector2(2.5, 2.5)
+drag_vertical_offset = -0.5
 drag_left_margin = 0.15
 drag_top_margin = 0.65
 drag_right_margin = 0.15

@@ -193,6 +193,9 @@ position = Vector2(-259, -9)
 [node name="RespawnPoint2" parent="Respawns" unique_id=1482105515 instance=ExtResource("4_lrl65")]
 position = Vector2(-26, -9)
 
+[node name="RespawnPoint23" parent="Respawns" unique_id=106267980 instance=ExtResource("4_lrl65")]
+position = Vector2(-46, -9)
+
 [node name="RespawnPoint3" parent="Respawns" unique_id=1521453699 instance=ExtResource("4_lrl65")]
 position = Vector2(-739, -425)
 
@@ -217,26 +220,23 @@ position = Vector2(700, 343)
 [node name="RespawnPoint5" parent="Respawns" unique_id=1789978709 instance=ExtResource("4_lrl65")]
 position = Vector2(35, -59)
 
-[node name="RespawnPoint23" parent="Respawns" unique_id=1783834507 instance=ExtResource("4_lrl65")]
-position = Vector2(209, -105)
-
-[node name="RespawnPoint24" parent="Respawns" unique_id=1864730384 instance=ExtResource("4_lrl65")]
-position = Vector2(231, -106)
-
 [node name="RespawnPoint17" parent="Respawns" unique_id=186642872 instance=ExtResource("4_lrl65")]
 position = Vector2(-287, -346)
 
 [node name="RespawnPoint18" parent="Respawns" unique_id=1077338723 instance=ExtResource("4_lrl65")]
 position = Vector2(-316, -426)
 
+[node name="RespawnPoint27" parent="Respawns" unique_id=1035268789 instance=ExtResource("4_lrl65")]
+position = Vector2(-224, -475)
+
+[node name="RespawnPoint28" parent="Respawns" unique_id=195495491 instance=ExtResource("4_lrl65")]
+position = Vector2(-124, -443)
+
 [node name="RespawnPoint6" parent="Respawns" unique_id=479190375 instance=ExtResource("4_lrl65")]
 position = Vector2(-30, -121)
 
 [node name="RespawnPoint7" parent="Respawns" unique_id=2147392395 instance=ExtResource("4_lrl65")]
 position = Vector2(34, -187)
-
-[node name="RespawnPoint25" parent="Respawns" unique_id=1956227993 instance=ExtResource("4_lrl65")]
-position = Vector2(633, 182)
 
 [node name="RespawnPoint26" parent="Respawns" unique_id=1066623167 instance=ExtResource("4_lrl65")]
 position = Vector2(67, -236)

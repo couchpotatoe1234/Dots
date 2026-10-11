@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dac6mjobjpdsm"
+path="res://.godot/imported/TransitionSprite.aseprite-483669e3704cab4e9ef442f07120cbd0.res"
+
+[deps]
+
+source_file="res://Aseprite drawings/TransitionSprite.aseprite"
+dest_files=["res://.godot/imported/TransitionSprite.aseprite-483669e3704cab4e9ef442f07120cbd0.res"]
+
+[params]
+
