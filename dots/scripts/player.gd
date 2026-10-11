@@ -10,8 +10,12 @@ const ATTACK_COOLDOWN : float = 0.4
 @onready var animation: AnimationPlayer = $AnimationPlayer
 @onready var transition_layer = $"../GUI/TransitionLayer"
 @onready var camera: Camera2D = $"Camera2D"
+@onready var attack_down: Area2D = $AttackDown
+@onready var attack_up: Area2D = $AttackUp
+@onready var attack_side: Area2D = $AttackSide
 var current_state: String = ""
 var fall_height: float = 0.0
+var facing := 1
 var health: int = 5
 var is_invulnerable: bool = false
 var knocked_back: bool = false
@@ -20,10 +24,17 @@ var can_attack: bool = true
 signal load_main_menu
 signal health_changed(current_health: int, max_health: int)
 
+
 func _ready() -> void:
 	health_changed.emit(health, max_health)
 	is_invulnerable = false
 	change_state("idle")
+	attack_side.body_entered.connect(func(body): _on_attack_hit(body, Vector2(facing, 0)))
+	attack_up.body_entered.connect(func(body): _on_attack_hit(body, Vector2.UP))
+	attack_down.body_entered.connect(func(body): _on_attack_hit(body, Vector2.DOWN))
+	
+	for hitbox in [attack_side, attack_up, attack_down]:
+		hitbox.monitoring = false
 	
 func _physics_process(delta: float) -> void:
 	if attack_cooldown_timer > 0.0:
@@ -257,3 +268,7 @@ func _enemy_hit(area: Area2D) -> void:
 		GameManager.hitstop(0.05)
 		await get_tree().create_timer(0.2).timeout
 		GameManager.controls_allowed = true
+	
+func _on_attack_hit(body: Node2D, direction: Vector2) -> void:
+	if body.has_method("take_hit"):
+		body.take_hit(direction)
