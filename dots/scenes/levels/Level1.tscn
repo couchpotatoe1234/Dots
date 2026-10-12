@@ -274,6 +274,8 @@ position = Vector2(-221, -154)
 position = Vector2(-287, -218)
 
 [node name="1-2" type="Area2D" parent="." unique_id=1903054289]
+collision_layer = 7
+collision_mask = 7
 script = ExtResource("7_brv20")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="1-2" unique_id=1483812702]
@@ -292,3 +294,4 @@ position = Vector2(1139, 410)
 position = Vector2(-477, -409)
 
 [connection signal="area_entered" from="1-2" to="1-2" method="_on_area_entered"]
+[connection signal="body_entered" from="1-2" to="1-2" method="_on_body_entered"]
