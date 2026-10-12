@@ -148,6 +148,9 @@ position = Vector2(960, 710)
 [node name="enemy1" parent="Enemies/Enemy_2" unique_id=235027177 instance=ExtResource("4_76388")]
 position = Vector2(659, 61)
 
+[node name="enemy2" parent="Enemies/Enemy_2" unique_id=1784257644 instance=ExtResource("4_76388")]
+position = Vector2(317, -12)
+
 [node name="enemy3" parent="Enemies/Enemy_2" unique_id=679357088 instance=ExtResource("4_76388")]
 position = Vector2(-201, -106)
 
@@ -287,7 +290,7 @@ scale = Vector2(1, 1.171875)
 texture = ExtResource("6_76cw8")
 
 [node name="Node" type="Node2D" parent="." unique_id=1668261085]
-position = Vector2(1139, 410)
+position = Vector2(1090, 342)
 
 [connection signal="area_entered" from="1-2" to="1-2" method="_on_area_entered"]
 [connection signal="body_entered" from="1-2" to="1-2" method="_on_body_entered"]
