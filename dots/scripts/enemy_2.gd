@@ -125,11 +125,11 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 		return
 	var push_dir = 1.0 if area.global_position.x < global_position.x else -1.0
 	if area.is_in_group("player_attack"):
-		take_damage(1, Vector2(150, 0))
+		take_damage(1, Vector2(push_dir * 150, 0))
 	elif area.is_in_group("player_attack_up"):
-		take_damage(1, Vector2(push_dir * 0, -150))
+		take_damage(1, Vector2(0, -150))
 	elif area.is_in_group("player_attack_down"):
-		take_damage(1, Vector2(push_dir * 0, 100))
+		take_damage(1, Vector2(0, 100))
 	elif area.is_in_group("normal_hazard"):
 		take_damage(2, Vector2.ZERO)
 

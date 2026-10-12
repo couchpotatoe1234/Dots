@@ -21,10 +21,18 @@ var is_invulnerable: bool = false
 var knocked_back: bool = false
 var attack_cooldown_timer : float = 0.0
 var can_attack: bool = true
+var coyote_timer: float = 0.0
+var coyote_duration: float = 0.12
+var jump_buffer_timer: float = 0.0
+var jump_buffer_duration: float = 0.12
+var was_on_floor: bool = false
 signal load_main_menu
 signal health_changed(current_health: int, max_health: int)
 
 func _ready() -> void:
+	floor_snap_length = 4.0
+	floor_max_angle = deg_to_rad(46.0)
+	safe_margin = 0.001
 	health_changed.emit(health, max_health)
 	is_invulnerable = false
 	change_state("idle")
@@ -33,6 +41,16 @@ func _ready() -> void:
 	attack_down.body_entered.connect(func(body): _on_attack_hit(body, Vector2.DOWN))
 
 func _physics_process(delta: float) -> void:
+	if coyote_timer > 0.0:
+		coyote_timer -= delta
+	if jump_buffer_timer > 0.0:
+		jump_buffer_timer -= delta
+	if is_on_floor():
+		coyote_timer = coyote_duration
+		was_on_floor = true
+	else:
+		if was_on_floor:
+			was_on_floor = false
 	if attack_cooldown_timer > 0.0:
 		attack_cooldown_timer -= delta
 	GameManager.player_x = global_position.x
@@ -46,8 +64,13 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 	var input_dir := 0.0
 	if GameManager.controls_allowed:
-		if Input.is_action_just_pressed("Jump") and is_on_floor():
+		if Input.is_action_just_pressed("Jump"):
+			jump_buffer_timer = jump_buffer_duration
+		if jump_buffer_timer > 0.0 and (is_on_floor() or coyote_timer > 0.0):
 			velocity.y = JUMP_VELOCITY
+			jump_buffer_timer = 0.0
+			coyote_timer = 0.0
+			was_on_floor = false
 		if Input.is_action_just_released("Jump") and not is_on_floor():
 			if velocity.y < 0:
 				velocity.y = 0
