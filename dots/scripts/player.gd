@@ -10,6 +10,9 @@ const ATTACK_COOLDOWN : float = 0.4
 @onready var animation: AnimationPlayer = $AnimationPlayer
 @onready var transition_layer = $"../GUI/TransitionLayer"
 @onready var camera: Camera2D = $"Camera2D"
+@onready var attack_down: Area2D = $"Attack-down"
+@onready var attack_up: Area2D = $"Attack-up"
+@onready var attack_side: Area2D = $"Attack-side"
 var current_state: String = ""
 var fall_height: float = 0.0
 var facing := 1
@@ -25,6 +28,9 @@ func _ready() -> void:
 	health_changed.emit(health, max_health)
 	is_invulnerable = false
 	change_state("idle")
+	attack_side.body_entered.connect(func(body): _on_attack_hit(body, Vector2(facing, 0)))
+	attack_up.body_entered.connect(func(body): _on_attack_hit(body, Vector2.UP))
+	attack_down.body_entered.connect(func(body): _on_attack_hit(body, Vector2.DOWN))
 
 func _physics_process(delta: float) -> void:
 	if attack_cooldown_timer > 0.0:
@@ -253,5 +259,13 @@ func _enemy_hit(area: Area2D) -> void:
 		GameManager.controls_allowed = true
 	
 func _on_attack_hit(body: Node2D, direction: Vector2) -> void:
+	print("detected node: ", body.name)
+	print("Node type: ", body.get_class())
+	print("node path ", body.get_path())
+	print("script: ", body.get_script())
+	
 	if body.has_method("take_hit"):
+		print("take_hit found")
 		body.take_hit(direction)
+	else:
+		print("no take_hit() ", body.name)

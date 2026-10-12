@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b2ouhgtoc3r5f"]
 
-[ext_resource type="Script" uid="uid://dg22ukklndowb" path="res://scripts/breakable_block.gd" id="1_nplfk"]
+[ext_resource type="Script" uid="uid://c3qxx1mwkknv7" path="res://scripts/BreakableBlock2.gd" id="1_nplfk"]
+[ext_resource type="Script" uid="uid://ktyshl1wlxmo" path="res://scripts/breakableBlock.gd" id="2_j6je8"]
 [ext_resource type="Texture2D" uid="uid://cr77ffttbmtn" path="res://Assets/sprites/TileSheet.png" id="2_nplfk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jdwa3"]
@@ -9,13 +10,16 @@ size = Vector2(32, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gkdic"]
 size = Vector2(32, 32)
 
-[node name="BreakableBlock" type="StaticBody2D" unique_id=1017945089]
+[node name="Node2D" type="Node2D" unique_id=1053735374]
 script = ExtResource("1_nplfk")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1953117759]
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=796133128]
+script = ExtResource("2_j6je8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=75079373]
 shape = SubResource("RectangleShape2D_jdwa3")
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1307329162]
+[node name="CPUParticles2D" type="CPUParticles2D" parent="StaticBody2D" unique_id=1303505403]
 z_index = 2
 emitting = false
 amount = 100
@@ -23,16 +27,40 @@ one_shot = true
 explosiveness = 1.0
 color = Color(0.19877315, 0.19877344, 0.18961903, 1)
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=693766352]
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=1044513638]
 z_index = 1
 texture = ExtResource("2_nplfk")
 hframes = 4
 vframes = 7
 frame = 24
 
-[node name="Break-part" type="Area2D" parent="." unique_id=327996991]
+[node name="Break-part" type="Area2D" parent="StaticBody2D" unique_id=1877708252]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Break-part" unique_id=1258945627]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/Break-part" unique_id=38458587]
 shape = SubResource("RectangleShape2D_gkdic")
 
-[connection signal="area_entered" from="Break-part" to="." method="_on_area_entered"]
+[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=1811198133]
+script = ExtResource("2_j6je8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=345789029]
+shape = SubResource("RectangleShape2D_jdwa3")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="StaticBody2D2" unique_id=1405571999]
+z_index = 2
+emitting = false
+amount = 100
+one_shot = true
+explosiveness = 1.0
+color = Color(0.19877315, 0.19877344, 0.18961903, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2" unique_id=1602221367]
+z_index = 1
+texture = ExtResource("2_nplfk")
+hframes = 4
+vframes = 7
+frame = 24
+
+[node name="Break-part" type="Area2D" parent="StaticBody2D2" unique_id=1663138530]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2/Break-part" unique_id=1817297575]
+shape = SubResource("RectangleShape2D_gkdic")
