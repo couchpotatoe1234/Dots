@@ -15,6 +15,20 @@ var _is_broken := false
 func _ready() -> void:
 	_hits_left = hits_to_break
 	_sprite_home = sprite.position
+	
+func take_hit(hit_direction: Vector2) -> void:
+	if _is_broken:
+		return
+	
+	_hits_left -= 1
+	print("block hit, hits left: ", _hits_left)
+	
+	if _hits_left <= 0:
+		_break()
+	else:
+		_shake(hit_direction)
+		
+	
 
 func _shake(hit_direction: Vector2) -> void:
 	if _shake_tween:
@@ -33,20 +47,21 @@ func _shake(hit_direction: Vector2) -> void:
 	_shake_tween.tween_property(sprite, "position", _sprite_home, step_time)
 
 func _break() -> void:
+	if _is_broken:
+		return
+		
 	_is_broken = true
-	if _shake_tween:
-		await get_tree().create_timer(0.18).timeout
-		_shake_tween.kill()
-		particles.emitting = true
-		await get_tree().create_timer(particles.lifetime).timeout
-		queue_free()
-
-func _on_area_entered(area: Area2D) -> void:
-	print("area entered")
-	if area.is_in_group("player_attack")  or area.is_in_group("player_attack_up") or area.is_in_group("player_attack_down"):
-		var hit_direction = Vector2(1, 0) if GameManager.player_x < global_position.x else Vector2(-1, 0)
-		_hits_left -= 1
-		if _hits_left <= 0:
-			_break()
-		else:
-			_shake(hit_direction)
+	
+	collision.set_deferred("disabled", true)
+	
+	particles.emitting = true
+	await get_tree().create_timer(particles.lifetime).timeout
+	
+	var block_root = get_parent()
+	
+	if block_root.has_method("break_block"):
+		block_root.break_block()
+	else:
+		push_error("Parent node is missing break block")
+		
+	

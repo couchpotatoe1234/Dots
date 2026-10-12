@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://beo3miagmv876" path="res://scenes/respawn_point.tscn" id="4_lrl65"]
 [ext_resource type="Texture2D" uid="uid://c4ahq4ccx0ucj" path="res://Assets/sprites/TransitionSprite.png" id="6_76cw8"]
 [ext_resource type="Script" uid="uid://ti87fravfjfw" path="res://scripts/transition_scripts/1-2.gd" id="7_brv20"]
-[ext_resource type="PackedScene" uid="uid://b2ouhgtoc3r5f" path="res://scenes/BreakableBlock.tscn" id="9_7d7pp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_odhdn"]
 size = Vector2(192, 12)
@@ -289,9 +288,6 @@ texture = ExtResource("6_76cw8")
 
 [node name="Node" type="Node2D" parent="." unique_id=1668261085]
 position = Vector2(1139, 410)
-
-[node name="BreakableBlock" parent="." unique_id=1017945089 instance=ExtResource("9_7d7pp")]
-position = Vector2(-477, -409)
 
 [connection signal="area_entered" from="1-2" to="1-2" method="_on_area_entered"]
 [connection signal="body_entered" from="1-2" to="1-2" method="_on_body_entered"]
