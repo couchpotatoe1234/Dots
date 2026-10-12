@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://bc02hcp47bsxj"]
 
 [ext_resource type="TileSet" uid="uid://c5xyi4dqquns3" path="res://Assets/Other/TileSet1.tres" id="1_8mrap"]
-[ext_resource type="Script" uid="uid://djda5aixi1khq" path="res://scenes/levels/level_2.gd" id="1_e5vnl"]
+[ext_resource type="Script" uid="uid://djda5aixi1khq" path="res://scripts/level_scripts/level_2.gd" id="1_e5vnl"]
 [ext_resource type="Texture2D" uid="uid://18jaets2sl2a" path="res://Assets/sprites/BackgroundSunset-Sheet.png" id="1_kkoku"]
 [ext_resource type="PackedScene" uid="uid://d1l5h6y70wdec" path="res://scenes/enemy_1.tscn" id="3_l6gr7"]
 [ext_resource type="PackedScene" uid="uid://duwg1gjydhlq8" path="res://scenes/enemy_2.tscn" id="4_sp0w3"]
@@ -109,7 +109,7 @@ position = Vector2(1021, 399)
 position = Vector2(-1952, 255)
 
 [node name="Node2D" type="Node2D" parent="." unique_id=195246853]
-position = Vector2(-2372, -65)
+position = Vector2(-2432, -57)
 
 [node name="Node2D2" parent="." unique_id=1053735374 instance=ExtResource("5_2p574")]
 position = Vector2(1872, -240)
