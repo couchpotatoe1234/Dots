@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://holsc4wmjpdh" path="res://scripts/enemy_2.gd" id="1_fi5i3"]
 [ext_resource type="Texture2D" uid="uid://c4v8384qoqnnw" path="res://Assets/sprites/Enemy02-Sheet.png" id="1_hqy2m"]
+[ext_resource type="Texture2D" uid="uid://be3n5nrlghqn1" path="res://Assets/sprites/Hit_Particles-Sheet.png" id="3_oh86k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fi5i3"]
 size = Vector2(24, 14)
@@ -375,6 +376,20 @@ size = Vector2(28, 18)
 radius = 5.0
 height = 22.0
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_wfn83"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3phul"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 40.0
+initial_velocity_max = 80.0
+gravity = Vector3(0, 98, 0)
+anim_offset_max = 1.0
+
 [node name="enemy1" type="CharacterBody2D" unique_id=235027177]
 collision_layer = 2
 collision_mask = 5
@@ -384,6 +399,7 @@ script = ExtResource("1_fi5i3")
 shape = SubResource("RectangleShape2D_fi5i3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=376673020]
+z_index = 1
 position = Vector2(1, -1)
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_x8io2")
@@ -402,6 +418,18 @@ rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_fi5i3")
 
 [node name="RayCast2D" type="RayCast2D" parent="." unique_id=370536291]
+
+[node name="HitParticlesFX" type="Node2D" parent="." unique_id=1175205022]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="HitParticlesFX" unique_id=1639798572]
+material = SubResource("CanvasItemMaterial_wfn83")
+emitting = false
+amount = 25
+texture = ExtResource("3_oh86k")
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.5
+process_material = SubResource("ParticleProcessMaterial_3phul")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animation_finished"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

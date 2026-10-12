@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dqja0jqku3hhk"
+path="res://.godot/imported/Hit_Particles.aseprite-1f7d73f3f55d534e0babb7ced3d59bef.res"
+
+[deps]
+
+source_file="res://Aseprite drawings/Hit_Particles.aseprite"
+dest_files=["res://.godot/imported/Hit_Particles.aseprite-1f7d73f3f55d534e0babb7ced3d59bef.res"]
+
+[params]
+

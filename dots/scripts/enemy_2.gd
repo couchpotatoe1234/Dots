@@ -16,6 +16,7 @@ var attack_timer: float = 0.0
 var lose_sight_timer: float = 0.0
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var ray_cast: RayCast2D = $RayCast2D
+@onready var hit_particles: GPUParticles2D = $HitParticlesFX/GPUParticles2D
 
 func _ready() -> void:
 	change_anim(Anim.IDLE)
@@ -138,6 +139,7 @@ func take_damage(amount: int, knockback: Vector2) -> void:
 		return
 	health -= amount
 	print("Flying enemy health:", health)
+	hit_particles.restart()
 	if health <= 0:
 		velocity = knockback
 		change_anim(Anim.DIE)

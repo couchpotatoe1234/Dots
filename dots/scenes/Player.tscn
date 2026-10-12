@@ -472,6 +472,8 @@ rotation = 3.1415927
 texture = ExtResource("3_3li8b")
 hframes = 6
 
+[node name="Hurt" type="Sprite2D" parent="PlayerSprite" unique_id=420660208]
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=309462495]
 position = Vector2(0, -12.5)
 shape = SubResource("CapsuleShape2D_7uch8")
