@@ -145,7 +145,6 @@ func _on_animation_finished(anim_name: String) -> void:
 		print("emited")
 		health_changed.emit(health, max_health)
 		health = max_health
-		is_invulnerable = false
 		load_main_menu.emit()
 
 func take_damage(amount: int) -> void:
@@ -238,6 +237,7 @@ func respawn_at_checkpoint() -> void:
 func _on_game_started() -> void:
 	health_changed.emit(health, max_health)
 	sprite.flip_h = false
+	is_invulnerable = false
 	velocity = Vector2.ZERO
 
 func _on_changed_level() -> void:
