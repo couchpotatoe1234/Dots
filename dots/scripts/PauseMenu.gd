@@ -7,6 +7,8 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 		if event.is_action_pressed("pause"):
+			if GameManager.can_pause == false:
+				return
 			toggle_pause()
 
 func toggle_pause() -> void:

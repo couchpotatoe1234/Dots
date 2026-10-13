@@ -20,6 +20,7 @@ func _ready() -> void:
 	load_main_menu()
 	
 func load_main_menu() -> void:
+	GameManager.can_pause = false
 	var menu_scene = load("res://scenes/MainMenu.tscn").instantiate()
 	level_container.add_child(menu_scene)
 	menu_scene.play_pressed.connect(_on_start_game)
@@ -34,6 +35,7 @@ func _on_start_game() -> void:
 
 func change_level(level_path: String, spawn_position: Vector2 = Vector2.ZERO) -> void:
 	GameManager.controls_allowed = false
+	GameManager.can_pause = false
 	if player:
 		player.hide()
 	if hud:
@@ -65,11 +67,13 @@ func change_level(level_path: String, spawn_position: Vector2 = Vector2.ZERO) ->
 		hud.set_deferred("visible", true)
 	if transition_layer:
 		await transition_layer.fade_in()
+		GameManager.can_pause = true
 		GameManager.controls_allowed = true
 			
 func return_to_main_menu() -> void:
 	print("main menu-d")
 	GameManager.controls_allowed = false
+	GameManager.can_pause = false
 	if player:
 		player.velocity = Vector2.ZERO
 		player.set_physics_process(false)

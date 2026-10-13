@@ -21,18 +21,33 @@ var is_invulnerable: bool = false
 var knocked_back: bool = false
 var attack_cooldown_timer : float = 0.0
 var can_attack: bool = true
+var coyote_timer: float = 0.0
+var coyote_duration: float = 0.12
+var jump_buffer_timer: float = 0.0
+var jump_buffer_duration: float = 0.12
+var was_on_floor: bool = false
 signal load_main_menu
 signal health_changed(current_health: int, max_health: int)
 
 func _ready() -> void:
+	floor_snap_length = 4.0
+	floor_max_angle = deg_to_rad(46.0)
+	safe_margin = 0.001
 	health_changed.emit(health, max_health)
 	is_invulnerable = false
 	change_state("idle")
-	attack_side.body_entered.connect(func(body): _on_attack_hit(body, Vector2(facing, 0)))
-	attack_up.body_entered.connect(func(body): _on_attack_hit(body, Vector2.UP))
-	attack_down.body_entered.connect(func(body): _on_attack_hit(body, Vector2.DOWN))
 
 func _physics_process(delta: float) -> void:
+	if coyote_timer > 0.0:
+		coyote_timer -= delta
+	if jump_buffer_timer > 0.0:
+		jump_buffer_timer -= delta
+	if is_on_floor():
+		coyote_timer = coyote_duration
+		was_on_floor = true
+	else:
+		if was_on_floor:
+			was_on_floor = false
 	if attack_cooldown_timer > 0.0:
 		attack_cooldown_timer -= delta
 	GameManager.player_x = global_position.x
@@ -46,8 +61,13 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 	var input_dir := 0.0
 	if GameManager.controls_allowed:
-		if Input.is_action_just_pressed("Jump") and is_on_floor():
+		if Input.is_action_just_pressed("Jump"):
+			jump_buffer_timer = jump_buffer_duration
+		if jump_buffer_timer > 0.0 and (is_on_floor() or coyote_timer > 0.0):
 			velocity.y = JUMP_VELOCITY
+			jump_buffer_timer = 0.0
+			coyote_timer = 0.0
+			was_on_floor = false
 		if Input.is_action_just_released("Jump") and not is_on_floor():
 			if velocity.y < 0:
 				velocity.y = 0
@@ -60,6 +80,7 @@ func _physics_process(delta: float) -> void:
 			if not unturnable:
 				sprite.flip_h = is_left
 				$PlayerSprite/Slash.flip_h = is_left
+				$PlayerSprite/Hurt.flip_h = is_left
 				$"Attack-side".scale.x = -1 if is_left else 1
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
@@ -153,6 +174,7 @@ func start_invulnerablilty() -> void:
 	can_attack = false
 	$PlayerSprite/Slash.visible = false
 	change_state("hurt")
+	GameManager.hitstop(0.33)
 	await get_tree().create_timer(0.5).timeout
 	can_attack = true
 	await get_tree().create_timer(0.25).timeout
@@ -167,6 +189,7 @@ func die() -> void:
 	velocity.x = 0
 	velocity.y = 0
 	print("ya died dummy")
+	GameManager.hitstop(0.33)
 	change_state("die")
 
 func attack() -> void:
@@ -190,6 +213,7 @@ func respawn_at_checkpoint() -> void:
 			tween.tween_property(camera, "offset", Vector2(randf_range(-8, 8), randf_range(-8, 8)), 0.05)
 		tween.tween_property(camera, "offset", Vector2.ZERO, 0.05)
 	change_state("hurt")
+	GameManager.hitstop(0.33)
 	GameManager.controls_allowed = false
 	is_invulnerable = true
 	velocity.y = -250
@@ -250,6 +274,10 @@ func _damaged(area: Area2D) -> void:
 
 func _enemy_hit(area: Area2D) -> void:
 	if area.is_in_group("normal_enemy"):
+		print("enemy_hit")
+		await get_tree().process_frame
+		if current_state == "hurt" or is_invulnerable:
+			return
 		GameManager.controls_allowed = false
 		var hitback_dir = 1.0 if sprite.flip_h or scale.x < 0 else -1.0
 		velocity.y = -25
@@ -258,14 +286,3 @@ func _enemy_hit(area: Area2D) -> void:
 		await get_tree().create_timer(0.2).timeout
 		GameManager.controls_allowed = true
 	
-func _on_attack_hit(body: Node2D, direction: Vector2) -> void:
-	print("detected node: ", body.name)
-	print("Node type: ", body.get_class())
-	print("node path ", body.get_path())
-	print("script: ", body.get_script())
-	
-	if body.has_method("take_hit"):
-		print("take_hit found")
-		body.take_hit(direction)
-	else:
-		print("no take_hit() ", body.name)

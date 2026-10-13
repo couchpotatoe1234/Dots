@@ -3,6 +3,7 @@ extends CharacterBody2D
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var wall_ray: RayCast2D = $WallRayCheck
 @onready var ledge_ray: RayCast2D = $LedgeRayCheck
+@onready var hit_particles: GPUParticles2D = $HurtParticlesFX/GPUParticles2D
 var health: int = 2
 var knock_dir: int = 1
 var damaged = false
@@ -51,6 +52,7 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 		else: 
 			knock_dir = -1
 		damaged = true
+		hit_particles.restart() 
 		sprite.play("hurt")
 		health -= 1
 		print("enemy health:", health)
@@ -65,6 +67,7 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 		else: 
 			knock_dir = -1
 		damaged = true
+		hit_particles.restart() 
 		sprite.play("hurt")
 		health -= 1
 		print("enemy health:", health)
@@ -75,6 +78,7 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 		sprite.play("walk")
 	if area.is_in_group("player_attack_down"):
 		damaged = true
+		hit_particles.restart() 
 		sprite.play("hurt")
 		health -= 1
 		print("enemy health:", health)
@@ -84,6 +88,7 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 		sprite.play("walk")
 	if area.is_in_group("normal_hazard"):
 		health = 0
+		hit_particles.restart() 
 	
 	if health <= 0:
 		stop = true
