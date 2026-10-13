@@ -7,6 +7,7 @@ var player_x: float = 0
 var last_respawn_position: Vector2 = Vector2.ZERO
 var hitstop_active: bool = false
 var current_hitstop_duration: float = 0.0
+var can_pause = false
 
 func hitstop(duration: float, magnitude: float = 0.0) -> void:
 	if hitstop_active and duration < current_hitstop_duration:
