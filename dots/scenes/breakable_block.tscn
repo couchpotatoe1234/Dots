@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://bgeq1vkrk6s8e"]
+
+[ext_resource type="Script" uid="uid://cqss28hn52ygo" path="res://scripts/breakableBlock.gd" id="1_a2xx3"]
+[ext_resource type="Script" uid="uid://d0pcmldfg1mcn" path="res://scripts/tilebreakable.gd" id="2_wotcy"]
+[ext_resource type="Texture2D" uid="uid://cr77ffttbmtn" path="res://Assets/sprites/TileSheet.png" id="3_r1o1r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ke6mt"]
+atlas = ExtResource("3_r1o1r")
+region = Rect2(0, 192, 32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2hjt5"]
+size = Vector2(32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jdwa3"]
+atlas = ExtResource("3_r1o1r")
+region = Rect2(0, 192, 32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4mnnb"]
+size = Vector2(32, 32)
+
+[node name="BreakableBlock" type="Node2D" unique_id=569884235]
+script = ExtResource("1_a2xx3")
+
+[node name="Tile1" type="StaticBody2D" parent="." unique_id=1300840619]
+script = ExtResource("2_wotcy")
+
+[node name="Sprite2D" type="Sprite2D" parent="Tile1" unique_id=956433840]
+position = Vector2(16, 16)
+texture = SubResource("AtlasTexture_ke6mt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tile1" unique_id=960191192]
+position = Vector2(16, 16)
+shape = SubResource("RectangleShape2D_2hjt5")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Tile1" unique_id=788788641]
+position = Vector2(16, 16)
+emitting = false
+amount = 20
+lifetime = 0.7
+one_shot = true
+explosiveness = 1.0
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 250)
+initial_velocity_min = 64.1
+initial_velocity_max = 166.67
+
+[node name="Tile2" type="StaticBody2D" parent="." unique_id=543204777]
+script = ExtResource("2_wotcy")
+
+[node name="Sprite2D" type="Sprite2D" parent="Tile2" unique_id=1142001242]
+position = Vector2(16, 48)
+texture = SubResource("AtlasTexture_jdwa3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tile2" unique_id=223868594]
+position = Vector2(16, 48)
+shape = SubResource("RectangleShape2D_4mnnb")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Tile2" unique_id=727403317]
+position = Vector2(16, 48)
+emitting = false
+amount = 20
+lifetime = 0.65
+one_shot = true
+explosiveness = 1.0
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 250)
+initial_velocity_min = 64.1
+initial_velocity_max = 179.49

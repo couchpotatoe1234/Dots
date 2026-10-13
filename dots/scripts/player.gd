@@ -36,6 +36,9 @@ func _ready() -> void:
 	health_changed.emit(health, max_health)
 	is_invulnerable = false
 	change_state("idle")
+	attack_side.body_entered.connect(func(body): _on_attack_hit(body, Vector2(facing, 0)))
+	attack_up.body_entered.connect(func(body): _on_attack_hit(body, Vector2.UP))
+	attack_down.body_entered.connect(func(body): _on_attack_hit(body, Vector2.DOWN))
 
 func _physics_process(delta: float) -> void:
 	if coyote_timer > 0.0:
@@ -286,3 +289,6 @@ func _enemy_hit(area: Area2D) -> void:
 		await get_tree().create_timer(0.2).timeout
 		GameManager.controls_allowed = true
 	
+func _on_attack_hit(body: Node2D, direction: Vector2) -> void:
+	if body.has_method("take_hit"):
+		body.take_hit(direction)

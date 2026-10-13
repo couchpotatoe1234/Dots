@@ -5,9 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://18jaets2sl2a" path="res://Assets/sprites/BackgroundSunset-Sheet.png" id="1_kkoku"]
 [ext_resource type="PackedScene" uid="uid://d1l5h6y70wdec" path="res://scenes/enemy_1.tscn" id="3_l6gr7"]
 [ext_resource type="PackedScene" uid="uid://duwg1gjydhlq8" path="res://scenes/enemy_2.tscn" id="4_sp0w3"]
-[ext_resource type="PackedScene" uid="uid://b2ouhgtoc3r5f" path="res://scenes/BreakableBlock.tscn" id="5_2p574"]
 [ext_resource type="Script" uid="uid://sb6dnfwptras" path="res://scripts/transition_scripts/2_1.gd" id="7_inlfm"]
 [ext_resource type="Texture2D" uid="uid://c4ahq4ccx0ucj" path="res://Assets/sprites/TransitionSprite.png" id="7_twycr"]
+[ext_resource type="PackedScene" uid="uid://bgeq1vkrk6s8e" path="res://scenes/breakable_block.tscn" id="9_dpm1s"]
 [ext_resource type="PackedScene" uid="uid://beo3miagmv876" path="res://scenes/respawn_point.tscn" id="9_e3qul"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gkdic"]
@@ -22,7 +22,7 @@ script = ExtResource("1_e5vnl")
 position = Vector2(1, -63)
 
 [node name="Sprite2D" type="Sprite2D" parent="Background" unique_id=217553322]
-position = Vector2(-351, -407)
+position = Vector2(-336, -544)
 scale = Vector2(23.921877, 17.76852)
 texture = ExtResource("1_kkoku")
 vframes = 4
@@ -117,32 +117,14 @@ position = Vector2(1021, 399)
 [node name="enemy1" parent="Enemies/Enemy_2" unique_id=235027177 instance=ExtResource("4_sp0w3")]
 position = Vector2(-1952, 255)
 
-[node name="enemy2" parent="Enemies/Enemy_2" unique_id=1345027979 instance=ExtResource("4_sp0w3")]
-position = Vector2(-1157, 322)
-
 [node name="enemy3" parent="Enemies/Enemy_2" unique_id=1920189754 instance=ExtResource("4_sp0w3")]
 position = Vector2(-436, 419)
 
 [node name="enemy4" parent="Enemies/Enemy_2" unique_id=598469780 instance=ExtResource("4_sp0w3")]
-position = Vector2(68, 444)
-
-[node name="enemy5" parent="Enemies/Enemy_2" unique_id=2025610234 instance=ExtResource("4_sp0w3")]
-position = Vector2(837, 385)
-
-[node name="enemy6" parent="Enemies/Enemy_2" unique_id=561167747 instance=ExtResource("4_sp0w3")]
-position = Vector2(1337, 258)
-
-[node name="enemy7" parent="Enemies/Enemy_2" unique_id=1446605086 instance=ExtResource("4_sp0w3")]
-position = Vector2(1708, 202)
+position = Vector2(843, 347)
 
 [node name="Node2D" type="Node2D" parent="." unique_id=195246853]
 position = Vector2(-2389, -65)
-
-[node name="Breakeable_Block1" parent="." unique_id=1053735374 instance=ExtResource("5_2p574")]
-position = Vector2(1872, -240)
-
-[node name="Breakeable_Block2" parent="." unique_id=1010194661 instance=ExtResource("5_2p574")]
-position = Vector2(1872, -272)
 
 [node name="2-1" type="Area2D" parent="." unique_id=1633693175]
 script = ExtResource("7_inlfm")
@@ -175,5 +157,8 @@ position = Vector2(357, 126)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="killzone" unique_id=360575714]
 position = Vector2(302, 327)
 shape = SubResource("WorldBoundaryShape2D_gkdic")
+
+[node name="BreakableBlock" parent="." unique_id=569884235 instance=ExtResource("9_dpm1s")]
+position = Vector2(1856, -288)
 
 [connection signal="body_entered" from="2-1" to="2-1" method="_on_body_entered"]
