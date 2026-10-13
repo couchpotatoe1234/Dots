@@ -16,7 +16,7 @@ var attack_timer: float = 0.0
 var lose_sight_timer: float = 0.0
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var ray_cast: RayCast2D = $RayCast2D
-@onready var hit_particles: GPUParticles2D = $HitParticlesFX/GPUParticles2D
+@onready var hit_particles: GPUParticles2D = $HurtParticlesFX/GPUParticles2D
 
 func _ready() -> void:
 	change_anim(Anim.IDLE)
@@ -112,7 +112,10 @@ func _on_animation_finished() -> void:
 			pick_new_hover_offset()
 			change_anim(Anim.AGGRO)
 		Anim.HURT:
-			change_anim(Anim.AGGRO)
+			if health <= 0:
+				change_anim(Anim.DIE)
+			else:
+				change_anim(Anim.AGGRO)
 		Anim.DIE:
 			queue_free()
 
@@ -139,17 +142,15 @@ func take_damage(amount: int, knockback: Vector2) -> void:
 		return
 	health -= amount
 	print("Flying enemy health:", health)
-	hit_particles.restart()
+	hit_particles.restart() 
+	knocked_back = true
+	velocity = knockback
+	change_anim(Anim.HURT)
+	await get_tree().create_timer(0.15).timeout
 	if health <= 0:
-		velocity = knockback
+		knocked_back = false
 		change_anim(Anim.DIE)
 	else:
-		knocked_back = true
-		velocity = knockback
-		change_anim(Anim.HURT)
-		await get_tree().create_timer(0.15).timeout
-		if current_anim == Anim.DIE:
-			return
 		velocity = Vector2.ZERO
 		knocked_back = false
 		start_attack_cooldown()

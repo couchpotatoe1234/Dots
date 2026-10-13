@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bvqhyhyb3d0tf" path="res://scripts/player.gd" id="1_p0vlq"]
 [ext_resource type="Texture2D" uid="uid://c4kto3jor8m5d" path="res://Assets/sprites/Spritesheet-Sheet.png" id="2_v6fml"]
 [ext_resource type="Texture2D" uid="uid://bowwlto2c1p0x" path="res://Assets/sprites/Attack.png" id="3_3li8b"]
+[ext_resource type="Texture2D" uid="uid://iao1snf8gofj" path="res://Assets/sprites/Hits.png" id="4_mdl7e"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7uch8"]
 radius = 8.0
@@ -89,6 +90,18 @@ tracks/6/path = NodePath(".:unturnable")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("PlayerSprite/Hurt:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -370,6 +383,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PlayerSprite/Hurt:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.08),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="Animation" id="Animation_3li8b"]
 resource_name = "idle"
@@ -473,6 +498,12 @@ texture = ExtResource("3_3li8b")
 hframes = 6
 
 [node name="Hurt" type="Sprite2D" parent="PlayerSprite" unique_id=420660208]
+visible = false
+position = Vector2(0, 3)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("4_mdl7e")
+hframes = 4
+frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=309462495]
 position = Vector2(0, -12.5)
@@ -513,11 +544,12 @@ disabled = true
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=893015492]
 zoom = Vector2(2.5, 2.5)
-drag_vertical_offset = -0.5
 drag_left_margin = 0.15
-drag_top_margin = 0.65
+drag_top_margin = 0.31
 drag_right_margin = 0.15
-drag_bottom_margin = 0.0
+drag_bottom_margin = 0.31
+editor_draw_limits = true
+editor_draw_drag_margin = true
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_damaged"]
