@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b2ouhgtoc3r5f"]
 
-[ext_resource type="Script" uid="uid://c3qxx1mwkknv7" path="res://scripts/BreakableBlock2.gd" id="1_nplfk"]
-[ext_resource type="Script" uid="uid://ktyshl1wlxmo" path="res://scripts/breakableBlock.gd" id="2_j6je8"]
+[ext_resource type="Script" uid="uid://c3qxx1mwkknv7" path="res://scripts/temp2.gd" id="1_nplfk"]
+[ext_resource type="Script" uid="uid://ktyshl1wlxmo" path="res://scripts/temp1.gd" id="2_j6je8"]
 [ext_resource type="Texture2D" uid="uid://cr77ffttbmtn" path="res://Assets/sprites/TileSheet.png" id="2_nplfk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jdwa3"]
