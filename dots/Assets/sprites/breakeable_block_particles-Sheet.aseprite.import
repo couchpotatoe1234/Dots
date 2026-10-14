@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://daeyjq8c0qsjm"
+path="res://.godot/imported/breakeable_block_particles-Sheet.aseprite-d00965b04b019dfa7c22eb4a1f146fa9.res"
+
+[deps]
+
+source_file="res://Assets/sprites/breakeable_block_particles-Sheet.aseprite"
+dest_files=["res://.godot/imported/breakeable_block_particles-Sheet.aseprite-d00965b04b019dfa7c22eb4a1f146fa9.res"]
+
+[params]
+
