@@ -64,6 +64,10 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 	var input_dir := 0.0
 	if GameManager.controls_allowed:
+		input_dir = Input.get_axis("left", "right")
+		if Input.is_action_just_pressed("dash"):
+			print("dash")
+			velocity.x = 500 * input_dir
 		if Input.is_action_just_pressed("Jump"):
 			jump_buffer_timer = jump_buffer_duration
 		if jump_buffer_timer > 0.0 and (is_on_floor() or coyote_timer > 0.0):
@@ -74,9 +78,6 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_released("Jump") and not is_on_floor():
 			if velocity.y < 0:
 				velocity.y = 0
-		
-		input_dir = Input.get_axis("left", "right")
-		
 		if input_dir:
 			velocity.x = input_dir * SPEED
 			var is_left = input_dir < 0
@@ -188,6 +189,7 @@ func start_invulnerablilty() -> void:
 func die() -> void:
 	is_invulnerable = true
 	GameManager.controls_allowed = false
+	$PlayerSprite/Slash.visible = false
 	velocity.x = 0
 	velocity.y = 0
 	print("ya died dummy")
@@ -260,6 +262,7 @@ func check_for_hazards() -> void:
 func _pogo(area: Area2D) -> void:
 	if area.is_in_group("pogoable") && current_state == "attack-down":
 		velocity.y = -300
+		await get_tree().process_frame
 		GameManager.hitstop(0.05)
 
 func _damaged(area: Area2D) -> void:
