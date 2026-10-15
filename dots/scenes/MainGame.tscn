@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dwkoq4wumem4g" path="res://scenes/Player.tscn" id="1_6ovph"]
 [ext_resource type="Script" uid="uid://bxfu3cjh5t870" path="res://scripts/Main.gd" id="1_p73vr"]
+[ext_resource type="PackedScene" uid="uid://dc0qbfmyejfi5" path="res://scenes/healer.tscn" id="3_7fyak"]
 [ext_resource type="PackedScene" uid="uid://crjuv2rpraf3o" path="res://scenes/PauseMenu.tscn" id="3_p73vr"]
 [ext_resource type="Script" uid="uid://di6dldye1rkun" path="res://scripts/TransitionLayer.gd" id="3_t4bxf"]
 [ext_resource type="PackedScene" uid="uid://2oso1y4cnvq5" path="res://scenes/HUD.tscn" id="4_x628s"]
@@ -62,6 +63,13 @@ _data = {
 script = ExtResource("1_p73vr")
 
 [node name="Player" parent="." unique_id=1860738924 instance=ExtResource("1_6ovph")]
+
+[node name="Healer" parent="." unique_id=1802982851 instance=ExtResource("3_7fyak")]
+position = Vector2(-17, -24)
+horizontal_speed = 220.0
+normal_vertical_speed = 240.0
+falling_follow_speed = 85.0
+follow_offset = Vector2(-28, -18)
 
 [node name="Level" type="Node2D" parent="." unique_id=1094287842]
 

@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://biotdgi5x2i0f"
+path="res://.godot/imported/Healer.aseprite-0e3d2288b11fbfa1f25d0e4df6f96add.res"
+
+[deps]
+
+source_file="res://Aseprite drawings/Healer.aseprite"
+dest_files=["res://.godot/imported/Healer.aseprite-0e3d2288b11fbfa1f25d0e4df6f96add.res"]
+
+[params]
+

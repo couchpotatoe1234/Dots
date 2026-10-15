@@ -29,6 +29,18 @@ region = Rect2(0, 192, 32, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4mnnb"]
 size = Vector2(32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hjt5"]
+atlas = ExtResource("3_r1o1r")
+region = Rect2(0, 31, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_syh4r"]
+atlas = ExtResource("3_r1o1r")
+region = Rect2(96, 33, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4mnnb"]
+atlas = ExtResource("3_r1o1r")
+region = Rect2(69, 39, 32, 32)
+
 [node name="BreakableBlock" type="Node2D" unique_id=569884235]
 script = ExtResource("1_a2xx3")
 
@@ -65,3 +77,65 @@ shape = SubResource("RectangleShape2D_4mnnb")
 [node name="BreakParticlesFX" type="Node2D" parent="Tile2" unique_id=269977924]
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Tile2/BreakParticlesFX" unique_id=745001116]
+
+[node name="Side Tiles" type="Node2D" parent="." unique_id=1584784771]
+
+[node name="Side Tiles" type="Node2D" parent="Side Tiles" unique_id=1015335507]
+
+[node name="Sprite2D" type="Sprite2D" parent="Side Tiles/Side Tiles" unique_id=533116636]
+position = Vector2(16, 80)
+texture = SubResource("AtlasTexture_2hjt5")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Side Tiles/Side Tiles" unique_id=1343735527]
+position = Vector2(16, -16)
+texture = SubResource("AtlasTexture_2hjt5")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Side Tiles/Side Tiles" unique_id=1816374159]
+position = Vector2(112, -16)
+texture = SubResource("AtlasTexture_syh4r")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Side Tiles/Side Tiles" unique_id=200021984]
+position = Vector2(112, 16)
+texture = SubResource("AtlasTexture_syh4r")
+
+[node name="Sprite2D5" type="Sprite2D" parent="Side Tiles/Side Tiles" unique_id=1204136683]
+position = Vector2(112, 48)
+texture = SubResource("AtlasTexture_syh4r")
+
+[node name="Sprite2D6" type="Sprite2D" parent="Side Tiles/Side Tiles" unique_id=1025746666]
+position = Vector2(112, 80)
+texture = SubResource("AtlasTexture_syh4r")
+
+[node name="Center tiles" type="Node2D" parent="Side Tiles" unique_id=1264103828]
+
+[node name="Sprite2D3" type="Sprite2D" parent="Side Tiles/Center tiles" unique_id=785747665]
+position = Vector2(48, -16)
+texture = SubResource("AtlasTexture_4mnnb")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Side Tiles/Center tiles" unique_id=51425947]
+position = Vector2(48, 16)
+texture = SubResource("AtlasTexture_4mnnb")
+
+[node name="Sprite2D5" type="Sprite2D" parent="Side Tiles/Center tiles" unique_id=1734577436]
+position = Vector2(48, 48)
+texture = SubResource("AtlasTexture_4mnnb")
+
+[node name="Sprite2D7" type="Sprite2D" parent="Side Tiles/Center tiles" unique_id=143060600]
+position = Vector2(48, 80)
+texture = SubResource("AtlasTexture_4mnnb")
+
+[node name="Sprite2D8" type="Sprite2D" parent="Side Tiles/Center tiles" unique_id=1418049129]
+position = Vector2(80, 80)
+texture = SubResource("AtlasTexture_4mnnb")
+
+[node name="Sprite2D9" type="Sprite2D" parent="Side Tiles/Center tiles" unique_id=1828309377]
+position = Vector2(80, 48)
+texture = SubResource("AtlasTexture_4mnnb")
+
+[node name="Sprite2D10" type="Sprite2D" parent="Side Tiles/Center tiles" unique_id=1771517627]
+position = Vector2(80, 16)
+texture = SubResource("AtlasTexture_4mnnb")
+
+[node name="Sprite2D11" type="Sprite2D" parent="Side Tiles/Center tiles" unique_id=801259967]
+position = Vector2(80, -16)
+texture = SubResource("AtlasTexture_4mnnb")

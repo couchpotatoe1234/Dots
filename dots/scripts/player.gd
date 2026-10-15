@@ -93,8 +93,10 @@ func _physics_process(delta: float) -> void:
 				attack()
 			else:
 				pass
+		
 	move_and_slide()
 	update_state(input_dir)
+	
 
 func update_state(input_dir: float) -> void:
 	if current_state in ["attack-side", "attack-up", "attack-down", "run-transition", "hurt", "die"]:
