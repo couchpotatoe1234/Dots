@@ -2,20 +2,21 @@ extends Node
 
 const COMPANION_SCENE = preload("res://scenes/healer.tscn")
 
-var companion: Node2D
+var healer: Node2D
 
-func ready() -> void:
+func _ready() -> void:
+	print("loaded in")
 	get_tree().scene_changed.connect(_on_scene_changed)
 	call_deferred("_spawn_heal")
-	print("loaded in")
 	
 func _on_scene_changed(_new_scene: Node) -> void:
 	print("scene change")
-	call_deferred("_spawn_heal")
+	call_deferred("_spawn_healer")
 	
 	
 func _spawn_heal() -> void:
-	if is_instance_valid(companion):
+	print("spawning companion")
+	if is_instance_valid(healer):
 		print("companion alr exist")
 		return
 		
@@ -25,6 +26,7 @@ func _spawn_heal() -> void:
 		print("player not in group")
 		return
 	
-	companion = COMPANION_SCENE.instantiate()
-	get_tree().root.add_child(companion)
-	companion.global_position = player.global_position + Vector2(-28, -18)
+	healer = COMPANION_SCENE.instantiate()
+	add_child(healer)
+	healer.global_position = player.global_position + Vector2(-675, -400)
+	print("Companion spawned: ", healer.global_position)
