@@ -28,7 +28,8 @@ func break_block() -> void:
 	if is_broken: return
 	is_broken = true
 	for tile in get_children():
-		tile.play_break_effect()
+		if tile.is_in_group("tile"):
+			tile.play_break_effect()
 
 func delete_self() -> void:
 	queue_free()
