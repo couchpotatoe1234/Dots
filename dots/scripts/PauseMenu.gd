@@ -24,6 +24,16 @@ func _on_main_menu_button_pressed() -> void:
 	if main_scene and main_scene.player:
 		main_scene.player.velocity = Vector2.ZERO
 		main_scene.player.set_physics_process(false)
+		main_scene.player.set_process(false)
+	get_tree().call_group("pauseable", "set_physics_process", false)
+	get_tree().call_group("pauseable", "set_process", false)
+	for pauseable in get_tree().get_nodes_in_group("pauseable"):
+		if "velocity" in pauseable:
+			pauseable.velocity = Vector2.ZERO
+		if pauseable.has_node("AnimationPlayer"):
+			pauseable.get_node("AnimationPlayer").pause()
+		if pauseable.has_node("AnimatedSprite2D"):
+			pauseable.get_node("AnimatedSprite2D").pause()
 	get_tree().paused = false
 	visible = false
 	hide()

@@ -318,7 +318,7 @@ initial_velocity_max = 150.0
 gravity = Vector3(0, 98, 0)
 anim_offset_max = 1.0
 
-[node name="enemy1" type="CharacterBody2D" unique_id=156177197]
+[node name="enemy1" type="CharacterBody2D" unique_id=156177197 groups=["pauseable"]]
 z_index = 5
 collision_layer = 4
 script = ExtResource("1_ejytf")

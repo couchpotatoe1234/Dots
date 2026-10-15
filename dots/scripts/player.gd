@@ -297,3 +297,9 @@ func _enemy_hit(area: Area2D) -> void:
 func _on_attack_hit(body: Node2D, direction: Vector2) -> void:
 	if body.has_method("take_hit"):
 		body.take_hit(direction)
+
+func disable_collision() -> void:
+	$CollisionShape2D.disabled = true
+
+func enable_collision() -> void:
+	$CollisionShape2D.disabled = false

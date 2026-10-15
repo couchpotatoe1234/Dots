@@ -21,7 +21,7 @@ var lose_sight_timer: float = 0.0
 func _ready() -> void:
 	change_anim(Anim.IDLE)
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if current_anim == Anim.DIE:
 		if not is_on_floor():
 			velocity += get_gravity() * delta
@@ -41,8 +41,10 @@ func _process(delta: float) -> void:
 					change_anim(Anim.AGGRO)
 			
 			Anim.AGGRO:
-				if not target_player or global_position.distance_to(target_player.global_position) <= aggro_range or can_see_player():
+				if can_see_player():
 					lose_sight_timer = 0.0
+					if target_player or global_position.distance_to(target_player.global_position) <= aggro_range:
+						lose_sight_timer = 0.0
 				else:
 					lose_sight_timer += delta
 					if lose_sight_timer >= 3.0:

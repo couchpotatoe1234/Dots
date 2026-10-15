@@ -390,7 +390,7 @@ initial_velocity_max = 150.0
 gravity = Vector3(0, 98, 0)
 anim_offset_max = 1.0
 
-[node name="enemy1" type="CharacterBody2D" unique_id=235027177]
+[node name="enemy1" type="CharacterBody2D" unique_id=235027177 groups=["pauseable"]]
 collision_layer = 2
 script = ExtResource("1_fi5i3")
 
@@ -420,7 +420,7 @@ shape = SubResource("CapsuleShape2D_fi5i3")
 
 [node name="HurtParticlesFX" type="Node2D" parent="." unique_id=1175205022]
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="HurtParticlesFX" unique_id=1639798572]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="HurtParticlesFX" unique_id=1639798572 groups=["pauseable"]]
 material = SubResource("CanvasItemMaterial_wfn83")
 emitting = false
 amount = 25

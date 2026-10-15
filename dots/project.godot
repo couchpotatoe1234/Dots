@@ -33,6 +33,7 @@ enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addon
 pogoable=""
 normal_enemy=""
 normal_hazard=""
+pauseable=""
 
 [importer_defaults]
 

@@ -1,13 +1,16 @@
 extends StaticBody2D
 
 @onready var sprite: Sprite2D = $Sprite2D
-@onready var collision: CollisionShape2D = $CollisionShape2D
+@onready var collisionshape: CollisionShape2D = $CollisionShape2D
 @onready var particles: GPUParticles2D = $BreakParticlesFX/GPUParticles2D
 
 var original_position: Vector2
 var shake_tween: Tween
 
+signal delete_self
+
 func _ready() -> void:
+	collision_layer = 1
 	original_position = sprite.position
 
 func take_hit(direction: Vector2) -> void:
@@ -29,7 +32,11 @@ func shake(direction: Vector2, strength: float, duration: float) -> void:
 		shake_tween.tween_property(sprite, "position", original_position + offset, step_time)
 	shake_tween.tween_property(sprite, "position", original_position, step_time)
 
-func play_break_effect() -> float:
-	collision.set_deffered("disabled", true)
-	particles.emitting = true
-	return particles.lifetime
+func play_break_effect() -> void:
+	collision_layer = 0
+	sprite.visible = false
+	collisionshape.set_deferred("Disabled", true)
+	particles.restart()
+	await particles.finished
+	GameManager.block1_broken = true
+	delete_self.emit()
