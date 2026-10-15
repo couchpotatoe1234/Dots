@@ -38,6 +38,7 @@ func change_level(level_path: String, spawn_position: Vector2 = Vector2.ZERO) ->
 	GameManager.can_pause = false
 	if player:
 		player.hide()
+		player.call_deferred("disable_collision")
 	if hud:
 		hud.set_deferred("visible", false)
 	if transition_layer:
@@ -61,6 +62,7 @@ func change_level(level_path: String, spawn_position: Vector2 = Vector2.ZERO) ->
 	if player:
 		player.global_position = spawn_position
 		player.process_mode = Node.PROCESS_MODE_INHERIT
+		player.enable_collision()
 		changed_level.emit()
 		player.show()
 	if hud:
