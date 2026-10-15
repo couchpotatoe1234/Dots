@@ -20,7 +20,15 @@ particles_anim_loop = false
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wotcy"]
 particle_flag_disable_z = true
-gravity = Vector3(0, 98, 0)
+emission_shape = 3
+emission_box_extents = Vector3(16, 16, 1)
+spread = 180.0
+initial_velocity_min = 120.0
+initial_velocity_max = 220.0
+angular_velocity_min = -720.0
+angular_velocity_max = 719.99994
+gravity = Vector3(0, 600, 0)
+anim_offset_max = 1.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jdwa3"]
 atlas = ExtResource("3_r1o1r")
@@ -28,6 +36,24 @@ region = Rect2(0, 192, 32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4mnnb"]
 size = Vector2(32, 32)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4f0pl"]
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_r1o1r"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(16, 16, 1)
+spread = 180.0
+initial_velocity_min = 120.0
+initial_velocity_max = 220.0
+angular_velocity_min = -720.0
+angular_velocity_max = 719.99994
+gravity = Vector3(0, 600, 0)
+anim_offset_max = 1.0
 
 [node name="BreakableBlock" type="Node2D" unique_id=569884235]
 script = ExtResource("1_a2xx3")
@@ -48,7 +74,12 @@ position = Vector2(16, 16)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Tile1/BreakParticlesFX" unique_id=1967217387]
 material = SubResource("CanvasItemMaterial_r1o1r")
+emitting = false
+amount = 40
 texture = ExtResource("4_wotcy")
+lifetime = 5.0
+one_shot = true
+explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_wotcy")
 
 [node name="Tile2" type="StaticBody2D" parent="." unique_id=543204777]
@@ -63,5 +94,17 @@ position = Vector2(16, 48)
 shape = SubResource("RectangleShape2D_4mnnb")
 
 [node name="BreakParticlesFX" type="Node2D" parent="Tile2" unique_id=269977924]
+position = Vector2(16, 48)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Tile2/BreakParticlesFX" unique_id=745001116]
+material = SubResource("CanvasItemMaterial_4f0pl")
+emitting = false
+amount = 40
+texture = ExtResource("4_wotcy")
+lifetime = 5.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_r1o1r")
+
+[connection signal="delete_self" from="Tile1" to="." method="delete_self"]
+[connection signal="delete_self" from="Tile2" to="." method="delete_self"]

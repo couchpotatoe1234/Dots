@@ -21,16 +21,16 @@ func _ready():
 		return
 
 func _physics_process(delta: float) -> void:
-	if not is_on_floor():
-		velocity += get_gravity() * delta
-	
-	if is_on_wall() or (wall_ray.is_colliding() or not ledge_ray.is_colliding()) && not damaged:
-		flip_direction()
-	if not damaged:
-		velocity.x = direction * speed
-	
-	move_and_slide()
-	
+		if not is_on_floor():
+			velocity += get_gravity() * delta
+		
+		if is_on_wall() or (wall_ray.is_colliding() or not ledge_ray.is_colliding()) && not damaged:
+			flip_direction()
+		if not damaged:
+			velocity.x = direction * speed
+		
+		move_and_slide()
+		
 
 
 func flip_direction() -> void:
@@ -88,8 +88,6 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 		sprite.play("walk")
 	if area.is_in_group("normal_hazard"):
 		health = 0
-		hit_particles.restart() 
-	
 	if health <= 0:
 		stop = true
 		speed = 1

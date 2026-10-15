@@ -26,3 +26,6 @@ func hitstop(duration: float, magnitude: float = 0.0) -> void:
 #level 1 = -675, -400
 #level 2 = -2375, -65
 #level 3 (cross) = -2400, -192
+
+
+var block1_broken = false

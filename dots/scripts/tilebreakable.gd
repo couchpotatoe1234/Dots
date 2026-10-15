@@ -7,6 +7,8 @@ extends StaticBody2D
 var original_position: Vector2
 var shake_tween: Tween
 
+signal delete_self
+
 func _ready() -> void:
 	original_position = sprite.position
 
@@ -29,7 +31,10 @@ func shake(direction: Vector2, strength: float, duration: float) -> void:
 		shake_tween.tween_property(sprite, "position", original_position + offset, step_time)
 	shake_tween.tween_property(sprite, "position", original_position, step_time)
 
-func play_break_effect() -> float:
-	collision.set_deffered("disabled", true)
-	particles.emitting = true
-	return particles.lifetime
+func play_break_effect() -> void:
+	sprite.visible = false
+	collision.set_deferred("Disabled", true)
+	particles.restart()
+	await particles.finished
+	GameManager.block1_broken = true
+	delete_self.emit()

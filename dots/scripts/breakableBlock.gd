@@ -8,6 +8,8 @@ var hits_left: int
 var is_broken := false
 
 func _ready() -> void:
+	if GameManager.block1_broken == true:
+		queue_free()
 	hits_left = hits_to_break
 
 func take_hit(direction: Vector2) -> void:
@@ -25,10 +27,8 @@ func take_hit(direction: Vector2) -> void:
 func break_block() -> void:
 	if is_broken: return
 	is_broken = true
-	var longest_lifetime := 0.0
 	for tile in get_children():
-		if tile.has_method("break_effect"):
-			var lifetime: float = tile.play_break_effect()
-			longest_lifetime = maxf(longest_lifetime, lifetime)
-	await get_tree().create_timer(longest_lifetime).timeout
+		tile.play_break_effect()
+
+func delete_self() -> void:
 	queue_free()
