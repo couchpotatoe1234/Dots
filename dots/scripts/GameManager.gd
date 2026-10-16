@@ -1,8 +1,8 @@
 extends Node
 
 var controls_allowed = true
-var last_save_point = Vector2(-2400, -192)
-var last_level = "res://scenes/rooms/Room3.tscn"
+var last_save_point = Vector2(-675, -400)
+var last_level = "res://scenes/rooms/Room1.tscn"
 var player_x: float = 0
 var last_respawn_position: Vector2 = Vector2.ZERO
 var hitstop_active: bool = false

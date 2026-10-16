@@ -411,6 +411,7 @@ autoplay = "idle"
 shape = SubResource("RectangleShape2D_hqy2m")
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=849384051 groups=["normal_enemy"]]
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1555118305]
 rotation = 1.5707964
