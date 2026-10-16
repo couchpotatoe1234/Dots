@@ -36,7 +36,7 @@ size = Vector2(32, 19)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_76cw8"]
 size = Vector2(1, 73)
 
-[node name="Level1" type="Node2D" unique_id=524429940]
+[node name="Room1" type="Node2D" unique_id=524429940]
 script = ExtResource("1_brv20")
 
 [node name="Background" type="Node2D" parent="." unique_id=1942672797]

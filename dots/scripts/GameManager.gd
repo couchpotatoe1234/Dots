@@ -1,8 +1,8 @@
 extends Node
 
 var controls_allowed = true
-var last_save_point = Vector2(-675, -400)
-var last_level = "res://scenes/levels/Level1.tscn"
+var last_save_point = Vector2(-2400, -192)
+var last_level = "res://scenes/rooms/Room3.tscn"
 var player_x: float = 0
 var last_respawn_position: Vector2 = Vector2.ZERO
 var hitstop_active: bool = false
@@ -22,10 +22,10 @@ func hitstop(duration: float, magnitude: float = 0.0) -> void:
 
 
 
-#LEVELSSS Starting Position; where you first enter from.
-#level 1 = -675, -400
-#level 2 = -2375, -65
-#level 3 (cross) = -2400, -192
+#ROOMSS Starting Position; where you first enter from.
+#room 1 = -675, -400
+#room 2 = -2375, -65
+#room 3 (cross) = -2400, -192
 
 
 var block1_broken = false
