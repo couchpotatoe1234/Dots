@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://cswgs7kt4in1f"]
 
-[ext_resource type="Script" uid="uid://m17une4y4fwl" path="res://scripts/level_scripts/level_1.gd" id="1_brv20"]
+[ext_resource type="Script" uid="uid://m17une4y4fwl" path="res://scripts/room_scripts/room_1.gd" id="1_brv20"]
 [ext_resource type="Texture2D" uid="uid://18jaets2sl2a" path="res://Assets/sprites/BackgroundSunset-Sheet.png" id="1_odhdn"]
 [ext_resource type="TileSet" uid="uid://c5xyi4dqquns3" path="res://Assets/Other/TileSet1.tres" id="2_lrl65"]
 [ext_resource type="PackedScene" uid="uid://duwg1gjydhlq8" path="res://scenes/enemy_2.tscn" id="4_76388"]
@@ -36,7 +36,7 @@ size = Vector2(32, 19)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_76cw8"]
 size = Vector2(1, 73)
 
-[node name="Level1" type="Node2D" unique_id=524429940]
+[node name="Room1" type="Node2D" unique_id=524429940]
 script = ExtResource("1_brv20")
 
 [node name="Background" type="Node2D" parent="." unique_id=1942672797]

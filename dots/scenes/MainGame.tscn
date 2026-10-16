@@ -66,10 +66,6 @@ script = ExtResource("1_p73vr")
 
 [node name="Healer" parent="." unique_id=1802982851 instance=ExtResource("3_7fyak")]
 position = Vector2(-17, -24)
-horizontal_speed = 220.0
-normal_vertical_speed = 240.0
-falling_follow_speed = 85.0
-follow_offset = Vector2(-28, -18)
 
 [node name="Level" type="Node2D" parent="." unique_id=1094287842]
 

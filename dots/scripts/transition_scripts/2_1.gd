@@ -5,4 +5,4 @@ func _on_body_entered(body: Node2D) -> void:
 		var main_node = get_tree().root.get_node("Main")
 		print("level_change")
 		if main_node and main_node.has_method("change_level"):
-			main_node.change_level("res://scenes/levels/Level1.tscn", Vector2(1120, 342))
+			main_node.change_level("res://scenes/rooms/Room1.tscn", Vector2(1120, 342))
