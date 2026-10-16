@@ -11,7 +11,7 @@ func _ready() -> void:
 	
 func _on_scene_changed(_new_scene: Node) -> void:
 	print("scene change")
-	call_deferred("_spawn_healer")
+	call_deferred("_spawn_heal")
 	
 	
 func _spawn_heal() -> void:
@@ -28,5 +28,10 @@ func _spawn_heal() -> void:
 	
 	healer = COMPANION_SCENE.instantiate()
 	add_child(healer)
-	healer.global_position = player.global_position + Vector2(-675, -400)
-	print("Companion spawned: ", healer.global_position)
+	healer.global_position = player.global_position
+	healer.visible = true
+	print("healer position:", healer.global_position)
+	print("healer visible:", healer.visible)
+	print("companion spawn")
+	healer.z_index = 101
+	healer.visible = true

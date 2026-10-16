@@ -15,33 +15,36 @@ func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player") as CharacterBody2D
 	
 	if player == null:
-		push_warning("cant find player")
+		print("cant find player")
+	else:
+		print("found player")
 		
-	
+
 func _physics_process(delta: float) -> void:
 	if not is_instance_valid(player):
 		player = get_tree().get_first_node_in_group("player") as CharacterBody2D
 		
-		if not is_instance_valid(player):
+		if player == null:
 			return
-		
+	
 	var offset := follow_offset
 	offset.x = -absf(follow_offset.x) * player.facing
 	
 	var target := player.global_position + offset
 	
-	var vertical_speed := normal_vertical_speed
+	var speed := normal_vertical_speed
 	if player.velocity.y > 0.0:
-		vertical_speed * delta
-		
-	var next_position := Vector2(
-		move_toward(global_position.x, target.x, horizontal_speed * delta),
-		move_toward(global_position.y, target.y, vertical_speed * delta)
-	)
+		speed = falling_follow_speed
+		 
+	var movement := target - global_position
 	
-	velocity = (next_position - global_position) / delta
+	velocity.x = move_toward(
+		0.0, movement.x, horizontal_speed * delta
+	) / maxf(delta, 0.001)
+	
+	velocity.y = move_toward(
+		0.0, movement.y, speed * delta
+	) / maxf(delta, 0.001)
+	
 	move_and_slide()
-	
-	if animated_sprite.sprite_frames.has_animation("movement"):
-		if not animated_sprite.is_playing():
-			animated_sprite.play("movement")
+	print("pos:", global_position, "player:", player.global_position)
