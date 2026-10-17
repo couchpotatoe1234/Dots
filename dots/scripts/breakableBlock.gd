@@ -8,6 +8,7 @@ var hits_left: int
 var is_broken := false
 
 func _ready() -> void:
+	$"Side Tiles".visible = true
 	if GameManager.block1_broken == true:
 		queue_free()
 	hits_left = hits_to_break
@@ -27,9 +28,11 @@ func take_hit(direction: Vector2) -> void:
 func break_block() -> void:
 	if is_broken: return
 	is_broken = true
+	$"Side Tiles".visible = false
 	for tile in get_children():
 		if tile.is_in_group("tile"):
 			tile.play_break_effect()
+			GameManager.block1_broken = true
 
 func delete_self() -> void:
 	queue_free()
