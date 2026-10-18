@@ -9,9 +9,14 @@ extends CharacterBody2D
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 var player: CharacterBody2D
+var is_repositioning: bool = false
 
 
 func _ready() -> void:
+	add_to_group("player")
+	print("player ready")
+	floor_snap_length = 4.0
+	
 	player = get_tree().get_first_node_in_group("player") as CharacterBody2D
 	
 	if animated_sprite.sprite_frames != null:
@@ -24,6 +29,10 @@ func _ready() -> void:
 		
 
 func _physics_process(delta: float) -> void:
+	if is_repositioning:
+		velocity = Vector2.ZERO
+		return
+	
 	if not is_instance_valid(player):
 		player = get_tree().get_first_node_in_group("player") as CharacterBody2D
 		
@@ -63,23 +72,33 @@ func set_player(new_player: CharacterBody2D) -> void:
 func get_follow_offset() -> Vector2:
 	var offset := follow_offset
 	
+	if not is_instance_valid(player):
+		return offset
+	
+	if not "facing" in player:
+		return offset
+	
 	offset.x = -absf(follow_offset.x) * float(player.facing)
 	return offset
 	
 func snap_to_player(new_player: CharacterBody2D) -> void:
+	is_repositioning = true
 	player = new_player
 	
 	if not is_instance_valid(player):
+		is_repositioning = false
 		return
 	
 	global_position = player.global_position + get_follow_offset()
 	velocity = Vector2.ZERO
-	
 	update_facing()
+	
+	is_repositioning = false
 	
 func update_facing() -> void:
 	if not is_instance_valid(player):
 		return
 		
-	var should_flip: bool = player.facing < 0
-	animated_sprite.flip_h = should_flip
+	if player.has_method("get_facing"):
+		var should_flip: bool = player.get_facing() < 0
+		animated_sprite.flip_h = should_flip

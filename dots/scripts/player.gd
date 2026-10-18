@@ -30,9 +30,13 @@ signal load_main_menu
 signal health_changed(current_health: int, max_health: int)
 
 func _ready() -> void:
+	add_to_group("player")
+	CompanionManager.register_player(self)
+	
 	floor_snap_length = 4.0
 	floor_max_angle = deg_to_rad(46.0)
 	safe_margin = 0.001
+	
 	health_changed.emit(health, max_health)
 	is_invulnerable = false
 	change_state("idle")
@@ -95,9 +99,9 @@ func _physics_process(delta: float) -> void:
 				pass
 		
 		
-	if Input.is_action_pressed("ui_right"):
+	if input_dir > 0:
 		facing = 1
-	elif Input.is_action_pressed("ui_right"):
+	elif input_dir < 0:
 		facing = -1
 	
 	move_and_slide()
@@ -310,3 +314,6 @@ func disable_collision() -> void:
 
 func enable_collision() -> void:
 	$CollisionShape2D.disabled = false
+	
+func get_facing() -> int:
+	return facing

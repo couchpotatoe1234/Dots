@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dc0qbfmyejfi5"]
 
-[ext_resource type="Script" uid="uid://dr24m7klgqxg4" path="res://healing.gd" id="1_idgs8"]
+[ext_resource type="Script" uid="uid://dr24m7klgqxg4" path="res://scripts/healing.gd" id="1_idgs8"]
 [ext_resource type="Texture2D" uid="uid://dfj7c3irudr3b" path="res://Assets/sprites/Healer.png" id="2_ul1qm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8m7qu"]
