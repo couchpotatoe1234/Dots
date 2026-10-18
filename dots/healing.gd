@@ -14,14 +14,13 @@ var player: CharacterBody2D
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player") as CharacterBody2D
 	
-	if $AnimatedSprite2D.sprite_frames:
-		print("Animations: ", $AnimatedSprite2D.sprite_frames.get_animation_names())
-		$AnimatedSprite2D.play("movement")
+	if animated_sprite.sprite_frames != null:
+		if animated_sprite.sprite_frames.has_animation("movement"):
+			animated_sprite.play("movement")
 	
-	if player == null:
-		print("cant find player")
-	else:
-		print("found player")
+	if player != null:
+		snap_to_player(player)
+		print("found plauer")
 		
 
 func _physics_process(delta: float) -> void:
@@ -34,7 +33,7 @@ func _physics_process(delta: float) -> void:
 	update_facing()
 	
 	var target: Vector2 = player.global_position + get_follow_offset()
-	var movement := target - global_position
+	var movement : Vector2 = target - global_position
 	
 	var vertical_speed: float = normal_vertical_speed
 	

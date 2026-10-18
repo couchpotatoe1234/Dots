@@ -13,21 +13,19 @@ func _on_scene_changed(_new_scene: Node) -> void:
 	
 	
 func _spawn_heal() -> void:
-	var player = get_tree().get_first_node_in_group("player")
+	var player := get_tree().get_first_node_in_group("player") as CharacterBody2D
 	
 	if player == null:
 		print("player not in group")
 		return
 	
 	if not is_instance_valid(healer):
-		healer = COMPANION_SCENE.instantiate()
+		healer = COMPANION_SCENE.instantiate() as CharacterBody2D
 		add_child(healer)
 		
-	if healer.has_method("set_player"):
-		healer.set_player(player)
-		
-	var side := -1.0 if player.facing > 0 else 1.0
-	healer.global_position = player.global_position + Vector2(28.0 * side, -18.0)
+	healer.set_player(player)
+	
+	healer.snap_to_player(player)
 	
 	healer.visible = true
 	healer.z_index = 100
