@@ -395,6 +395,7 @@ collision_layer = 4
 script = ExtResource("1_fi5i3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1492390756]
+position = Vector2(-1, -2)
 shape = SubResource("RectangleShape2D_fi5i3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=376673020]
@@ -410,12 +411,14 @@ frame_progress = 1.0
 [node name="Hurtbox" type="Area2D" parent="." unique_id=280137790 groups=["pogoable"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=842564116]
+position = Vector2(-1, -2)
 shape = SubResource("RectangleShape2D_hqy2m")
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=849384051 groups=["normal_enemy"]]
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1555118305]
+position = Vector2(-1, -4)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_fi5i3")
 

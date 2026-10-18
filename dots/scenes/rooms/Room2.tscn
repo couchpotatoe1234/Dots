@@ -173,156 +173,156 @@ position = Vector2(1856, -288)
 
 [node name="Background deco" type="Node2D" parent="." unique_id=1428697782]
 
-[node name="Sprite2D" type="Sprite2D" parent="Background deco" unique_id=1292515604]
+[node name="Tree" type="Sprite2D" parent="Background deco" unique_id=1292515604]
 position = Vector2(-1855, -64)
 scale = Vector2(2, 2)
 texture = ExtResource("9_mwb0y")
 hframes = 4
-vframes = 7
+vframes = 8
 frame = 20
 
-[node name="Sprite2D3" type="Sprite2D" parent="Background deco" unique_id=1842833661]
+[node name="Tree3" type="Sprite2D" parent="Background deco" unique_id=1842833661]
 position = Vector2(359, 96)
 scale = Vector2(2, 2)
 texture = ExtResource("9_mwb0y")
 hframes = 4
-vframes = 7
+vframes = 8
 frame = 20
 
-[node name="Sprite2D4" type="Sprite2D" parent="Background deco" unique_id=1016922738]
+[node name="Tree4" type="Sprite2D" parent="Background deco" unique_id=1016922738]
 position = Vector2(1300, -128)
 scale = Vector2(2, 2)
 texture = ExtResource("9_mwb0y")
 hframes = 4
-vframes = 7
+vframes = 8
 frame = 20
 
-[node name="Sprite2D2" type="Sprite2D" parent="Background deco" unique_id=1635595258]
+[node name="Tree2" type="Sprite2D" parent="Background deco" unique_id=1635595258]
 position = Vector2(-907, 32)
 scale = Vector2(-2, 2)
 texture = ExtResource("9_mwb0y")
 hframes = 4
-vframes = 7
+vframes = 8
 frame = 20
 
-[node name="Node2D" type="Sprite2D" parent="Background deco" unique_id=715738631]
+[node name="Bush" type="Sprite2D" parent="Background deco" unique_id=715738631]
 position = Vector2(-1407, 8)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("9_mwb0y")
 hframes = 4
-vframes = 7
+vframes = 8
 frame = 21
 
-[node name="Node2D4" type="Sprite2D" parent="Background deco" unique_id=1590413921]
+[node name="Bush4" type="Sprite2D" parent="Background deco" unique_id=1590413921]
 position = Vector2(722, 40)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("9_mwb0y")
 hframes = 4
-vframes = 7
+vframes = 8
 frame = 21
 
-[node name="Node2D2" type="Sprite2D" parent="Background deco" unique_id=2007487251]
+[node name="Bush2" type="Sprite2D" parent="Background deco" unique_id=2007487251]
 position = Vector2(-509, 72)
 scale = Vector2(-1.5, 1.5)
 texture = ExtResource("9_mwb0y")
 hframes = 4
-vframes = 7
+vframes = 8
 frame = 21
 
-[node name="Node2D3" type="Sprite2D" parent="Background deco" unique_id=870401385]
+[node name="Bush3" type="Sprite2D" parent="Background deco" unique_id=870401385]
 position = Vector2(-76, 104)
 scale = Vector2(-1.5, 1.5)
 texture = ExtResource("9_mwb0y")
 hframes = 4
-vframes = 7
+vframes = 8
 frame = 21
 
-[node name="Sprite2D5" type="Sprite2D" parent="Background deco" unique_id=537990238]
+[node name="Rock7" type="Sprite2D" parent="Background deco" unique_id=537990238]
 position = Vector2(-427, 120)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("9_mwb0y")
 hframes = 4
-vframes = 7
+vframes = 8
 frame = 22
 
-[node name="Sprite2D6" type="Sprite2D" parent="Background deco" unique_id=576572997]
+[node name="Rock6" type="Sprite2D" parent="Background deco" unique_id=576572997]
 position = Vector2(-839, 88)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("9_mwb0y")
 hframes = 4
-vframes = 7
+vframes = 8
 frame = 22
 
-[node name="Sprite2D7" type="Sprite2D" parent="Background deco" unique_id=2140793668]
+[node name="Rock4" type="Sprite2D" parent="Background deco" unique_id=2140793668]
 position = Vector2(-1273, 24)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("9_mwb0y")
 hframes = 4
-vframes = 7
+vframes = 8
 frame = 22
 
-[node name="Sprite2D14" type="Sprite2D" parent="Background deco" unique_id=297919901]
+[node name="Rock10" type="Sprite2D" parent="Background deco" unique_id=297919901]
 position = Vector2(1014, -8)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("9_mwb0y")
 hframes = 4
-vframes = 7
+vframes = 8
 frame = 22
 
-[node name="Sprite2D15" type="Sprite2D" parent="Background deco" unique_id=1567156048]
+[node name="Rock11" type="Sprite2D" parent="Background deco" unique_id=1567156048]
 position = Vector2(1631, -104)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("9_mwb0y")
 hframes = 4
-vframes = 7
+vframes = 8
 frame = 22
 
-[node name="Sprite2D8" type="Sprite2D" parent="Background deco" unique_id=359166358]
+[node name="Rock" type="Sprite2D" parent="Background deco" unique_id=359166358]
 position = Vector2(-2299, -72)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("9_mwb0y")
 hframes = 4
-vframes = 7
+vframes = 8
 frame = 22
 
-[node name="Sprite2D9" type="Sprite2D" parent="Background deco" unique_id=1767515009]
+[node name="Rock2" type="Sprite2D" parent="Background deco" unique_id=1767515009]
 position = Vector2(-2001, -72)
 scale = Vector2(-0.5, 0.5)
 texture = ExtResource("9_mwb0y")
 hframes = 4
-vframes = 7
+vframes = 8
 frame = 22
 
-[node name="Sprite2D10" type="Sprite2D" parent="Background deco" unique_id=894061479]
+[node name="Rock3" type="Sprite2D" parent="Background deco" unique_id=894061479]
 position = Vector2(-1539, -8)
 scale = Vector2(-0.5, 0.5)
 texture = ExtResource("9_mwb0y")
 hframes = 4
-vframes = 7
+vframes = 8
 frame = 22
 
-[node name="Sprite2D11" type="Sprite2D" parent="Background deco" unique_id=1268542814]
+[node name="Rock5" type="Sprite2D" parent="Background deco" unique_id=1268542814]
 position = Vector2(-1077, 56)
 scale = Vector2(-0.5, 0.5)
 texture = ExtResource("9_mwb0y")
 hframes = 4
-vframes = 7
+vframes = 8
 frame = 22
 
-[node name="Sprite2D12" type="Sprite2D" parent="Background deco" unique_id=1851105167]
+[node name="Rock8" type="Sprite2D" parent="Background deco" unique_id=1851105167]
 position = Vector2(154, 120)
 scale = Vector2(-0.5, 0.5)
 texture = ExtResource("9_mwb0y")
 hframes = 4
-vframes = 7
+vframes = 8
 frame = 22
 
-[node name="Sprite2D13" type="Sprite2D" parent="Background deco" unique_id=954941216]
+[node name="Rock9" type="Sprite2D" parent="Background deco" unique_id=954941216]
 position = Vector2(618, 56)
 scale = Vector2(-0.5, 0.5)
 texture = ExtResource("9_mwb0y")
 hframes = 4
-vframes = 7
+vframes = 8
 frame = 22
 
 [node name="2-1" type="Area2D" parent="." unique_id=1633693175]
@@ -347,12 +347,12 @@ position = Vector2(1983, -256.5)
 shape = SubResource("RectangleShape2D_c0bta")
 
 [node name="Sprite2D" type="Sprite2D" parent="2-3" unique_id=1331787385]
-position = Vector2(1968, -267.5)
-scale = Vector2(1, 1.328125)
+position = Vector2(1968, -267)
+scale = Vector2(1, 1.3437501)
 texture = ExtResource("7_twycr")
 
 [node name="Node2D" type="Node2D" parent="." unique_id=195246853]
-position = Vector2(-2415, -65)
+position = Vector2(1984, -223)
 
 [connection signal="body_entered" from="2-1" to="2-1" method="_on_body_entered"]
 [connection signal="body_entered" from="2-3" to="2-3" method="_on_body_entered"]
