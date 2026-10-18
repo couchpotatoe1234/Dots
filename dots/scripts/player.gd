@@ -4,15 +4,16 @@ extends CharacterBody2D
 const SPEED: float = 150.0
 const JUMP_VELOCITY: float = -325.0
 const ATTACK_COOLDOWN : float = 0.3
+@export var attacking: bool = false
 @export var unturnable: bool = false
 @export var max_health: int = 5
 @onready var sprite: Sprite2D = $PlayerSprite
 @onready var animation: AnimationPlayer = $AnimationPlayer
 @onready var transition_layer = $"../GUI/TransitionLayer"
 @onready var camera: Camera2D = $"Camera2D"
-@onready var attack_down: Area2D = $"Attack-down"
-@onready var attack_up: Area2D = $"Attack-up"
-@onready var attack_side: Area2D = $"Attack-side"
+@onready var attack_down: Area2D = $"Attack-down-long"
+@onready var attack_up: Area2D = $"Attack-up-long"
+@onready var attack_side: Area2D = $"Attack-side-long"
 var current_state: String = ""
 var fall_height: float = 0.0
 var facing := 1
@@ -62,8 +63,7 @@ func _physics_process(delta: float) -> void:
 		animation.stop()
 		change_state("idle")
 		unturnable = false
-		$"Attack-down/Down".set_deferred("disabled", true)
-		$PlayerSprite/Slash.visible = false
+		$"Attack-down-long/Down".set_deferred("disabled", true)
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	var input_dir := 0.0
@@ -87,9 +87,23 @@ func _physics_process(delta: float) -> void:
 			var is_left = input_dir < 0
 			if not unturnable:
 				sprite.flip_h = is_left
-				$PlayerSprite/Slash.flip_h = is_left
 				$PlayerSprite/Hurt.flip_h = is_left
-				$"Attack-side".scale.x = -1 if is_left else 1
+				if not attacking:
+					$"Attack-side-long".scale.x = -1 if is_left else 1
+					if is_left:
+						$"PlayerSprite/Attack-side-long".scale.x = -abs($"PlayerSprite/Attack-side-long".scale.x)
+						$"PlayerSprite/Attack-side-long".position.x = -abs($"PlayerSprite/Attack-side-long".position.x)
+						$"PlayerSprite/Attack-down-long".scale.x = abs($"PlayerSprite/Attack-down-long".scale.x)
+						$"PlayerSprite/Attack-down-long".position.x = abs($"PlayerSprite/Attack-down-long".position.x)
+						$"PlayerSprite/Attack-up-long".scale.x = -abs($"PlayerSprite/Attack-up-long".scale.x)
+						$"PlayerSprite/Attack-up-long".position.x = -abs($"PlayerSprite/Attack-up-long".position.x)
+					else:
+						$"PlayerSprite/Attack-side-long".scale.x = abs($"PlayerSprite/Attack-side-long".scale.x)
+						$"PlayerSprite/Attack-side-long".position.x = abs($"PlayerSprite/Attack-side-long".position.x)
+						$"PlayerSprite/Attack-down-long".scale.x = -abs($"PlayerSprite/Attack-down-long".scale.x)
+						$"PlayerSprite/Attack-down-long".position.x = -abs($"PlayerSprite/Attack-down-long".position.x)
+						$"PlayerSprite/Attack-up-long".scale.x = abs($"PlayerSprite/Attack-up-long".scale.x)
+						$"PlayerSprite/Attack-up-long".position.x = abs($"PlayerSprite/Attack-up-long".position.x)
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 		if Input.is_action_just_pressed("Attack"):
@@ -111,13 +125,13 @@ func _physics_process(delta: float) -> void:
 
 func update_state(input_dir: float) -> void:
 	if current_state in ["attack-side", "attack-up", "attack-down", "run-transition", "hurt", "die"]:
-		if is_invulnerable && current_state in ["attack-side", "attack-up", "attack-down"]:
-			animation.stop()
-			$"Attack-down/Down".set_deferred("disabled", true)
-			$"Attack-up/Up".set_deferred("disabled", true)
-			$"Attack-side/Side".set_deferred("disabled", true)
-			start_invulnerablilty()
-		else:
+		#if is_invulnerable && current_state in ["attack-side", "attack-up", "attack-down"]:
+		#	animation.stop()
+		#	$"Attack-down/Down".set_deferred("disabled", true)
+		#	$"Attack-up/Up".set_deferred("disabled", true)
+		#	$"Attack-side/Side".set_deferred("disabled", true)
+		#	start_invulnerablilty()
+		#else:
 			return
 	if not is_on_floor():
 		if current_state != "airtime":
@@ -186,7 +200,6 @@ func start_invulnerablilty() -> void:
 	is_invulnerable = true
 	unturnable = false
 	can_attack = false
-	$PlayerSprite/Slash.visible = false
 	change_state("hurt")
 	GameManager.hitstop(0.33)
 	await get_tree().create_timer(0.5).timeout
@@ -200,7 +213,6 @@ func start_invulnerablilty() -> void:
 func die() -> void:
 	is_invulnerable = true
 	GameManager.controls_allowed = false
-	$PlayerSprite/Slash.visible = false
 	velocity.x = 0
 	velocity.y = 0
 	GameManager.hitstop(0.33)
@@ -219,7 +231,7 @@ func respawn_at_checkpoint() -> void:
 	if is_invulnerable:
 		return
 	transition_layer.fade_out()
-	$PlayerSprite/Slash.visible = false
+
 	unturnable = false
 	if camera:
 		var tween = create_tween()
