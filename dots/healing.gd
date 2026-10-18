@@ -40,16 +40,20 @@ func _physics_process(delta: float) -> void:
 	if player.velocity.y > 0.0:
 		vertical_speed = falling_follow_speed
 		 
+	var step_x: float = horizontal_speed * delta
+	var step_y: float  = vertical_speed * delta
 	
-	velocity.x = move_toward(
-		global_position.x, target.x, horizontal_speed * delta
-	) - global_position.x
+	var next_x: float = move_toward(
+		global_position.x, target.x, step_x
+	)
+	var next_y: float = move_toward(
+		global_position.y, target.y, step_y
+	)
 	
-	velocity.y = move_toward(
-		global_position.y, target.y, vertical_speed * delta
-	) - global_position.y
-	
-	velocity /= maxf(delta, 0.001)
+	velocity = Vector2(
+		(next_x - global_position.x) / maxf(delta, 0.001),
+		(next_y - global_position.y) / maxf(delta, 0.001)
+	)
 	
 	move_and_slide()
 
@@ -77,4 +81,5 @@ func update_facing() -> void:
 	if not is_instance_valid(player):
 		return
 		
-	animated_sprite.flip_h = player.facing < 0
+	var should_flip: bool = player.facing < 0
+	animated_sprite.flip_h = should_flip

@@ -86,10 +86,6 @@ func _physics_process(delta: float) -> void:
 				$PlayerSprite/Slash.flip_h = is_left
 				$PlayerSprite/Hurt.flip_h = is_left
 				$"Attack-side".scale.x = -1 if is_left else 1
-			if sprite.flip_h == is_left:
-				facing = -1
-			else:
-				facing = 1
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 		if Input.is_action_just_pressed("Attack"):
@@ -98,6 +94,12 @@ func _physics_process(delta: float) -> void:
 			else:
 				pass
 		
+		
+	if Input.is_action_pressed("ui_right"):
+		facing = 1
+	elif Input.is_action_pressed("ui_right"):
+		facing = -1
+	
 	move_and_slide()
 	update_state(input_dir)
 	
