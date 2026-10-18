@@ -21,7 +21,7 @@ particles_anim_loop = false
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wotcy"]
 particle_flag_disable_z = true
 emission_shape = 3
-emission_box_extents = Vector3(16, 16, 1)
+emission_box_extents = Vector3(64, 16, 1)
 spread = 180.0
 initial_velocity_min = 120.0
 initial_velocity_max = 220.0
@@ -64,7 +64,7 @@ position = Vector2(16, 16)
 shape = SubResource("RectangleShape2D_2hjt5")
 
 [node name="BreakParticlesFX" type="Node2D" parent="Tile1" unique_id=1982934296]
-position = Vector2(16, 16)
+position = Vector2(64, 16)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Tile1/BreakParticlesFX" unique_id=1967217387]
 z_index = 1
@@ -89,13 +89,14 @@ position = Vector2(16, 48)
 shape = SubResource("RectangleShape2D_4mnnb")
 
 [node name="BreakParticlesFX" type="Node2D" parent="Tile2" unique_id=269977924]
+position = Vector2(32, 0)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Tile2/BreakParticlesFX" unique_id=33098594]
 z_index = 1
 material = SubResource("CanvasItemMaterial_r1o1r")
-position = Vector2(16, 48)
+position = Vector2(32, 48)
 emitting = false
-amount = 25
+amount = 100
 texture = ExtResource("4_wotcy")
 lifetime = 2.5
 one_shot = true
