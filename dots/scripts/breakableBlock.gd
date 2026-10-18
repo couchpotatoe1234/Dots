@@ -3,7 +3,7 @@ extends Node2D
 @export var hits_to_break: int = 3
 @export var shake_stregnth: float = 4.0
 @export var shake_duration: float = 0.18
-
+var no_hit: float = 0.0
 var hits_left: int
 var is_broken := false
 
@@ -13,11 +13,15 @@ func _ready() -> void:
 		queue_free()
 	hits_left = hits_to_break
 
+func _physics_process(delta: float) -> void:
+	no_hit += delta
+
 func take_hit(direction: Vector2) -> void:
-	if is_broken:
+	if is_broken or no_hit < 0.5:
 		return
 	hits_left -= 1
 	print("hits left: ", hits_left)
+	no_hit = 0.0
 	if hits_left <= 0:
 		break_block()
 		return
