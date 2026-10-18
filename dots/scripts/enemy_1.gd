@@ -17,10 +17,9 @@ func _ready():
 	sprite.play("walk")
 	sprite.flip_h = (direction > 0)
 	
-	if stop:
-		return
-
 func _physics_process(delta: float) -> void:
+		if stop:
+			return
 		if not is_on_floor():
 			velocity += get_gravity() * delta
 		
@@ -42,9 +41,6 @@ func flip_direction() -> void:
 		ledge_ray.scale.x = -ledge_ray.scale.x
 		ledge_ray.position.x = -ledge_ray.position.x
 	
-
-
-
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("player_attack"):
 		if GameManager.player_x > global_position.x:
@@ -57,8 +53,8 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 		health -= 1
 		print("enemy health:", health)
 		velocity.y = -50
-		velocity.x = -15 * knock_dir
-		await get_tree().create_timer(0.4).timeout
+		velocity.x = -150 * knock_dir
+		await get_tree().create_timer(0.1).timeout
 		damaged = false
 		sprite.play("walk")
 	if area.is_in_group("player_attack_up"):
@@ -90,7 +86,7 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 		health = 0
 	if health <= 0:
 		stop = true
-		speed = 1
+		speed = 0.0
 		sprite.play("death")
 		$Hurtbox/CollisionShape2D.set_deferred("disabled", true)
 		$Hitbox/CollisionShape2D.set_deferred("disabled", true)

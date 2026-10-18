@@ -513,6 +513,7 @@ shape = SubResource("CapsuleShape2D_7uch8")
 libraries/ = SubResource("AnimationLibrary_mdl7e")
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=1159227117 groups=["player_hurtbox"]]
+collision_layer = 4
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1974410907]
@@ -528,6 +529,7 @@ shape = SubResource("CapsuleShape2D_mdl7e")
 disabled = true
 
 [node name="Attack-up" type="Area2D" parent="." unique_id=1647694317 groups=["player_attack_up"]]
+collision_mask = 3
 
 [node name="Up" type="CollisionShape2D" parent="Attack-up" unique_id=172591767]
 position = Vector2(0, -19)
@@ -535,6 +537,7 @@ shape = SubResource("CapsuleShape2D_3li8b")
 disabled = true
 
 [node name="Attack-side" type="Area2D" parent="." unique_id=1066161007 groups=["player_attack"]]
+collision_mask = 3
 
 [node name="Side" type="CollisionShape2D" parent="Attack-side" unique_id=93557552]
 position = Vector2(6, -13)

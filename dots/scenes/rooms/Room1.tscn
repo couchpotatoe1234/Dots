@@ -242,10 +242,10 @@ position = Vector2(647, 373)
 position = Vector2(700, 343)
 
 [node name="RespawnPoint5" parent="Respawns" unique_id=1789978709 instance=ExtResource("4_lrl65")]
-position = Vector2(23, -59)
+position = Vector2(10, -54)
 
 [node name="RespawnPoint32" parent="Respawns" unique_id=425791256 instance=ExtResource("4_lrl65")]
-position = Vector2(54, -59)
+position = Vector2(42, -54)
 
 [node name="RespawnPoint17" parent="Respawns" unique_id=186642872 instance=ExtResource("4_lrl65")]
 position = Vector2(-281, -346)
@@ -359,7 +359,7 @@ position = Vector2(-178, -275)
 position = Vector2(-126, -435)
 
 [node name="Platform6" parent="Platforms" unique_id=347607994 instance=ExtResource("12_eu5ve")]
-position = Vector2(36, -51)
+position = Vector2(24, -45)
 
 [node name="Background-deco" type="Node2D" parent="." unique_id=847998151]
 

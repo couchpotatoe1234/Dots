@@ -1,9 +1,9 @@
 extends CharacterBody2D
 
 
-const SPEED: float = 500.0
+const SPEED: float = 150.0
 const JUMP_VELOCITY: float = -325.0
-const ATTACK_COOLDOWN : float = 0.4
+const ATTACK_COOLDOWN : float = 0.3
 @export var unturnable: bool = false
 @export var max_health: int = 5
 @onready var sprite: Sprite2D = $PlayerSprite
@@ -156,7 +156,6 @@ func _on_animation_finished(anim_name: String) -> void:
 		current_state = ""
 		change_state("idle")
 	elif anim_name == "die":
-		print("emited")
 		health_changed.emit(health, max_health)
 		health = max_health
 		load_main_menu.emit()
@@ -167,7 +166,6 @@ func take_damage(amount: int) -> void:
 	unturnable = false
 	health -= amount
 	health_changed.emit(health, max_health)
-	print("Player health now:", health)
 	var knock_dir = 1.0 if sprite.flip_h or scale.x < 0 else -1.0
 	velocity.x = knock_dir * 100.0
 	velocity.y = -200
@@ -205,7 +203,6 @@ func die() -> void:
 	$PlayerSprite/Slash.visible = false
 	velocity.x = 0
 	velocity.y = 0
-	print("ya died dummy")
 	GameManager.hitstop(0.33)
 	change_state("die")
 
@@ -237,7 +234,6 @@ func respawn_at_checkpoint() -> void:
 	velocity.x = 0
 	health -= 1
 	health_changed.emit(health, max_health)
-	print("Player health now:", health)
 	if health <= 0:
 		die()
 		return
@@ -292,18 +288,24 @@ func _damaged(area: Area2D) -> void:
 		respawn_at_checkpoint()
 
 func _enemy_hit(area: Area2D) -> void:
-	if area.is_in_group("normal_enemy"):
-		print("enemy_hit")
-		await get_tree().process_frame
+	if area.is_in_group("pogoable"):
 		if current_state == "hurt" or is_invulnerable:
 			return
+		print("enemy_hit")
 		GameManager.controls_allowed = false
 		var hitback_dir = 1.0 if sprite.flip_h or scale.x < 0 else -1.0
-		velocity.y = -25
-		velocity.x = 100 * hitback_dir
+		if current_state == "attack-side":
+			velocity.y = -25
+			velocity.x = 187.5 * hitback_dir
+		if current_state == "attack-up":
+			velocity.y = -25
+			velocity.x = 50 * hitback_dir
+		print("knockback")
 		GameManager.hitstop(0.05)
-		await get_tree().create_timer(0.2).timeout
+		await get_tree().create_timer(0.1).timeout
 		GameManager.controls_allowed = true
+	else:
+		print("other area entered")
 	
 func _on_attack_hit(body: Node2D, direction: Vector2) -> void:
 	if body.has_method("take_hit"):
