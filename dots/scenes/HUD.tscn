@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://dyq4gqlif2xjt" path="res://scripts/hud.gd" id="1_fls4u"]
 [ext_resource type="Texture2D" uid="uid://bn3t0klrhpgr8" path="res://Assets/sprites/health1.png" id="1_k5de2"]
 [ext_resource type="Texture2D" uid="uid://clek24x0gqsp4" path="res://Assets/sprites/HUD.png" id="2_1etfg"]
+[ext_resource type="Texture2D" uid="uid://d2fiofo8e2bjo" path="res://Assets/sprites/heal.png" id="4_7hsmw"]
+[ext_resource type="FontFile" uid="uid://dtob7sad1udk0" path="res://Assets/fonts/Minecraft.ttf" id="5_nysna"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_efote"]
 atlas = ExtResource("1_k5de2")
@@ -138,6 +140,11 @@ animations = [{
 "speed": 20.0
 }]
 
+[sub_resource type="LabelSettings" id="LabelSettings_7hsmw"]
+line_spacing = 5.0
+font = ExtResource("5_nysna")
+font_size = 12
+
 [node name="HUD" type="CanvasLayer" unique_id=1320359941]
 
 [node name="HUD" type="Control" parent="." unique_id=1522904841]
@@ -182,11 +189,18 @@ scale = Vector2(2, 1.955)
 sprite_frames = SubResource("SpriteFrames_ke6mt")
 animation = &"hit"
 
+[node name="Sprite2D2" type="Sprite2D" parent="HUD" unique_id=1453526175]
+position = Vector2(138, 568)
+scale = Vector2(2, 2)
+texture = ExtResource("4_7hsmw")
+
 [node name="Label" type="Label" parent="HUD" unique_id=793653826]
 layout_mode = 1
 anchors_preset = -1
-offset_left = 60.0
-offset_top = 333.0
-offset_right = 93.0
-offset_bottom = 356.0
+offset_left = 165.0
+offset_top = 563.0
+offset_right = 192.0
+offset_bottom = 579.0
 theme_override_font_sizes/font_size = 16
+text = "999"
+label_settings = SubResource("LabelSettings_7hsmw")

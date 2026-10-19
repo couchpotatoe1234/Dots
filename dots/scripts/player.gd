@@ -31,7 +31,7 @@ signal health_changed(current_health: int, max_health: int)
 
 func _ready() -> void:
 	add_to_group("player")
-	CompanionManager.register_player(self)
+	
 	
 	floor_snap_length = 4.0
 	floor_max_angle = deg_to_rad(46.0)
@@ -69,6 +69,9 @@ func _physics_process(delta: float) -> void:
 	var input_dir := 0.0
 	if GameManager.controls_allowed:
 		input_dir = Input.get_axis("left", "right")
+		if Input.is_action_just_pressed("heal"):
+			print("heal")
+			heal()
 		if Input.is_action_just_pressed("dash"):
 			print("dash")
 			velocity.x = 500 * input_dir
@@ -319,3 +322,14 @@ func enable_collision() -> void:
 	
 func get_facing() -> int:
 	return facing
+	
+func register_companion() -> void:
+	CompanionManager.register_player(self)
+	
+func heal() -> void:
+	if health >= 2:
+		health = 5
+	else:
+		health += 3
+	health_changed.emit(health, max_health)
+	

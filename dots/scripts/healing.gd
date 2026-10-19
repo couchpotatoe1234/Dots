@@ -1,17 +1,28 @@
 extends CharacterBody2D
 
-@export var horizontal_speed: float = 220.0
+@export var horizontal_speed: float = 145.0
 @export var normal_vertical_speed: float = 240.0
 @export var falling_follow_speed: float = 85.0
-
-@export var follow_offset: Vector2 = Vector2(-28, -18)
+@export var offset_change_time: float = 2.0
+@export var follow_offset: Vector2 = Vector2(20, -60)
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 var player: CharacterBody2D
 var is_repositioning: bool = false
+var offset_timer: float = 0.0
+var current_offset: Vector2 = Vector2(45, -10)
+var target_offset: Vector2 = Vector2(20, -30)
 
-
+var follow_offsets: Array[Vector2] = [
+	Vector2(20, -40), Vector2(-20, -40),
+	Vector2(20, -39), Vector2(-20, -39),
+	Vector2(20, -38), Vector2(-20, -38),
+	Vector2(20, -36), Vector2(-20, -37),
+	Vector2(20, -36), Vector2(-20, -36),
+	Vector2(20, -34), Vector2(-20, -34),
+	Vector2(20, -32), Vector2(-20, -32),
+]
 func _ready() -> void:
 	add_to_group("player")
 	print("player ready")
@@ -29,6 +40,7 @@ func _ready() -> void:
 		
 
 func _physics_process(delta: float) -> void:
+	update_follow_offset(delta)
 	if is_repositioning:
 		velocity = Vector2.ZERO
 		return
@@ -70,7 +82,7 @@ func set_player(new_player: CharacterBody2D) -> void:
 	player = new_player
 	
 func get_follow_offset() -> Vector2:
-	var offset := follow_offset
+	var offset := target_offset
 	
 	if not is_instance_valid(player):
 		return offset
@@ -102,3 +114,15 @@ func update_facing() -> void:
 	if player.has_method("get_facing"):
 		var should_flip: bool = player.get_facing() < 0
 		animated_sprite.flip_h = should_flip
+		
+func update_follow_offset(delta: float) -> void:
+	offset_timer += delta
+	
+	if offset_timer >= offset_change_time:
+		offset_timer = 0.0
+		
+		var random_index = randi_range(0, follow_offsets.size() - 1)
+		target_offset = follow_offsets[random_index]
+		
+	current_offset = current_offset.lerp(target_offset, delta * 3.0)
+		

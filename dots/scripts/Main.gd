@@ -31,6 +31,7 @@ func _on_start_game() -> void:
 		player.change_state("idle")
 		game_started.emit()
 	change_level(GameManager.last_level, GameManager.last_save_point)
+	player.register_companion()
 	
 
 func change_level(level_path: String, spawn_position: Vector2 = Vector2.ZERO) -> void:
@@ -71,6 +72,7 @@ func change_level(level_path: String, spawn_position: Vector2 = Vector2.ZERO) ->
 		await transition_layer.fade_in()
 		GameManager.can_pause = true
 		GameManager.controls_allowed = true
+	player.register_companion()
 			
 func return_to_main_menu() -> void:
 	print("main menu-d")
