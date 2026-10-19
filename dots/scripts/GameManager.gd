@@ -25,7 +25,7 @@ func hitstop(duration: float, magnitude: float = 0.0) -> void:
 #ROOMSS Starting Position; where you first enter from.
 #room 1 = -675, -400
 #room 2 = -2415, -65
-#room 3 (cross) = -2543, -161
+#room 3 = -2543, -161
 
 
 var block1_broken = false

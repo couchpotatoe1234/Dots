@@ -4,8 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://cymae72i7ph41" path="res://Assets/sprites/Enemy01-Sheet.png" id="2_a1412"]
 [ext_resource type="Texture2D" uid="uid://be3n5nrlghqn1" path="res://Assets/sprites/Hit_Particles-Sheet.png" id="3_ejytf"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6rg8l"]
-size = Vector2(23, 11)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_70d11"]
+radius = 5.0
+height = 23.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ejytf"]
 atlas = ExtResource("2_a1412")
@@ -324,8 +325,9 @@ collision_layer = 4
 script = ExtResource("1_ejytf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1456834289]
-position = Vector2(-0.5, -5.5)
-shape = SubResource("RectangleShape2D_6rg8l")
+position = Vector2(0, -5)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_70d11")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1467014739]
 z_index = 1
@@ -366,7 +368,7 @@ amount = 25
 texture = ExtResource("3_ejytf")
 lifetime = 0.5
 one_shot = true
-explosiveness = 0.5
+explosiveness = 0.75
 process_material = SubResource("ParticleProcessMaterial_ejytf")
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

@@ -308,7 +308,7 @@ func _enemy_hit(area: Area2D) -> void:
 		var hitback_dir = 1.0 if sprite.flip_h or scale.x < 0 else -1.0
 		if current_state == "attack-side":
 			velocity.y = -25
-			velocity.x = 187.5 * hitback_dir
+			velocity.x = 150 * hitback_dir
 		if current_state == "attack-up":
 			velocity.y = -25
 			velocity.x = 50 * hitback_dir
