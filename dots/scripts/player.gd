@@ -339,11 +339,13 @@ func register_companion() -> void:
 	CompanionManager.register_player(self)
 	
 func heal() -> void:
-	if GameManager.heals >= 1:
-		if health >= 2:
-			health = 5
-		else:
-			health += 3
-	health_changed.emit(health, max_health)
+	if health <= 0:
+		return
+	if GameManager.heals <= 0:
+		return
+	if health >= max_health:
+		return
 	GameManager.heals -= 1
-	
+	get_tree().call_group("hud", "change_heals")
+	health = mini(health + 3, max_health)
+	health_changed.emit(health, max_health)

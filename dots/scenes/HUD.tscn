@@ -147,7 +147,7 @@ font_size = 12
 
 [node name="HUD" type="CanvasLayer" unique_id=1320359941]
 
-[node name="HUD" type="Control" parent="." unique_id=1522904841]
+[node name="HUD" type="Control" parent="." unique_id=1522904841 groups=["hud"]]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0

@@ -4,6 +4,7 @@ extends Control
 @onready var label: Label = $Label
 
 func _ready() -> void:
+	label.text = str(GameManager.heals)
 	var player = get_tree(). get_first_node_in_group("player")
 	if player:
 		_connect_to_player(player)
@@ -12,8 +13,11 @@ func _ready() -> void:
 		
 @warning_ignore("unused_parameter")
 func _on_health_changed(current_health: int, max_health: int) -> void:
-	for i in hearts.size():
+	for i in range(hearts.size()):
 		var last_frame = hearts[i].sprite_frames.get_frame_count("hit") - 1
+		
+		hearts[i].stop()
+		
 		if i < current_health:
 			hearts[i].frame = 0
 		elif i == current_health:
@@ -27,7 +31,9 @@ func _on_node_added(node: Node) -> void:
 		get_tree().node_added.disconnect(_on_node_added)
 		
 func _connect_to_player(player: Node) -> void:
-	player.health_changed.connect(_on_health_changed)
+	if not player.health_changed.is_connected(_on_health_changed):
+		player.health_changed.connect(_on_health_changed)
+	
 	_on_health_changed(player.health, player.max_health)
 	
 func _money() -> void:
