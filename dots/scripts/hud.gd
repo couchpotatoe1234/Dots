@@ -1,6 +1,7 @@
 extends Control
 
 @onready var hearts: Array[AnimatedSprite2D] = [$Heart1, $Heart2, $Heart3, $Heart4, $Heart5]
+@onready var label: Label = $Label
 
 func _ready() -> void:
 	var player = get_tree(). get_first_node_in_group("player")
@@ -31,3 +32,6 @@ func _connect_to_player(player: Node) -> void:
 	
 func _money() -> void:
 	print("67")
+	
+func change_heals() -> void:
+	label.text = str(GameManager.heals)

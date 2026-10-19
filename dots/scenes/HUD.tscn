@@ -190,17 +190,17 @@ sprite_frames = SubResource("SpriteFrames_ke6mt")
 animation = &"hit"
 
 [node name="Sprite2D2" type="Sprite2D" parent="HUD" unique_id=1453526175]
-position = Vector2(138, 568)
-scale = Vector2(2, 2)
+position = Vector2(167, 552)
+scale = Vector2(3, 3)
 texture = ExtResource("4_7hsmw")
 
 [node name="Label" type="Label" parent="HUD" unique_id=793653826]
 layout_mode = 1
 anchors_preset = -1
-offset_left = 165.0
-offset_top = 563.0
-offset_right = 192.0
-offset_bottom = 579.0
+offset_left = 213.0
+offset_top = 545.0
+offset_right = 240.0
+offset_bottom = 561.0
 theme_override_font_sizes/font_size = 16
 text = "999"
 label_settings = SubResource("LabelSettings_7hsmw")

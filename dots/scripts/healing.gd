@@ -126,3 +126,4 @@ func update_follow_offset(delta: float) -> void:
 		
 	current_offset = current_offset.lerp(target_offset, delta * 3.0)
 		
+		
