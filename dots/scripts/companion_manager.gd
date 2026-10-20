@@ -8,8 +8,6 @@ func register_player(player: CharacterBody2D) -> void:
 	if not is_instance_valid(player):
 		print("player invalid")
 		return
-		
-		
 	print("register: ", player.name)
 	print("pos", player.global_position)
 	if not is_instance_valid(healer):

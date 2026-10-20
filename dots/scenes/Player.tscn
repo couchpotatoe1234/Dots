@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bvqhyhyb3d0tf" path="res://scripts/player.gd" id="1_p0vlq"]
 [ext_resource type="Texture2D" uid="uid://c4kto3jor8m5d" path="res://Assets/sprites/Spritesheet-Sheet.png" id="2_v6fml"]
 [ext_resource type="Texture2D" uid="uid://dn0083vro1ouj" path="res://Assets/sprites/Attack-down.png" id="3_70d11"]
-[ext_resource type="Texture2D" uid="uid://iao1snf8gofj" path="res://Assets/sprites/Hits.png" id="4_mdl7e"]
+[ext_resource type="Texture2D" uid="uid://bmf37bwifavcn" path="res://Assets/sprites/player-hit.png" id="4_70d11"]
 [ext_resource type="Texture2D" uid="uid://l3y65v03850b" path="res://Assets/sprites/Attack-side.png" id="5_qu4a1"]
 [ext_resource type="Texture2D" uid="uid://ictu7b2swtrv" path="res://Assets/sprites/Attack-up.png" id="6_70d11"]
 
@@ -186,6 +186,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [Vector2i(0, 4), Vector2i(1, 4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprite/Attack-down-long:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_mdl7e"]
@@ -512,6 +524,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [Vector2i(0, 5), Vector2i(1, 5)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprite/Attack-down-long:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_6eyey"]
 resource_name = "hurt"
@@ -814,9 +838,7 @@ hframes = 6
 visible = false
 position = Vector2(0, 3)
 scale = Vector2(1.5, 1.5)
-texture = ExtResource("4_mdl7e")
-hframes = 4
-frame = 3
+texture = ExtResource("4_70d11")
 
 [node name="Attack-side-long" type="Sprite2D" parent="PlayerSprite" unique_id=339125822]
 visible = false

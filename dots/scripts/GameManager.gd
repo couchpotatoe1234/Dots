@@ -37,6 +37,7 @@ func hitstop(duration: float, magnitude: float = 0.0) -> void:
 #room 1 = -675, -400
 #room 2 = -2415, -65
 #room 3 = -2543, -161
+#bar = 0, -256
 
 
 var block1_broken = false
