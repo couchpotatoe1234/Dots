@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-const SPEED: float = 150.0
+const SPEED: float = 1000.0
 const JUMP_VELOCITY: float = -325.0
 const ATTACK_COOLDOWN : float = 0.3
 @export var attacking: bool = false
