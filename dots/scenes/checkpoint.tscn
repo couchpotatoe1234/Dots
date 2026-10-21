@@ -1,52 +1,64 @@
 [gd_scene format=3 uid="uid://dt71s545tqq0f"]
 
-[ext_resource type="Script" uid="uid://djtkds5t6u7us" path="res://scenes/checkpoint.gd" id="1_vsimk"]
+[ext_resource type="Script" uid="uid://djtkds5t6u7us" path="res://scripts/checkpoint.gd" id="1_vsimk"]
 [ext_resource type="FontFile" uid="uid://dtob7sad1udk0" path="res://Assets/fonts/Minecraft.ttf" id="1_yyywg"]
 [ext_resource type="Texture2D" uid="uid://b2lrroax6225f" path="res://Assets/sprites/Respawn_Point.png" id="2_yqsag"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yqsag"]
-radius = 100.0
-height = 275.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_c45tw"]
-atlas = ExtResource("2_yqsag")
-region = Rect2(0, 0, 32, 64)
+radius = 29.0
+height = 84.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_55jpe"]
 atlas = ExtResource("2_yqsag")
 region = Rect2(32, 0, 32, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_vsimk"]
+atlas = ExtResource("2_yqsag")
+region = Rect2(0, 0, 32, 64)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_ke6mt"]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_c45tw")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_55jpe")
 }],
 "loop": 1,
 "name": &"activated",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vsimk")
+}],
+"loop": 1,
+"name": &"notactivated",
+"speed": 5.0
 }]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ke6mt"]
 font = ExtResource("1_yyywg")
+font_size = 6
 
 [node name="Checkpoint" type="Node2D" unique_id=291515086]
+
+[node name="Area2D" type="Area2D" parent="." unique_id=2126511389]
 script = ExtResource("1_vsimk")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1360785813]
-position = Vector2(72, 95)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1360785813]
+position = Vector2(0, -24)
 shape = SubResource("CapsuleShape2D_yqsag")
 debug_color = Color(0.9147795, 8.4325075e-05, 0.7168878, 0.41960785)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1842355355]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D" unique_id=1842355355]
+position = Vector2(-0.9999924, -32.999992)
+scale = Vector2(1.25, 1.25)
 sprite_frames = SubResource("SpriteFrames_ke6mt")
-animation = &"activated"
+animation = &"notactivated"
 
-[node name="Label" type="Label" parent="." unique_id=1618456038]
-offset_right = 40.0
-offset_bottom = 23.0
+[node name="Label" type="Label" parent="Area2D" unique_id=1618456038]
+offset_left = -30.0
+offset_top = -54.0
+offset_right = 27.0
+offset_bottom = -47.0
 text = "Press E to activate"
 label_settings = SubResource("LabelSettings_ke6mt")
