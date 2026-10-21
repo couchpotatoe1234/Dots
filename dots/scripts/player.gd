@@ -32,12 +32,9 @@ signal health_changed(current_health: int, max_health: int)
 
 func _ready() -> void:
 	add_to_group("player")
-	
-	
 	floor_snap_length = 4.0
 	floor_max_angle = deg_to_rad(46.0)
 	safe_margin = 0.001
-	
 	health_changed.emit(health, max_health)
 	is_invulnerable = false
 	change_state("idle")
@@ -85,28 +82,32 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_released("Jump") and not is_on_floor():
 			if velocity.y < 0:
 				velocity.y = 0
+		if input_dir > 0:
+			facing = 1
+		elif input_dir < 0:
+			facing = -1
+		var is_left = (facing == -1)
+		if not unturnable:
+			sprite.flip_h = is_left
+			$PlayerSprite/Hurt.flip_h = is_left
+			if not attacking:
+				$"Attack-side-long".scale.x = -1 if is_left else 1
+				if is_left:
+					$"PlayerSprite/Attack-side-long".scale.x = -abs($"PlayerSprite/Attack-side-long".scale.x)
+					$"PlayerSprite/Attack-side-long".position.x = -abs($"PlayerSprite/Attack-side-long".position.x)
+					$"PlayerSprite/Attack-down-long".scale.x = abs($"PlayerSprite/Attack-down-long".scale.x)
+					$"PlayerSprite/Attack-down-long".position.x = abs($"PlayerSprite/Attack-down-long".position.x)
+					$"PlayerSprite/Attack-up-long".scale.x = -abs($"PlayerSprite/Attack-up-long".scale.x)
+					$"PlayerSprite/Attack-up-long".position.x = -abs($"PlayerSprite/Attack-up-long".position.x)
+				else:
+					$"PlayerSprite/Attack-side-long".scale.x = abs($"PlayerSprite/Attack-side-long".scale.x)
+					$"PlayerSprite/Attack-side-long".position.x = abs($"PlayerSprite/Attack-side-long".position.x)
+					$"PlayerSprite/Attack-down-long".scale.x = -abs($"PlayerSprite/Attack-down-long".scale.x)
+					$"PlayerSprite/Attack-down-long".position.x = -abs($"PlayerSprite/Attack-down-long".position.x)
+					$"PlayerSprite/Attack-up-long".scale.x = abs($"PlayerSprite/Attack-up-long".scale.x)
+					$"PlayerSprite/Attack-up-long".position.x = abs($"PlayerSprite/Attack-up-long".position.x)
 		if input_dir:
 			velocity.x = input_dir * SPEED
-			var is_left = input_dir < 0
-			if not unturnable:
-				sprite.flip_h = is_left
-				$PlayerSprite/Hurt.flip_h = is_left
-				if not attacking:
-					$"Attack-side-long".scale.x = -1 if is_left else 1
-					if is_left:
-						$"PlayerSprite/Attack-side-long".scale.x = -abs($"PlayerSprite/Attack-side-long".scale.x)
-						$"PlayerSprite/Attack-side-long".position.x = -abs($"PlayerSprite/Attack-side-long".position.x)
-						$"PlayerSprite/Attack-down-long".scale.x = abs($"PlayerSprite/Attack-down-long".scale.x)
-						$"PlayerSprite/Attack-down-long".position.x = abs($"PlayerSprite/Attack-down-long".position.x)
-						$"PlayerSprite/Attack-up-long".scale.x = -abs($"PlayerSprite/Attack-up-long".scale.x)
-						$"PlayerSprite/Attack-up-long".position.x = -abs($"PlayerSprite/Attack-up-long".position.x)
-					else:
-						$"PlayerSprite/Attack-side-long".scale.x = abs($"PlayerSprite/Attack-side-long".scale.x)
-						$"PlayerSprite/Attack-side-long".position.x = abs($"PlayerSprite/Attack-side-long".position.x)
-						$"PlayerSprite/Attack-down-long".scale.x = -abs($"PlayerSprite/Attack-down-long".scale.x)
-						$"PlayerSprite/Attack-down-long".position.x = -abs($"PlayerSprite/Attack-down-long".position.x)
-						$"PlayerSprite/Attack-up-long".scale.x = abs($"PlayerSprite/Attack-up-long".scale.x)
-						$"PlayerSprite/Attack-up-long".position.x = abs($"PlayerSprite/Attack-up-long".position.x)
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 		if Input.is_action_just_pressed("Attack"):
@@ -114,13 +115,6 @@ func _physics_process(delta: float) -> void:
 				attack()
 			else:
 				pass
-		
-		
-	if input_dir > 0:
-		facing = 1
-	elif input_dir < 0:
-		facing = -1
-	
 	move_and_slide()
 	update_state(input_dir)
 	
@@ -128,13 +122,6 @@ func _physics_process(delta: float) -> void:
 
 func update_state(input_dir: float) -> void:
 	if current_state in ["attack-side", "attack-up", "attack-down", "run-transition", "hurt", "die"]:
-		#if is_invulnerable && current_state in ["attack-side", "attack-up", "attack-down"]:
-		#	animation.stop()
-		#	$"Attack-down/Down".set_deferred("disabled", true)
-		#	$"Attack-up/Up".set_deferred("disabled", true)
-		#	$"Attack-side/Side".set_deferred("disabled", true)
-		#	start_invulnerablilty()
-		#else:
 			return
 	if not is_on_floor():
 		if current_state != "airtime":
@@ -349,3 +336,4 @@ func heal() -> void:
 	get_tree().call_group("hud", "change_heals")
 	health = mini(health + 3, max_health)
 	health_changed.emit(health, max_health)
+	print("player health:", health)
