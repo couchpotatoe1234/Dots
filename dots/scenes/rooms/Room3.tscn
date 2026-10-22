@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cmhw68yync6xc" path="res://scenes/platforms/platform_2.tscn" id="10_rdbf0"]
 [ext_resource type="PackedScene" uid="uid://ewa82o21ksc1" path="res://scenes/platforms/platform_3.tscn" id="11_m8o46"]
 [ext_resource type="PackedScene" uid="uid://brmdxueplqg21" path="res://scenes/platforms/platform_4.tscn" id="12_eoxmg"]
+[ext_resource type="Script" uid="uid://1si4fey2wqdm" path="res://scripts/transition_scripts/3_mtr1.gd" id="13_rdbf0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xr0ie"]
 texture = ExtResource("2_7aq1f")
@@ -186,6 +187,9 @@ size = Vector2(32, 19)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_odiq7"]
 size = Vector2(2, 70)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ke6mt"]
+size = Vector2(97, 20)
+
 [node name="Room3" type="Node2D" unique_id=2072021642]
 script = ExtResource("1_7aq1f")
 
@@ -194,7 +198,7 @@ position = Vector2(1, -63)
 
 [node name="Sprite2D" type="Sprite2D" parent="Background" unique_id=618940837]
 z_index = -1
-position = Vector2(-837.99994, -256)
+position = Vector2(-806.00006, -297)
 scale = Vector2(23.921877, 17.76852)
 texture = ExtResource("1_wvhnu")
 vframes = 4
@@ -446,6 +450,19 @@ texture = ExtResource("7_odiq7")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="3-2" unique_id=927851086]
 position = Vector2(-2559, -195)
 shape = SubResource("RectangleShape2D_odiq7")
+
+[node name="3-mtr1" type="Area2D" parent="." unique_id=2099165064]
+script = ExtResource("13_rdbf0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="3-mtr1" unique_id=1490191774]
+position = Vector2(-1423.5, -950)
+shape = SubResource("RectangleShape2D_ke6mt")
+
+[node name="TransitionSprite" type="Sprite2D" parent="3-mtr1" unique_id=1394634282]
+position = Vector2(-1424, -939.9501)
+rotation = -1.5707964
+scale = Vector2(1.2531252, 1.5)
+texture = ExtResource("7_odiq7")
 
 [node name="Node2D" type="Node2D" parent="." unique_id=696561927]
 position = Vector2(-2543, -161)
@@ -871,3 +888,4 @@ vframes = 8
 frame = 22
 
 [connection signal="body_entered" from="3-2" to="3-2" method="_on_body_entered"]
+[connection signal="body_entered" from="3-mtr1" to="." method="_on_mtr_1_body_entered"]
