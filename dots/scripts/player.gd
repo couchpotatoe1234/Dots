@@ -154,7 +154,7 @@ func _on_animation_finished(anim_name: String) -> void:
 	elif anim_name == "fall":
 		current_state = "idle"
 		animation.play("idle")
-	elif anim_name == "attack-side" or anim_name == "hurt" or anim_name == "attack-up" or anim_name == "attack-down":
+	elif anim_name == "attack-side" or anim_name == "hurt" or anim_name == "attack-up" or anim_name == "attack-down" or anim_name == "heal":
 		current_state = ""
 		change_state("idle")
 	elif anim_name == "die":
@@ -331,6 +331,7 @@ func heal() -> void:
 	get_tree().call_group("hud", "change_heals")
 	health = mini(health + 3, max_health)
 	health_changed.emit(health, max_health)
+	change_state("heal")
 
 func _on_main_respawned() -> void:
 	is_invulnerable = false
