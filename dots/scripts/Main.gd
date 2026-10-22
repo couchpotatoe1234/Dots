@@ -35,7 +35,7 @@ func _on_start_game() -> void:
 	change_level(GameManager.last_level, GameManager.last_save_point)
 	player.register_companion()
 
-func change_level(level_path: String, spawn_position: Vector2 = Vector2.ZERO) -> void:
+func change_level(level_path: String, spawn_position: Vector2 = Vector2.ZERO, _spawn_velocity: Vector2 = Vector2.ZERO) -> void:
 	GameManager.controls_allowed = false
 	GameManager.can_pause = false
 	if player:
@@ -67,10 +67,12 @@ func change_level(level_path: String, spawn_position: Vector2 = Vector2.ZERO) ->
 		player.set_collision_mask_value(2, true)
 		changed_level.emit()
 		player.show()
+		player.velocity = _spawn_velocity
 	if hud:
 		hud.set_deferred("visible", true)
 	if transition_layer:
-		await transition_layer.fade_in()
+		transition_layer.fade_in()
+		await get_tree().create_timer(0.5).timeout
 		GameManager.can_pause = true
 		GameManager.controls_allowed = true
 	player.register_companion()

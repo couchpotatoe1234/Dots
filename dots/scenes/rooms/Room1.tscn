@@ -13,7 +13,6 @@
 [ext_resource type="PackedScene" uid="uid://ewa82o21ksc1" path="res://scenes/platforms/platform_3.tscn" id="11_ivxlp"]
 [ext_resource type="PackedScene" uid="uid://brmdxueplqg21" path="res://scenes/platforms/platform_4.tscn" id="12_eu5ve"]
 [ext_resource type="Texture2D" uid="uid://cr77ffttbmtn" path="res://Assets/sprites/TileSheet.png" id="13_4fepx"]
-[ext_resource type="PackedScene" uid="uid://dt71s545tqq0f" path="res://scenes/checkpoint.tscn" id="14_ivxlp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_odhdn"]
 size = Vector2(192, 12)
@@ -475,9 +474,6 @@ texture = ExtResource("13_4fepx")
 hframes = 4
 vframes = 8
 frame = 22
-
-[node name="Checkpoint" parent="." unique_id=291515086 instance=ExtResource("14_ivxlp")]
-position = Vector2(-87, -10)
 
 [connection signal="area_entered" from="1-2" to="1-2" method="_on_area_entered"]
 [connection signal="body_entered" from="1-2" to="1-2" method="_on_body_entered"]

@@ -60,5 +60,5 @@ offset_left = -30.0
 offset_top = -54.0
 offset_right = 27.0
 offset_bottom = -47.0
-text = "Press E to activate"
+text = "Press ⬆ to activate"
 label_settings = SubResource("LabelSettings_ke6mt")

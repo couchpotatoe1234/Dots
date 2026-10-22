@@ -6,8 +6,7 @@ var player_in_range: bool = false
 var activated: bool = false
 
 func _ready() -> void:
-	if GameManager.last_level == owner.scene_file_path:
-		sprite.play("activated")
+	
 	if sprite == null:
 		push_error("missing")
 		return
@@ -20,8 +19,10 @@ func _ready() -> void:
 	
 
 func _process(_delta: float) -> void:
+	if GameManager.last_level == owner.scene_file_path:
+		sprite.play("activated")
 	if player_in_range and not activated:
-		if Input.is_action_just_pressed("interact"):
+		if Input.is_action_just_pressed("up"):
 			activate_checkpoint()
 			
 func _on_body_entered(body: Node2D) -> void:
