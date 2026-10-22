@@ -94,4 +94,5 @@ libraries/ = SubResource("AnimationLibrary_7fyak")
 
 [connection signal="changed_level" from="." to="Player" method="_on_changed_level"]
 [connection signal="game_started" from="." to="Player" method="_on_game_started"]
-[connection signal="load_main_menu" from="Player" to="." method="return_to_main_menu"]
+[connection signal="respawned" from="." to="Player" method="_on_main_respawned"]
+[connection signal="respawn" from="Player" to="." method="_on_player_respawn"]

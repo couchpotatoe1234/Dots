@@ -39,25 +39,23 @@ animations = [{
 font = ExtResource("1_yyywg")
 font_size = 6
 
-[node name="Checkpoint" type="Node2D" unique_id=291515086]
-
-[node name="Area2D" type="Area2D" parent="." unique_id=2126511389]
+[node name="Checkpoint" type="Area2D" unique_id=1221400640]
 collision_layer = 4
 collision_mask = 31
 script = ExtResource("1_vsimk")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1360785813]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1360785813]
 position = Vector2(0, -24)
 shape = SubResource("CapsuleShape2D_yqsag")
 debug_color = Color(0.9147795, 8.4325075e-05, 0.7168878, 0.41960785)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D" unique_id=1842355355]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1842355355]
 position = Vector2(-0.9999924, -32.999992)
 scale = Vector2(1.25, 1.25)
 sprite_frames = SubResource("SpriteFrames_ke6mt")
 animation = &"notactivated"
 
-[node name="Label" type="Label" parent="Area2D" unique_id=1618456038]
+[node name="Label" type="Label" parent="." unique_id=1618456038]
 offset_left = -30.0
 offset_top = -54.0
 offset_right = 27.0

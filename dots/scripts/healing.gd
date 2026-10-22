@@ -25,7 +25,6 @@ var follow_offsets: Array[Vector2] = [
 ]
 func _ready() -> void:
 	add_to_group("player")
-	print("player ready")
 	floor_snap_length = 4.0
 	
 	player = get_tree().get_first_node_in_group("player") as CharacterBody2D
@@ -36,7 +35,6 @@ func _ready() -> void:
 	
 	if player != null:
 		snap_to_player(player)
-		print("found plauer")
 		
 
 func _physics_process(delta: float) -> void:
@@ -54,7 +52,6 @@ func _physics_process(delta: float) -> void:
 	update_facing()
 	
 	var target: Vector2 = player.global_position + get_follow_offset()
-	var movement : Vector2 = target - global_position
 	
 	var vertical_speed: float = normal_vertical_speed
 	

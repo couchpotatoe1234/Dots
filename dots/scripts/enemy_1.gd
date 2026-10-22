@@ -51,7 +51,6 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 		hit_particles.restart() 
 		sprite.play("hurt")
 		health -= 1
-		print("enemy health:", health)
 		velocity.y = -50
 		velocity.x = -150 * knock_dir
 		await get_tree().create_timer(0.1).timeout
@@ -66,7 +65,6 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 		hit_particles.restart() 
 		sprite.play("hurt")
 		health -= 1
-		print("enemy health:", health)
 		velocity.y = -150
 		velocity.x = -40 * knock_dir
 		await get_tree().create_timer(0.4).timeout
@@ -77,7 +75,6 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 		hit_particles.restart() 
 		sprite.play("hurt")
 		health -= 1
-		print("enemy health:", health)
 		velocity.x = 0
 		await get_tree().create_timer(0.4).timeout
 		damaged = false

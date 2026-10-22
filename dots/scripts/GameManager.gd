@@ -9,10 +9,6 @@ var hitstop_active: bool = false
 var current_hitstop_duration: float = 0.0
 var can_pause = false
 var heals = 2
-var checkpoint_scene: String = ""
-var checkpoint_position: Vector2 = Vector2.ZERO
-var has_checkpoint: bool = false
-var respawning: bool = false
 
 func hitstop(duration: float, magnitude: float = 0.0) -> void:
 	if hitstop_active and duration < current_hitstop_duration:
@@ -25,11 +21,6 @@ func hitstop(duration: float, magnitude: float = 0.0) -> void:
 	hitstop_active = false
 	current_hitstop_duration = 0.0
 
-func set_checkpoint(scene_path: String, spawn_position: Vector2) -> void:
-	checkpoint_scene = scene_path
-	checkpoint_position = spawn_position
-	has_checkpoint = true
-	print("checkpoint saved: ", checkpoint_scene, checkpoint_position)
 
 #ROOMSS Starting Position; where you first enter from.
 #room 1 = -675, -400

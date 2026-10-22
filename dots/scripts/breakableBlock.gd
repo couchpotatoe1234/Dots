@@ -20,7 +20,6 @@ func take_hit(direction: Vector2) -> void:
 	if is_broken or no_hit < 0.5:
 		return
 	hits_left -= 1
-	print("hits left: ", hits_left)
 	no_hit = 0.0
 	if hits_left <= 0:
 		break_block()
