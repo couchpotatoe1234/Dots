@@ -8,6 +8,7 @@ extends Node2D
 var current_level_node: Node = null
 signal game_started
 signal changed_level
+signal respawned
 
 func _ready() -> void:
 	if hud:
@@ -18,19 +19,7 @@ func _ready() -> void:
 	if pause_menu:
 		pause_menu.return_to_menu_requested.connect(return_to_main_menu)
 	load_main_menu()
-	
-func respawn_at_checkpoint() -> void:
-	if not GameManager.has_checkpoint:
-		get_tree().reload_current_scene()
-		return
-		
-	GameManager.respawning = true
-	
-	var error = get_tree().change_scene_to_file(GameManager.checkpoint_scene)
-	
-	if error != OK:
-		push_error("Failed to load checkpoint" + GameManager.checkpoint_scene)
-		GameManager.respawning = false
+
 	
 func load_main_menu() -> void:
 	GameManager.can_pause = false
@@ -45,7 +34,6 @@ func _on_start_game() -> void:
 		game_started.emit()
 	change_level(GameManager.last_level, GameManager.last_save_point)
 	player.register_companion()
-	
 
 func change_level(level_path: String, spawn_position: Vector2 = Vector2.ZERO) -> void:
 	GameManager.controls_allowed = false
@@ -88,7 +76,6 @@ func change_level(level_path: String, spawn_position: Vector2 = Vector2.ZERO) ->
 	player.register_companion()
 			
 func return_to_main_menu() -> void:
-	print("main menu-d")
 	GameManager.controls_allowed = false
 	GameManager.can_pause = false
 	if player:
@@ -107,3 +94,7 @@ func return_to_main_menu() -> void:
 	load_main_menu()
 	if transition_layer:
 		await transition_layer.fade_in()
+
+func _on_player_respawn() -> void:
+	change_level(GameManager.last_level, GameManager.last_save_point)
+	respawned.emit()

@@ -27,7 +27,6 @@ var coyote_duration: float = 0.12
 var jump_buffer_timer: float = 0.0
 var jump_buffer_duration: float = 0.12
 var was_on_floor: bool = false
-signal load_main_menu
 signal respawn
 signal health_changed(current_health: int, max_health: int)
 
@@ -42,15 +41,6 @@ func _ready() -> void:
 	attack_side.body_entered.connect(func(body): _on_attack_hit(body, Vector2(facing, 0)))
 	attack_up.body_entered.connect(func(body): _on_attack_hit(body, Vector2.UP))
 	attack_down.body_entered.connect(func(body): _on_attack_hit(body, Vector2.DOWN))
-	
-	if GameManager.respawning and GameManager.has_checkpoint:
-		await get_tree().process_frame
-		
-		global_position = GameManager.checkpoint_position
-		health = max_health
-		velocity = Vector2.ZERO
-		GameManager.respawning = false
-		print("respawned", global_position)
 
 func _physics_process(delta: float) -> void:
 	if coyote_timer > 0.0:
@@ -77,7 +67,6 @@ func _physics_process(delta: float) -> void:
 	if GameManager.controls_allowed:
 		input_dir = Input.get_axis("left", "right")
 		if Input.is_action_just_pressed("heal"):
-			print("heal")
 			heal()
 		if Input.is_action_just_pressed("dash"):
 			print("dash")
@@ -172,7 +161,7 @@ func _on_animation_finished(anim_name: String) -> void:
 	elif anim_name == "die":
 		health_changed.emit(health, max_health)
 		health = max_health
-		respawn.emit(respawn_at_checkpoint)
+		respawn.emit()
 
 func take_damage(amount: int) -> void:
 	if is_invulnerable:
@@ -251,6 +240,7 @@ func respawn_at_checkpoint() -> void:
 		return
 	await transition_layer.fade_out() 
 	global_position = GameManager.last_respawn_position
+	velocity = Vector2.ZERO
 	transition_layer.fade_in()
 	change_state("idle")
 	await get_tree().create_timer(0.5).timeout
@@ -303,7 +293,6 @@ func _enemy_hit(area: Area2D) -> void:
 	if area.is_in_group("pogoable"):
 		if current_state == "hurt" or is_invulnerable:
 			return
-		print("enemy_hit")
 		GameManager.controls_allowed = false
 		var hitback_dir = 1.0 if sprite.flip_h or scale.x < 0 else -1.0
 		if current_state == "attack-side":
@@ -312,12 +301,9 @@ func _enemy_hit(area: Area2D) -> void:
 		if current_state == "attack-up":
 			velocity.y = -25
 			velocity.x = 50 * hitback_dir
-		print("knockback")
 		GameManager.hitstop(0.05)
 		await get_tree().create_timer(0.1).timeout
 		GameManager.controls_allowed = true
-	else:
-		print("other area entered")
 	
 func _on_attack_hit(body: Node2D, direction: Vector2) -> void:
 	if body.has_method("take_hit"):
@@ -334,7 +320,7 @@ func get_facing() -> int:
 	
 func register_companion() -> void:
 	CompanionManager.register_player(self)
-	
+
 func heal() -> void:
 	if health <= 0:
 		return
@@ -346,4 +332,9 @@ func heal() -> void:
 	get_tree().call_group("hud", "change_heals")
 	health = mini(health + 3, max_health)
 	health_changed.emit(health, max_health)
-	print("player health:", health)
+
+func _on_main_respawned() -> void:
+	is_invulnerable = false
+	health = max_health
+	change_state("idle")
+	health_changed.emit(health, max_health)

@@ -143,7 +143,6 @@ func take_damage(amount: int, knockback: Vector2) -> void:
 	if current_anim == Anim.DIE:
 		return
 	health -= amount
-	print("Flying enemy health:", health)
 	hit_particles.restart() 
 	knocked_back = true
 	velocity = knockback
