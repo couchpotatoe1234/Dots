@@ -1,4 +1,5 @@
-# Dots  
+# Ghosted  
+PLAY LINKKK: https://couchpotatoe1234.itch.io/dots  
 This is a platformer/metroidvania style game built in Godot with the art made using Aseprite. It is a work in progress at the moment, but will continue improving over the course of the next 3 weeks. With the project, the README will grow, elaborating on all the cool stuff that will be added to the project.  
 
 ![App Screenshot](images/image_4.png)  
