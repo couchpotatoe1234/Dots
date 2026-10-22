@@ -28,6 +28,7 @@ var jump_buffer_timer: float = 0.0
 var jump_buffer_duration: float = 0.12
 var was_on_floor: bool = false
 signal load_main_menu
+signal respawn
 signal health_changed(current_health: int, max_health: int)
 
 func _ready() -> void:
@@ -41,6 +42,15 @@ func _ready() -> void:
 	attack_side.body_entered.connect(func(body): _on_attack_hit(body, Vector2(facing, 0)))
 	attack_up.body_entered.connect(func(body): _on_attack_hit(body, Vector2.UP))
 	attack_down.body_entered.connect(func(body): _on_attack_hit(body, Vector2.DOWN))
+	
+	if GameManager.respawning and GameManager.has_checkpoint:
+		await get_tree().process_frame
+		
+		global_position = GameManager.checkpoint_position
+		health = max_health
+		velocity = Vector2.ZERO
+		GameManager.respawning = false
+		print("respawned", global_position)
 
 func _physics_process(delta: float) -> void:
 	if coyote_timer > 0.0:
@@ -162,7 +172,7 @@ func _on_animation_finished(anim_name: String) -> void:
 	elif anim_name == "die":
 		health_changed.emit(health, max_health)
 		health = max_health
-		load_main_menu.emit()
+		respawn.emit(respawn_at_checkpoint)
 
 func take_damage(amount: int) -> void:
 	if is_invulnerable:
@@ -207,7 +217,7 @@ func die() -> void:
 	velocity.y = 0
 	GameManager.hitstop(0.33)
 	change_state("die")
-
+	
 func attack() -> void:
 	attack_cooldown_timer = ATTACK_COOLDOWN
 	if Input.is_action_pressed("up"):

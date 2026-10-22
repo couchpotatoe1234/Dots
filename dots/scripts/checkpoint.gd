@@ -27,17 +27,15 @@ func _process(delta: float) -> void:
 			activate_checkpoint()
 			
 func _on_body_entered(body: Node2D) -> void:
+	print("something enter", body.name)
+	
 	if body.is_in_group("player"):
-		print("player entered", get_path())
-		print("prompt reference", prompt)
+		print("player detected")
 		
 		player_in_range = true
 		
-		if not activated:
-			if is_instance_valid(prompt):
-				prompt.visible = true
-			else:
-				push_error("missing label" + str(get_path()))
+		if not activated and is_instance_valid(prompt):
+			prompt.show()
 			
 func _on_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):

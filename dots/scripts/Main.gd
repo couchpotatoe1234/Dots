@@ -19,6 +19,19 @@ func _ready() -> void:
 		pause_menu.return_to_menu_requested.connect(return_to_main_menu)
 	load_main_menu()
 	
+func respawn_at_checkpoint() -> void:
+	if not GameManager.has_checkpoint:
+		get_tree().reload_current_scene()
+		return
+		
+	GameManager.respawning = true
+	
+	var error = get_tree().change_scene_to_file(GameManager.checkpoint_scene)
+	
+	if error != OK:
+		push_error("Failed to load checkpoint" + GameManager.checkpoint_scene)
+		GameManager.respawning = false
+	
 func load_main_menu() -> void:
 	GameManager.can_pause = false
 	var menu_scene = load("res://scenes/MainMenu.tscn").instantiate()
