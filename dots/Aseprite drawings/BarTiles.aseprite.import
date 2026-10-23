@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://lcep1jjspuxm"
+path="res://.godot/imported/BarTiles.aseprite-3d803ed623141e0c0b2cbd8bdc867edb.res"
+
+[deps]
+
+source_file="res://Aseprite drawings/BarTiles.aseprite"
+dest_files=["res://.godot/imported/BarTiles.aseprite-3d803ed623141e0c0b2cbd8bdc867edb.res"]
+
+[params]
+
