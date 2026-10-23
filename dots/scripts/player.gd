@@ -120,7 +120,7 @@ func _physics_process(delta: float) -> void:
 	
 
 func update_state(input_dir: float) -> void:
-	if current_state in ["attack-side", "attack-up", "attack-down", "run-transition", "hurt", "die"]:
+	if current_state in ["attack-side", "attack-up", "attack-down", "run-transition", "hurt", "die", "heal"]:
 			return
 	if not is_on_floor():
 		if current_state != "airtime":

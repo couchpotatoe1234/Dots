@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4kto3jor8m5d"
-path="res://.godot/imported/Spritesheet-Sheet.png-ee3a9f6edb6472b58a3c4b1ef85019fb.ctex"
+uid="uid://c68glhhfu4bj6"
+path="res://.godot/imported/BarTiles-Sheet.png-b79a1d25f69b625c1a49dcbb1659340c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/sprites/Spritesheet-Sheet.png"
-dest_files=["res://.godot/imported/Spritesheet-Sheet.png-ee3a9f6edb6472b58a3c4b1ef85019fb.ctex"]
+source_file="res://Assets/sprites/BarTiles-Sheet.png"
+dest_files=["res://.godot/imported/BarTiles-Sheet.png-b79a1d25f69b625c1a49dcbb1659340c.ctex"]
 
 [params]
 
