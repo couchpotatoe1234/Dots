@@ -24,7 +24,7 @@ var follow_offsets: Array[Vector2] = [
 	Vector2(20, -32), Vector2(-20, -32),
 ]
 func _ready() -> void:
-	add_to_group("player")
+	add_to_group("healer")
 	floor_snap_length = 4.0
 	
 	player = get_tree().get_first_node_in_group("player") as CharacterBody2D
@@ -122,5 +122,10 @@ func update_follow_offset(delta: float) -> void:
 		target_offset = follow_offsets[random_index]
 		
 	current_offset = current_offset.lerp(target_offset, delta * 3.0)
-		
-		
+	
+func heal() -> void:
+	animated_sprite.play("heal")
+	await get_tree().create_timer(4.25).timeout
+	animated_sprite.play("movement")
+	
+	

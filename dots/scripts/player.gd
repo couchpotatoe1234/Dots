@@ -13,6 +13,7 @@ const ATTACK_COOLDOWN : float = 0.3
 @onready var attack_down: Area2D = $"Attack-down-long"
 @onready var attack_up: Area2D = $"Attack-up-long"
 @onready var attack_side: Area2D = $"Attack-side-long"
+
 var current_state: String = ""
 var fall_height: float = 0.0
 var facing := 1
@@ -329,9 +330,15 @@ func heal() -> void:
 		return
 	GameManager.heals -= 1
 	get_tree().call_group("hud", "change_heals")
+	
 	health = mini(health + 3, max_health)
 	health_changed.emit(health, max_health)
+	
 	change_state("heal")
+	
+	var healer_node = get_tree().get_first_node_in_group_player("healer")
+	if healer_node != null and healer_node.has_method("heal"):
+		healer_node.heal()
 
 func _on_main_respawned() -> void:
 	is_invulnerable = false
