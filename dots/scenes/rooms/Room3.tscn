@@ -188,7 +188,7 @@ size = Vector2(32, 19)
 size = Vector2(2, 70)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ke6mt"]
-size = Vector2(97, 20)
+size = Vector2(97, 9)
 
 [node name="Room3" type="Node2D" unique_id=2072021642]
 script = ExtResource("1_7aq1f")
@@ -456,7 +456,7 @@ collision_mask = 2
 script = ExtResource("13_rdbf0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="3-mtr1" unique_id=1490191774]
-position = Vector2(-1423.5, -950)
+position = Vector2(-1423.5, -955.5)
 shape = SubResource("RectangleShape2D_ke6mt")
 
 [node name="TransitionSprite" type="Sprite2D" parent="3-mtr1" unique_id=1394634282]
