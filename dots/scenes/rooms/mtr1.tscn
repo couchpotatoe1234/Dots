@@ -1,10 +1,13 @@
 [gd_scene format=4 uid="uid://dsbiw5lvutsbs"]
 
+[ext_resource type="Script" uid="uid://enux51t3vtry" path="res://scripts/room_scripts/mtr_1.gd" id="1_bodh1"]
 [ext_resource type="Texture2D" uid="uid://18jaets2sl2a" path="res://Assets/sprites/BackgroundSunset-Sheet.png" id="1_o7t3e"]
 [ext_resource type="PackedScene" uid="uid://e26n3ywyf7k3" path="res://scenes/platforms/platform_1.tscn" id="2_bodh1"]
 [ext_resource type="Texture2D" uid="uid://cr77ffttbmtn" path="res://Assets/sprites/TileSheet.png" id="2_ir5co"]
 [ext_resource type="PackedScene" uid="uid://duwg1gjydhlq8" path="res://scenes/enemy_2.tscn" id="3_bodh1"]
 [ext_resource type="PackedScene" uid="uid://beo3miagmv876" path="res://scenes/respawn_point.tscn" id="4_fuqvp"]
+[ext_resource type="Script" uid="uid://bnc055kydojqr" path="res://scenes/rooms/mtr1-3.gd" id="7_32dyf"]
+[ext_resource type="Texture2D" uid="uid://c4ahq4ccx0ucj" path="res://Assets/sprites/TransitionSprite.png" id="8_sbr2h"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_32dyf"]
 texture = ExtResource("2_ir5co")
@@ -152,7 +155,11 @@ terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0, 0, 0, 1)
 sources/2 = SubResource("TileSetAtlasSource_32dyf")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ke6mt"]
+size = Vector2(97, 21)
+
 [node name="Node2D" type="Node2D" unique_id=1713037080]
+script = ExtResource("1_bodh1")
 
 [node name="Background" type="Node2D" parent="." unique_id=1587839153]
 position = Vector2(1, -63)
@@ -278,3 +285,19 @@ position = Vector2(-1842, 80)
 [node name="Platform2" parent="Respawn" unique_id=43627195 instance=ExtResource("2_bodh1")]
 position = Vector2(-146, -899)
 rotation = -0.00146271
+
+[node name="mtr1-3" type="Area2D" parent="." unique_id=1123947407]
+collision_mask = 2
+script = ExtResource("7_32dyf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="mtr1-3" unique_id=767112247]
+position = Vector2(-2095.5, 308.5)
+shape = SubResource("RectangleShape2D_ke6mt")
+
+[node name="TransitionSprite" type="Sprite2D" parent="mtr1-3" unique_id=1396312868]
+position = Vector2(-2096.0002, 299)
+rotation = 1.5707964
+scale = Vector2(1.2531252, 1.5)
+texture = ExtResource("8_sbr2h")
+
+[connection signal="body_entered" from="mtr1-3" to="mtr1-3" method="_on_body_entered"]

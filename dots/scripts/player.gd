@@ -336,8 +336,8 @@ func heal() -> void:
 	
 	change_state("heal")
 	
-	var healer_node = get_tree().get_first_node_in_group_player("healer")
-	if healer_node != null and healer_node.has_method("heal"):
+	var healer_node = get_tree().get_first_node_in_group("healer")
+	if is_instance_valid(healer_node) and healer_node.has_method("heal"):
 		healer_node.heal()
 
 func _on_main_respawned() -> void:

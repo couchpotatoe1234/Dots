@@ -126,6 +126,8 @@ func update_follow_offset(delta: float) -> void:
 func heal() -> void:
 	animated_sprite.play("heal")
 	await get_tree().create_timer(4.25).timeout
-	animated_sprite.play("movement")
+	
+	if is_instance_valid(animated_sprite):
+		animated_sprite.play("movement")
 	
 	

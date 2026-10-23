@@ -452,6 +452,7 @@ position = Vector2(-2559, -195)
 shape = SubResource("RectangleShape2D_odiq7")
 
 [node name="3-mtr1" type="Area2D" parent="." unique_id=2099165064]
+collision_mask = 2
 script = ExtResource("13_rdbf0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="3-mtr1" unique_id=1490191774]
@@ -888,4 +889,4 @@ vframes = 8
 frame = 22
 
 [connection signal="body_entered" from="3-2" to="3-2" method="_on_body_entered"]
-[connection signal="body_entered" from="3-mtr1" to="." method="_on_mtr_1_body_entered"]
+[connection signal="body_entered" from="3-mtr1" to="3-mtr1" method="_on_body_entered"]
