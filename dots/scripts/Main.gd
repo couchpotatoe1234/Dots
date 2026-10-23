@@ -41,6 +41,7 @@ func change_level(level_path: String, spawn_position: Vector2 = Vector2.ZERO, _s
 	if player:
 		player.hide()
 		player.set_collision_mask_value(2, false)
+		player.set_physics_process(false)
 	if hud:
 		hud.set_deferred("visible", false)
 	if transition_layer:
@@ -62,6 +63,7 @@ func change_level(level_path: String, spawn_position: Vector2 = Vector2.ZERO, _s
 			cam.limit_right = int(rect.position.x + rect.size.x)
 			cam.limit_bottom = int(rect.position.y + rect.size.y)
 	if player:
+		player.set_physics_process(true)
 		player.global_position = spawn_position
 		player.process_mode = Node.PROCESS_MODE_INHERIT
 		player.set_collision_mask_value(2, true)
